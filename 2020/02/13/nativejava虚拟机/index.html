@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>nativejava虚拟机 | Niko&#39;s BLOG</title>
+  <title>Android native创建虚拟机 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -80,9 +80,15 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(3)</small></a></li>
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/DBI/" class="animsition-link">DBI<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/游戏/" class="animsition-link">游戏<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -175,12 +181,22 @@
           2020-02-13
       </time>
     
+    
+    | 
+    <a href='/tags/源码分析/'>源码分析</a>,
+    
+    <a href='/tags/Android/'>Android</a>,
+    
+    <a href='/tags/开发/'>开发</a>
+    
+    
 </span>
-                <h1>nativejava虚拟机</h1>
+                <h1>Android native创建虚拟机</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>前段时间看到看雪有篇文章讲百度壳的分析，讲的是native创建虚拟机来自主加载so，代码是基于dvm的。但是我直接改成art，在8.0上并没有成功，当时想着写art的脱壳机的时候再去研究一下原因，结果一拖再拖就没有下文了。最近又看到一个创建虚拟机来加载so的，看了一下代码，是基于art的，并且可以跑成功。于是就打算看看为啥之前的不行。</p>
+<a id="more"></a>
 <h1 id="分析代码"><a href="#分析代码" class="headerlink" title="分析代码"></a>分析代码</h1><p>相比于dvm的，art的那个代码多了如下部分:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    &#x2F;&#x2F;1</span><br><span class="line">  JavaVMOption opt[4];</span><br><span class="line">  opt[0].optionString &#x3D; &quot;-Djava.class.path&#x3D;&#x2F;data&#x2F;local&#x2F;tmp&#x2F;target-app.apk&quot;;</span><br><span class="line">  opt[1].optionString &#x3D; &quot;-agentlib:jdwp&#x3D;transport&#x3D;dt_android_adb,suspend&#x3D;n,server&#x3D;y&quot;;</span><br><span class="line">  opt[2].optionString &#x3D; &quot;-Djava.library.path&#x3D;&#x2F;data&#x2F;local&#x2F;tmp&quot;;</span><br><span class="line">  opt[3].optionString &#x3D; &quot;-verbose:jni&quot;; &#x2F;&#x2F; may want to remove this, it&#39;s noisy</span><br><span class="line">&#96;&#96;&#96;</span><br></pre></td></tr></table></figure>
 <pre><code>//2</code></pre><p>registerNatives_t registerNatives;<br>  registerNatives = (registerNatives_t) dlsym(libandroid_runtime_dso, “Java_com_android_internal_util_WithFramework_registerNatives”);<br>  if (!registerNatives) {<br>    // Attempt non-legacy version<br>    registerNatives = (registerNatives_t) dlsym(libandroid_runtime_dso, “registerFrameworkNatives”);<br>    if(!registerNatives) {<br>      return -3;<br>    }<br>  }</p>

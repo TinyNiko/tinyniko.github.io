@@ -80,9 +80,15 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(3)</small></a></li>
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/DBI/" class="animsition-link">DBI<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/游戏/" class="animsition-link">游戏<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -186,6 +192,8 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><p>c 语言中 static 关键字 代表只能在模块中访问，比如静态函数，静态变量名。在android中，static声明的函数是直接变成内联函数。<br>static 变量，如果初始化了，会放在.data段，如果没有初始化，会放在.bss段 </p>
+<a id="more"></a>
+
 <h1 id="关于hook"><a href="#关于hook" class="headerlink" title="关于hook"></a>关于hook</h1><p>常见的是got hook ，inline hook ，还有java的method hook . </p>
 <p>got hook 只能针对 导入函数，这个其实也是一个got 相关的问题，什么函数会进入到got 表。 这个是他的局限<br>调用导入函数的时候先进plt，plt 里执行一个jmp 操作 ，第一次跳转到got.plt ，但是got.plt 存的是plt的下一条指令，然后把重定位的offset push 到栈，然后调用_dl_runtime_resolve 解析函数的名字，然后搜索符号地址，最后给got.plt 赋新的地址，下一次就直接进去</p>
 <p>inline hook 修改函数头几个字节，然后跳转到hook函数，但是对字节数偏少的函数处理比较麻烦</p>

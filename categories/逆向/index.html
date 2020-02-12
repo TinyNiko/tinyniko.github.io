@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Docker | Niko&#39;s BLOG</title>
+  <title>Category: 逆向 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="post-template">
+<body class="home-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -171,100 +171,69 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2020-02-12T16:16:48.000Z" itemprop="datePublished">
-          2020-02-13
-      </time>
-    
-    
-    | 
-    <a href='/tags/Docker/'>Docker</a>
-    
-    
-</span>
-                <h1>Docker</h1>
+      <!-- ============================ Hero Image =========================== -->
+
+<section id="hero" class="scrollme">
+    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                    <div>
+                        
+                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
+                        <p></p>
+                        
+                        <h2></h2>
+                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
+                        
+
+                    </div>
+                </div>
             </div>
+            <!-- // .col-md-12 -->
         </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<h1 id="0x00-前言（建议略过）"><a href="#0x00-前言（建议略过）" class="headerlink" title="0x00 前言（建议略过）"></a>0x00 前言（建议略过）</h1><p>第一次接触docker大概是2016年吧，记不大清了，反正那一年docker很火。当年学了一些docker 的命令，就算是对docker有些了解了吧，但其实懂的很少。最近又开始搞docker了，因为前段时间打ctf的时候发现用dockerfile搭镜像的题还是挺多的，而且非常方便，小巧。我一向是使用虚拟机的，但是不得不说，虚拟机太大了，电脑+硬盘塞了6，7个虚拟机，占了很大的 空间。我的mac上不知是不是xcode的问题，angr一直装不上，后来直接整了一个docker镜像就ok 了，就能直接玩耍了。 今天主要是想介绍一下docker 的命令，以及一个小项目的迁移。</p>
-<a id="more"></a>
-<h1 id="0x01-docker-命令"><a href="#0x01-docker-命令" class="headerlink" title="0x01 docker 命令"></a>0x01 docker 命令</h1><h1 id="0x02-dockerfile"><a href="#0x02-dockerfile" class="headerlink" title="0x02 dockerfile"></a>0x02 dockerfile</h1><h1 id="0x03-项目迁移"><a href="#0x03-项目迁移" class="headerlink" title="0x03 项目迁移"></a>0x03 项目迁移</h1><p>我原来有个项目，一直是在虚拟机里做的，所以只要虚拟机配好环境 我就可以直接开发了。但是由于是虚拟机的缘故，别人都无法自己生成文件，于是，我就把项目直接迁移到docker ，这样大家都可以从gitlab拉取代码进行编译。相比较复制一个虚拟机，那速度真的是非常快。<br>由于dockerfile 的命令都很友好， 移植过程很快，大概半个小时就把原来的项目迁移完成，10行代码不到。</p>
-
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
-    
-    <a class="pull-left" href="/2020/02/13/Mono%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/" style="float: left;">
-        ← Mono安全相关
-    </a>
-    
-    
-    <a class="pull-right" href="/2020/02/13/ClassLoader%E5%88%86%E6%9E%90/">
-        ClassLoader分析 →
-    </a>
-    
-</nav>
-
-        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
-  /**
-   * 搜狐畅言
-   */
-
-  /*
-  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
-
-  window.onload = function () {
-    (function () {
-      var appid = 'cytXXXX';
-      var conf = 'prod_xxxxxxxxxxxxxxxxx';
-      var width = window.innerWidth || document.documentElement.clientWidth;
-      var loadJs = function (d, a, id) {
-        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
-        var b = document.createElement("script");
-        b.setAttribute("type", "text/javascript");
-        b.setAttribute("charset", "UTF-8");
-        b.setAttribute("src", d);
-        if (id) {
-          b.setAttribute("id", id);
-        }
-        if (typeof a === "function") {
-          if (window.attachEvent) {
-            b.onreadystatechange = function () {
-              var e = b.readyState;
-              if (e === "loaded" || e === "complete") {
-                b.onreadystatechange = null;
-                a()
-              }
-            }
-          } else {
-            b.onload = a
-          }
-        }
-        c.appendChild(b)
-      };
-
-      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
-        window.changyan.api.config({
-          appid: appid,
-          conf: conf
-        })
-      });
-    })();
-  }
-  */
-
-</script>
-</div>
+        <div class="herofade beige-dk"></div>
     </div>
 </section>
 
+<!-- Height spacing helper -->
+<div class="heightblock"></div>
+<!-- // End height spacing helper -->
 
+<!-- ============================ END Hero Image =========================== -->
+
+
+
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
+                    
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2020/02/13/fart脱壳机逆向/">fart脱壳机逆向</a></h4>
+                            
+                            <p><time datetime="2020-02-12T16:19:22.000Z"><a href="/2020/02/13/fart脱壳机逆向/">2020-02-13</a></time></p>
+                        </div>
+                    
+                </div>
+            </div>    
+        </div>
+    </div>
+</section> 
+
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+        </div>
+    </div>
+</section>
       
 <!-- ============================ Footer =========================== -->
 

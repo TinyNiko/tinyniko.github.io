@@ -80,9 +80,15 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(3)</small></a></li>
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/DBI/" class="animsition-link">DBI<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/游戏/" class="animsition-link">游戏<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -188,6 +194,7 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>写android so 的时候会使用堆，但是处理不好有可能导致崩溃，address sanitizer  正好可以解决这个问题 </p>
+<a id="more"></a>
 <h1 id="第一次尝试"><a href="#第一次尝试" class="headerlink" title="第一次尝试"></a>第一次尝试</h1><p>第一次找了官方文档，看了一下，按照他的方式确实可以集成asan，但是这个只能是可执行文件 。尝试一番无果，就没有再继续研究了。</p>
 <h1 id="第二次尝试"><a href="#第二次尝试" class="headerlink" title="第二次尝试"></a>第二次尝试</h1><p>第二次看到同事集成成功了，直接把asan的so放到libs，然后新的so依赖于这个so。于是我网上又找了找资料，发现ndk很早就自带了一个配置asan环境的脚本，但是需要手机root ，遂干了起来，一次成功。<br>参考<a href="https://www.cnblogs.com/willhua/p/9688266.html" target="_blank" rel="noopener">这篇文章</a></p>
 <p>另外可以看到官方的一篇<a href="https://developer.android.com/ndk/guides/asan" target="_blank" rel="noopener">文章</a>讲api27以上的使用方式，也可以侧面说明asan还是得到官方的大力支持的</p>

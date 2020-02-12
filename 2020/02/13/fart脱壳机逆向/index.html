@@ -80,9 +80,15 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(3)</small></a></li>
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/DBI/" class="animsition-link">DBI<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/游戏/" class="animsition-link">游戏<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -175,12 +181,23 @@
           2020-02-13
       </time>
     
+    
+    | 
+    <a href='/tags/逆向/'>逆向</a>,
+    
+    <a href='/tags/开发/'>开发</a>,
+    
+    <a href='/tags/脱壳/'>脱壳</a>
+    
+    
 </span>
                 <h1>fart脱壳机逆向</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<h1 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h1><p>看雪上看到有人发了一个art脱壳机,看懂了大概，但对于细节还是有一些不理解。找了一下github发发现作者提供了rom包，还有qq群，but qq群竟然要钱，所以qq群了，还是自己动手逆向吧，已知代码都在libart.so 里，把里面不太明白的地方分析一下就好了。</p>
+<a id="more"></a>
+<p>后续是看到看雪有人发了一片类似的文章，只能说有想法的人很多，但是人的主动性不一致，所以具体的分析可以看<br><a href="https://bbs.pediy.com/thread-257101.htm" target="_blank" rel="noopener">这篇文章</a></p>
 <h1 id="0x01-获取目标文件"><a href="#0x01-获取目标文件" class="headerlink" title="0x01 获取目标文件"></a>0x01 获取目标文件</h1><p>首先拿到rom包，file system.img ,发现输出是不认识的格式，就上网搜了一下资料，<br><a href="https://segmentfault.com/a/1190000004363645" target="_blank" rel="noopener">这篇文章</a> 主要讲了</p>
 <blockquote>
 <p>system2_0.img: Linux rev 1.0 ext4 filesystem data, UUID=57f8f4bc-abf4-655f-bf67-946fc0f9f25b (extents) (large files)</p>
@@ -192,7 +209,7 @@
 <pre><code>1. ext4 filesystem data
 
 2. Android sparse image</code></pre><p>我手里的是2，所以用simg2img 将raw 转换成ext4 ,然后mount 一下就行，但是我的mac上执行mount 会报找不到文件的错误(可能是mac系统的问题，root权限也不行)，于是就去linux 试了一下，就可以了. 然后在lib下顺利拿 <code>libart.so</code></p>
-<h1 id="0x02-分析"><a href="#0x02-分析" class="headerlink" title="0x02 分析"></a>0x02 分析</h1><p>我们的目标是分析脱壳机的具体实现，由于作者在写文章的时候，留下了一些函数名，所以直接找这些符号就可以了。打开ida 进行搜索，发现函数确实存在。找了这几个函数，忽然发现他们都是jni函数，需要去分析framework的代码。没办法，继续找:(。</p>
+<h1 id="0x02-分析"><a href="#0x02-分析" class="headerlink" title="0x02 分析"></a>0x02 分析</h1><p>我们的目标是分析脱壳机的具体实现，由于作者在写文章的时候，留下了一些函数名，所以直接找这些符号就可以了。打开ida 进行搜索，发现函数确实存在。找了这几个函数，忽然发现他们都是jni函数，需要去分析framework的代码。没办法，继续找:(。<br>此处找到3个文件，framework.jar libcore-art.jar libart.so ,所有的代码都在3个文件里面，根据作者提供的dumpMethodCode,我们可以找到对应的代码，这里就不再更新了，之后我会上传一份修改过的，基于8.1的r52的源码的修改，算是对这个的总结吧。</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
@@ -201,7 +218,7 @@
     
     
     <a class="pull-right" href="/2020/02/13/nativejava%E8%99%9A%E6%8B%9F%E6%9C%BA/">
-        nativejava虚拟机 →
+        Android native创建虚拟机 →
     </a>
     
 </nav>

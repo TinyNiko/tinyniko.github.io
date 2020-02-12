@@ -80,9 +80,15 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(3)</small></a></li>
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/DBI/" class="animsition-link">DBI<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/游戏/" class="animsition-link">游戏<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -188,6 +194,7 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>某东的课要求我们实现一个用socket通信的程序, 用C/C++写,虽然用<br>很多语言写过这个了,但是这次想在linux平台上试一下。于是就写了个代码测试一下,然而在使用pthread的时候,程序报了一个貌似函数类型错误的的错误,然后就大致的了解了一下。</p>
+<a id="more"></a>
 <h2 id="0x1-解析"><a href="#0x1-解析" class="headerlink" title="0x1 解析"></a>0x1 解析</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt; </span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">pthread_create</span><span class="params">((<span class="keyword">pthread_t</span>  *thread,  <span class="keyword">pthread_attr_t</span>  *attr,  <span class="keyword">void</span>  *(*start_routine)(<span class="keyword">void</span>  *),  <span class="keyword">void</span>  *arg)</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="comment">//另外gcc 编译的时候加上 -pthread 选项</span></span></span></span><br></pre></td></tr></table></figure>
 
 <p>这里要注意的是 线程函数的类型 必须是void (func)(void ) , 然后第四个参数是传递给func的参数,这里可以看到,只能传一个void *类型的<br>指针给线程函数,当然,不传就是NULL.</p>

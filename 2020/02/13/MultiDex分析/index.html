@@ -80,9 +80,15 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(3)</small></a></li>
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/DBI/" class="animsition-link">DBI<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/游戏/" class="animsition-link">游戏<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -175,12 +181,20 @@
           2020-02-13
       </time>
     
+    
+    | 
+    <a href='/tags/源码分析/'>源码分析</a>,
+    
+    <a href='/tags/Android/'>Android</a>
+    
+    
 </span>
                 <h1>MultiDex分析</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h1 id="DexClassLoader-分析"><a href="#DexClassLoader-分析" class="headerlink" title="DexClassLoader 分析"></a>DexClassLoader 分析</h1><p>尝试了一下oneNote的导出功能，貌似并不是很好，所以只能改用markdown了。<br>muLtidex 的加载，实在attachBaseContext的时候调用Multidex.install(this) 就可以了Install 实现比较简单</p>
+      		<p>尝试了一下oneNote的导出功能，貌似并不是很好，所以只能改用markdown了。<br>muLtidex 的加载，实在attachBaseContext的时候调用Multidex.install(this) 就可以了Install 实现比较简单</p>
+<a id="more"></a>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">158</span>                File dexDir = <span class="keyword">new</span> File(applicationInfo.dataDir, SECONDARY_FOLDER_NAME);</span><br><span class="line"><span class="number">159</span>                List&lt;File&gt; files = MultiDexExtractor.load(context, applicationInfo, dexDir, <span class="keyword">false</span>);</span><br><span class="line"><span class="number">160</span>                <span class="keyword">if</span> (checkValidZipFiles(files)) &#123;</span><br><span class="line"><span class="number">161</span>                    installSecondaryDexes(loader, dexDir, files);</span><br><span class="line"><span class="number">162</span>                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="number">163</span>                    Log.w(TAG, <span class="string">"Files were not valid zip files.  Forcing a reload."</span>);</span><br><span class="line"><span class="number">164</span>                    <span class="comment">// Try again, but this time force a reload of the zip file.</span></span><br><span class="line"><span class="number">165</span>                    files = MultiDexExtractor.load(context, applicationInfo, dexDir, <span class="keyword">true</span>);</span><br><span class="line"><span class="number">166</span></span><br><span class="line"><span class="number">167</span>                    <span class="keyword">if</span> (checkValidZipFiles(files)) &#123;</span><br><span class="line"><span class="number">168</span>                        installSecondaryDexes(loader, dexDir, files);</span><br><span class="line"><span class="number">169</span>                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="number">170</span>                        <span class="comment">// Second time didn't work, give up</span></span><br><span class="line"><span class="number">171</span>                        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Zip files were not valid."</span>);</span><br><span class="line"><span class="number">172</span>                    &#125;</span><br><span class="line"><span class="number">173</span>                &#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -209,7 +223,7 @@
         <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
     
     <a class="pull-left" href="/2020/02/13/nativejava%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="float: left;">
-        ← nativejava虚拟机
+        ← Android native创建虚拟机
     </a>
     
     

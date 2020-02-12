@@ -80,9 +80,15 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(3)</small></a></li>
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/DBI/" class="animsition-link">DBI<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/游戏/" class="animsition-link">游戏<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -175,16 +181,27 @@
           2020-02-13
       </time>
     
+    
+    | 
+    <a href='/tags/源码分析/'>源码分析</a>,
+    
+    <a href='/tags/Android/'>Android</a>,
+    
+    <a href='/tags/java/'>java</a>
+    
+    
 </span>
                 <h1>ClassLoader分析</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><p>前端时间看看dexclassloader 和pathclassloader  ，发现网上大面积的这种结论</p>
+      		<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><p>前段时间看看dexclassloader 和pathclassloader  ，发现网上大面积的这种结论</p>
 <blockquote>
 <p>DexClassLoader：能够加载未安装的jar/apk/dex<br>PathClassLoader：只能加载系统中已经安装过的apk</p>
 </blockquote>
-<p>真的不知道他们是看的4.x的代码还是什么，感觉就是文章抄来抄去。。。<br>看网上的文章会发现大部分 到下面的代码就没有了</p>
+<p>真的不知道他们是看的4.x的代码还是什么，感觉就是文章抄来抄去。。。</p>
+<a id="more"></a>
+<p>看网上的文章会发现大部分 到下面的代码就没有了</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">807</span><span class="comment">// Multidex files make it possible that some, but not all, dex files can be broken/outdated. This</span></span><br><span class="line"><span class="number">808</span><span class="comment">// complicates the loading process, as we should not use an iterative loading process, because that</span></span><br><span class="line"><span class="number">809</span><span class="comment">// would register the oat file and dex files that come before the broken one. Instead, check all</span></span><br><span class="line"><span class="number">810</span><span class="comment">// multidex ahead of time.</span></span><br><span class="line"><span class="number">811</span>bool ClassLinker::OpenDexFilesFromOat(<span class="keyword">const</span> <span class="keyword">char</span>* dex_location, <span class="keyword">const</span> <span class="keyword">char</span>* oat_location,</span><br><span class="line"><span class="number">812</span>                                      std::vector&lt;std::string&gt;* error_msgs,</span><br><span class="line"><span class="number">813</span>                                      std::vector&lt;<span class="keyword">const</span> DexFile*&gt;* dex_files) &#123;</span><br><span class="line"><span class="number">814</span>  <span class="comment">// 1) Check whether we have an open oat file.</span></span><br><span class="line"><span class="number">815</span>  <span class="comment">// This requires a dex checksum, use the "primary" one.</span></span><br><span class="line"><span class="number">816</span>  uint32_t dex_location_checksum;</span><br><span class="line"><span class="number">817</span>  uint32_t* dex_location_checksum_pointer = &amp;dex_location_checksum;</span><br><span class="line"><span class="number">818</span>  bool have_checksum = <span class="keyword">true</span>;</span><br><span class="line"><span class="number">819</span>  std::string checksum_error_msg;</span><br><span class="line"><span class="number">820</span>  <span class="keyword">if</span> (!DexFile::GetChecksum(dex_location, dex_location_checksum_pointer, &amp;checksum_error_msg)) &#123;</span><br><span class="line"><span class="number">821</span>    <span class="comment">// This happens for pre-opted files since the corresponding dex files are no longer on disk.</span></span><br><span class="line"><span class="number">822</span>    dex_location_checksum_pointer = nullptr;</span><br><span class="line"><span class="number">823</span>    have_checksum = <span class="keyword">false</span>;</span><br><span class="line"><span class="number">824</span>  &#125;</span><br><span class="line"><span class="number">825</span></span><br><span class="line"><span class="number">826</span>  bool needs_registering = <span class="keyword">false</span>;</span><br><span class="line"><span class="number">827</span></span><br><span class="line"><span class="number">828</span>  <span class="keyword">const</span> OatFile::OatDexFile* oat_dex_file = FindOpenedOatDexFile(oat_location, dex_location,</span><br><span class="line"><span class="number">829</span>                                                                 dex_location_checksum_pointer);</span><br></pre></td></tr></table></figure>
 
 <p>从这边看 ，确实是，如果要加载的dex不在某个列表里 就返回空 ，但是这并不能说PathClassLoader 只能加载系统中安装过的apk，因为上面的代码下面还有很多代码，<br>所以说其实在art下PathClassLoader是可以加载dex的，当然对于apk 我并没有测试</p>
@@ -200,7 +217,7 @@
     
     
     <a class="pull-right" href="/2020/02/12/qdbi/">
-        qdbi →
+        qdbi初体验 →
     </a>
     
 </nav>

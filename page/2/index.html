@@ -80,9 +80,15 @@
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
-				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(3)</small></a></li>
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/DBI/" class="animsition-link">DBI<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/游戏/" class="animsition-link">游戏<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -224,8 +230,10 @@
                     <p>
                       
                         Qemu+Mips 配置0x00最近在搞mips相关的东西。搞的心累。。。。记几个遇到的问题吧
-0x010 首先得有qemu,已经经过buildroot 编译过的mips-gcc这个过程比较费时，网上有相关的说明，就不多说了。下面说说我遇到的几个问题
-1 交叉编译mips程序在我编译完buildroot 后， 在output/xxxxx/bin 目录里会有一些mips-linux-gcc,使用这些gcc编译的时候，会出现找不到xxx.b
+0x01
+首先得有qemu,已经经过buildroot 编译过的mips-gcc这个过程比较费时，网上有相关的说明，就不多说了。下面说说我遇到的几个问题
+
+交叉编译mips程序在我编译完buildroot 后， 在output/xxxxx/bin 目录里会有一些mips-linux-gcc,使用这些gcc编译的时候，会出现找不到xxx.bx_
                       
                     </p>
                     
@@ -262,8 +270,7 @@
                 <div class="col-md-8">
                     <p>
                       
-                        0x00 前言某东的课要求我们实现一个用socket通信的程序, 用C/C++写,虽然用很多语言写过这个了,但是这次想在linux平台上试一下。于是就写了个代码测试一下,然而在使用pthread的时候,程序报了一个貌似函数类型错误的的错误,然后就大致的了解了一下。
-0x1 解析123#include &lt;pthread.h&gt; int  pthread_create((pthread_t  *thread,  pthread_a
+                        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>某东的课要求我们实现一个用socket通信的程序, 用C/C++写,虽然用<br>很多语言写过这个了,但是这次想在linux平台上试一下。于是就写了个代码测试一下,然而在使用pthread的时候,程序报了一个貌似函数类型错误的的错误,然后就大致的了解了一下。</p>
                       
                     </p>
                     
@@ -300,15 +307,7 @@
                 <div class="col-md-8">
                     <p>
                       
-                        虚拟定位前言近年来，越来越多的手机应用通过定位系统来实现强大功能，比如钉钉的打卡，微信的实时位置共享，咕咚的路径记录。这些应用给大众带来了便利，但也让一部分人看到了商机，通过虚拟定位技术，使用者可以出现在世界的任何一个角落，并且不会被应用检查出问题。这样，使用者就可以进行远程打卡，秀定位了。
-技术原理手机定位的几种方式
-卫星定位(GPS)
-基站定位
-wifi/移动网络/蓝牙定位
-AGPS 定位
-混合式定位(综合以上几种方式)
-
-手机上的
+                        <h1 id="虚拟定位"><a href="#虚拟定位" class="headerlink" title="虚拟定位"></a>虚拟定位</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>近年来，越来越多的手机应用通过定位系统来实现强大功能，比如钉钉的打卡，微信的实时位置共享，咕咚的路径记录。这些应用给大众带来了便利，但也让一部分人看到了商机，通过虚拟定位技术，使用者可以出现在世界的任何一个角落，并且不会被应用检查出问题。这样，使用者就可以进行远程打卡，秀定位了。</p>
                       
                     </p>
                     
