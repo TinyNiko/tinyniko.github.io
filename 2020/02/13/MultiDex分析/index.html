@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<!--<![endif]-->
+
+<head>
+  <title>MultiDex分析 | Niko&#39;s BLOG</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Niko's BLOG">
+    <meta name="author" content="N1ko">
+    <meta name="description" content="" />
+    <meta name="keywords" content="逆向,程序分析,漏洞挖掘" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Niko&#39;s BLOG" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(3)</small></a></li>
+				    
+				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" target="_blank" rel="noopener" class="animsition-link">Kieran</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Niko's BLOG</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2020-02-12T16:18:18.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+</span>
+                <h1>MultiDex分析</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h1 id="DexClassLoader-分析"><a href="#DexClassLoader-分析" class="headerlink" title="DexClassLoader 分析"></a>DexClassLoader 分析</h1><p>尝试了一下oneNote的导出功能，貌似并不是很好，所以只能改用markdown了。<br>muLtidex 的加载，实在attachBaseContext的时候调用Multidex.install(this) 就可以了Install 实现比较简单</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">158</span>                File dexDir = <span class="keyword">new</span> File(applicationInfo.dataDir, SECONDARY_FOLDER_NAME);</span><br><span class="line"><span class="number">159</span>                List&lt;File&gt; files = MultiDexExtractor.load(context, applicationInfo, dexDir, <span class="keyword">false</span>);</span><br><span class="line"><span class="number">160</span>                <span class="keyword">if</span> (checkValidZipFiles(files)) &#123;</span><br><span class="line"><span class="number">161</span>                    installSecondaryDexes(loader, dexDir, files);</span><br><span class="line"><span class="number">162</span>                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="number">163</span>                    Log.w(TAG, <span class="string">"Files were not valid zip files.  Forcing a reload."</span>);</span><br><span class="line"><span class="number">164</span>                    <span class="comment">// Try again, but this time force a reload of the zip file.</span></span><br><span class="line"><span class="number">165</span>                    files = MultiDexExtractor.load(context, applicationInfo, dexDir, <span class="keyword">true</span>);</span><br><span class="line"><span class="number">166</span></span><br><span class="line"><span class="number">167</span>                    <span class="keyword">if</span> (checkValidZipFiles(files)) &#123;</span><br><span class="line"><span class="number">168</span>                        installSecondaryDexes(loader, dexDir, files);</span><br><span class="line"><span class="number">169</span>                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="number">170</span>                        <span class="comment">// Second time didn't work, give up</span></span><br><span class="line"><span class="number">171</span>                        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Zip files were not valid."</span>);</span><br><span class="line"><span class="number">172</span>                    &#125;</span><br><span class="line"><span class="number">173</span>                &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>最重要的是MultiDexExtractor.load 调用了两次，然后调用installSecondaryDexes 进行安装</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">   */</span><br><span class="line"><span class="number">82</span>    <span class="function"><span class="keyword">static</span> List&lt;File&gt; <span class="title">load</span><span class="params">(Context context, ApplicationInfo applicationInfo, File dexDir,</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="number">83</span>            <span class="keyword">boolean</span> forceReload)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"><span class="number">84</span>        Log.i(TAG, <span class="string">"MultiDexExtractor.load("</span> + applicationInfo.sourceDir + <span class="string">", "</span> + forceReload + <span class="string">")"</span>);</span><br><span class="line"><span class="number">85</span>        <span class="keyword">final</span> File sourceApk = <span class="keyword">new</span> File(applicationInfo.sourceDir);</span><br><span class="line"><span class="number">86</span></span><br><span class="line"><span class="number">87</span>        <span class="keyword">long</span> currentCrc = getZipCrc(sourceApk);</span><br><span class="line"><span class="number">88</span></span><br><span class="line"><span class="number">89</span>        List&lt;File&gt; files;</span><br><span class="line"><span class="number">90</span>        <span class="keyword">if</span> (!forceReload &amp;&amp; !isModified(context, sourceApk, currentCrc)) &#123;</span><br><span class="line"><span class="number">91</span>            <span class="keyword">try</span> &#123;</span><br><span class="line"><span class="number">92</span>                files = loadExistingExtractions(context, sourceApk, dexDir);</span><br><span class="line"><span class="number">93</span>            &#125; <span class="keyword">catch</span> (IOException ioe) &#123;</span><br><span class="line"><span class="number">94</span>                Log.w(TAG, <span class="string">"Failed to reload existing extracted secondary dex files,"</span></span><br><span class="line"><span class="number">95</span>                        + <span class="string">" falling back to fresh extraction"</span>, ioe);</span><br><span class="line"><span class="number">96</span>                files = performExtractions(sourceApk, dexDir);</span><br><span class="line"><span class="number">97</span>                putStoredApkInfo(context, getTimeStamp(sourceApk), currentCrc, files.size() + <span class="number">1</span>);</span><br><span class="line"><span class="number">98</span></span><br><span class="line"><span class="number">99</span>            &#125;</span><br><span class="line"><span class="number">100</span>        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="number">101</span>            Log.i(TAG, <span class="string">"Detected that extraction must be performed."</span>);</span><br><span class="line"><span class="number">102</span>            files = performExtractions(sourceApk, dexDir);</span><br><span class="line"><span class="number">103</span>            putStoredApkInfo(context, getTimeStamp(sourceApk), currentCrc, files.size() + <span class="number">1</span>);</span><br><span class="line"><span class="number">104</span>        &#125;</span><br><span class="line"><span class="number">105</span></span><br><span class="line"><span class="number">106</span>        Log.i(TAG, <span class="string">"load found "</span> + files.size() + <span class="string">" secondary dex files"</span>);</span><br><span class="line"><span class="number">107</span>        <span class="keyword">return</span> files;</span><br><span class="line"><span class="number">108</span>    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先是一个判断，看是不是强制，还有就是有没有修改过apk，没有的话就直接用已经存在的，loadExistingExtractions 找了zip文件进行加载<br>Perform 做的事就是把apk里的其他dex文件放到一个zip文件中，这样，以后加载就直接加载zip文件，看了其他版本的代码，加载的流程有些不一样，不过并不影响</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">179</span>            ZipEntry dexFile = apk.getEntry(DEX_PREFIX + secondaryNumber + DEX_SUFFIX);</span><br><span class="line"><span class="number">180</span>            <span class="keyword">while</span> (dexFile != <span class="keyword">null</span>) &#123;</span><br><span class="line"><span class="number">181</span>                String fileName = extractedFilePrefix + secondaryNumber + EXTRACTED_SUFFIX;</span><br><span class="line"><span class="number">182</span>                File extractedFile = <span class="keyword">new</span> File(dexDir, fileName);</span><br><span class="line"><span class="number">183</span>                files.add(extractedFile);</span><br><span class="line"><span class="number">184</span></span><br><span class="line"><span class="number">185</span>                Log.i(TAG, <span class="string">"Extraction is needed for file "</span> + extractedFile);</span><br><span class="line"><span class="number">186</span>                <span class="keyword">int</span> numAttempts = <span class="number">0</span>;</span><br><span class="line"><span class="number">187</span>                <span class="keyword">boolean</span> isExtractionSuccessful = <span class="keyword">false</span>;</span><br><span class="line"><span class="number">188</span>                <span class="keyword">while</span> (numAttempts &lt; MAX_EXTRACT_ATTEMPTS &amp;&amp; !isExtractionSuccessful) &#123;</span><br><span class="line"><span class="number">189</span>                    numAttempts++;</span><br><span class="line"><span class="number">190</span></span><br><span class="line"><span class="number">191</span>                    <span class="comment">// Create a zip file (extractedFile) containing only the secondary dex file</span></span><br><span class="line"><span class="number">192</span>                    <span class="comment">// (dexFile) from the apk.</span></span><br><span class="line"><span class="number">193</span>                    extract(apk, dexFile, extractedFile, extractedFilePrefix);</span><br><span class="line"><span class="number">194</span></span><br><span class="line"><span class="number">195</span>                    <span class="comment">// Verify that the extracted file is indeed a zip file.</span></span><br><span class="line"><span class="number">196</span>                    isExtractionSuccessful = verifyZipFile(extractedFile);</span><br><span class="line"><span class="number">197</span></span><br><span class="line"><span class="number">198</span>                    <span class="comment">// Log the sha1 of the extracted zip file</span></span><br><span class="line"><span class="number">199</span>                    Log.i(TAG, <span class="string">"Extraction "</span> + (isExtractionSuccessful ? <span class="string">"success"</span> : <span class="string">"failed"</span>) +</span><br><span class="line"><span class="number">200</span>                            <span class="string">" - length "</span> + extractedFile.getAbsolutePath() + <span class="string">": "</span> +</span><br><span class="line"><span class="number">201</span>                            extractedFile.length());</span><br><span class="line"><span class="number">202</span>                    <span class="keyword">if</span> (!isExtractionSuccessful) &#123;</span><br><span class="line"><span class="number">203</span>                        <span class="comment">// Delete the extracted file</span></span><br><span class="line"><span class="number">204</span>                        extractedFile.delete();</span><br><span class="line"><span class="number">205</span>                        <span class="keyword">if</span> (extractedFile.exists()) &#123;</span><br><span class="line"><span class="number">206</span>                            Log.w(TAG, <span class="string">"Failed to delete corrupted secondary dex '"</span> +</span><br><span class="line"><span class="number">207</span>                                    extractedFile.getPath() + <span class="string">"'"</span>);</span><br><span class="line"><span class="number">208</span>                        &#125;</span><br><span class="line"><span class="number">209</span>                    &#125;</span><br><span class="line"><span class="number">210</span>                &#125;</span><br><span class="line"><span class="number">211</span>                <span class="keyword">if</span> (!isExtractionSuccessful) &#123;</span><br><span class="line"><span class="number">212</span>                    <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Could not create zip file "</span> +</span><br><span class="line"><span class="number">213</span>                            extractedFile.getAbsolutePath() + <span class="string">" for secondary dex ("</span> +</span><br><span class="line"><span class="number">214</span>                            secondaryNumber + <span class="string">")"</span>);</span><br><span class="line"><span class="number">215</span>                &#125;</span><br><span class="line"><span class="number">216</span>                secondaryNumber++;</span><br><span class="line"><span class="number">217</span>                dexFile = apk.getEntry(DEX_PREFIX + secondaryNumber + DEX_SUFFIX);</span><br></pre></td></tr></table></figure>
+
+<p>接着把文件相关信息写到一个shared_pref文件中</p>
+<p>完事以后呢，就调用 installSecondaryDexes 进行正式的安装</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">237</span>    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">installSecondaryDexes</span><span class="params">(ClassLoader loader, File dexDir, List&lt;File&gt; files)</span></span></span><br><span class="line"><span class="function">238            <span class="keyword">throws</span> IllegalArgumentException, IllegalAccessException, NoSuchFieldException,</span></span><br><span class="line"><span class="function">239            InvocationTargetException, NoSuchMethodException, IOException </span>&#123;</span><br><span class="line"><span class="number">240</span>        <span class="keyword">if</span> (!files.isEmpty()) &#123;</span><br><span class="line"><span class="number">241</span>            <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">19</span>) &#123;</span><br><span class="line"><span class="number">242</span>                V19.install(loader, files, dexDir);</span><br><span class="line"><span class="number">243</span>            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">14</span>) &#123;</span><br><span class="line"><span class="number">244</span>                V14.install(loader, files, dexDir);</span><br><span class="line"><span class="number">245</span>            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="number">246</span>                V4.install(loader, files);</span><br><span class="line"><span class="number">247</span>            &#125;</span><br><span class="line"><span class="number">248</span>        &#125;</span><br><span class="line"><span class="number">249</span>    &#125;</span><br><span class="line"><span class="number">250</span></span><br></pre></td></tr></table></figure>
+
+<p>根据不同版本进行不同的安装<br>从代码上看，其实都是去反射调用了DexPathList ,然后再调用这个对象的makeDexElements ， 看到这个makeDexELements，基本上就知道要完事了，这个就和DexClassLoader加载过程差不多了。用来做不落地加载好像也是可以的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">417</span>        <span class="keyword">private</span> <span class="keyword">static</span> Object[] makeDexElements(</span><br><span class="line"><span class="number">418</span>                Object dexPathList, ArrayList&lt;File&gt; files, File optimizedDirectory,</span><br><span class="line"><span class="number">419</span>                ArrayList&lt;IOException&gt; suppressedExceptions)</span><br><span class="line"><span class="number">420</span>                        <span class="keyword">throws</span> IllegalAccessException, InvocationTargetException,</span><br><span class="line"><span class="number">421</span>                        NoSuchMethodException &#123;</span><br><span class="line"><span class="number">422</span>            Method makeDexElements =</span><br><span class="line"><span class="number">423</span>                    findMethod(dexPathList, <span class="string">"makeDexElements"</span>, ArrayList<span class="class">.<span class="keyword">class</span>, <span class="title">File</span>.<span class="title">class</span>,</span></span><br><span class="line"><span class="class">424                            <span class="title">ArrayList</span>.<span class="title">class</span>)</span>;</span><br><span class="line"><span class="number">425</span></span><br><span class="line"><span class="number">426</span>            <span class="keyword">return</span> (Object[]) makeDexElements.invoke(dexPathList, files, optimizedDirectory,</span><br><span class="line"><span class="number">427</span>                    suppressedExceptions);</span><br><span class="line"><span class="number">428</span>        &#125;</span><br><span class="line"><span class="number">429</span>    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">328</span>    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">expandFieldArray</span><span class="params">(Object instance, String fieldName,</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="number">329</span>            Object[] extraElements)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalArgumentException,</span></span><br><span class="line"><span class="function">330            IllegalAccessException </span>&#123;</span><br><span class="line"><span class="number">331</span>        Field jlrField = findField(instance, fieldName);</span><br><span class="line"><span class="number">332</span>        Object[] original = (Object[]) jlrField.get(instance);</span><br><span class="line"><span class="number">333</span>        Object[] combined = (Object[]) Array.newInstance(</span><br><span class="line"><span class="number">334</span>                original.getClass().getComponentType(), original.length + extraElements.length);</span><br><span class="line"><span class="number">335</span>        System.arraycopy(original, <span class="number">0</span>, combined, <span class="number">0</span>, original.length);</span><br><span class="line"><span class="number">336</span>        System.arraycopy(extraElements, <span class="number">0</span>, combined, original.length, extraElements.length);</span><br><span class="line"><span class="number">337</span>        jlrField.set(instance, combined);</span><br><span class="line"><span class="number">338</span>    &#125;</span><br><span class="line"><span class="number">339</span></span><br></pre></td></tr></table></figure>
+<p>这个expand也是个反射调用，把优化后的dex文件加到数组里</p>
+<p>分析到这里基本就结束了，其实主要就是把multidex过一遍</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    <a class="pull-left" href="/2020/02/13/nativejava%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="float: left;">
+        ← nativejava虚拟机
+    </a>
+    
+    
+    <a class="pull-right" href="/2020/02/13/Mono%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/">
+        Mono安全相关 →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By N1ko. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" target="_blank" rel="noopener" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+      
+</body>
+</html>

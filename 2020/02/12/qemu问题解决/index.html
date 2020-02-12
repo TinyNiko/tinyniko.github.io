@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: 源码分析 | Niko&#39;s BLOG</title>
+  <title>qemu问题解决 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -165,69 +165,103 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2020/02/12/旧博客引导/">旧博客引导</a></h4>
-                            
-                            <p><time datetime="2020-02-11T17:41:47.000Z"><a href="/2020/02/12/旧博客引导/">2020-02-12</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2020-02-12T15:40:37.000Z" itemprop="datePublished">
+          2020-02-12
+      </time>
+    
+    
+    | 
+    <a href='/tags/qemu/'>qemu</a>,
+    
+    <a href='/tags/mips/'>mips</a>
+    
+    
+</span>
+                <h1>qemu问题解决</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h1 id="Qemu-Mips-配置"><a href="#Qemu-Mips-配置" class="headerlink" title="Qemu+Mips 配置"></a>Qemu+Mips 配置</h1><h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>最近在搞mips相关的东西。搞的心累。。。。<br>记几个遇到的问题吧</p>
+<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p>0 首先得有qemu,已经经过buildroot 编译过的mips-gcc<br>这个过程比较费时，网上有相关的说明，就不多说了。<br>下面说说我遇到的几个问题</p>
+<p>1 交叉编译mips程序<br>在我编译完buildroot 后， 在output/xxxxx/bin 目录里会有一些mips-linux-gcc<br>,使用这些gcc编译的时候，会出现找不到xxx.bx_real的错误，这里我的解决方法是<br>改名字，然后把bin这个目录加到PATH中。</p>
+<p>2 sudo chroot . ./qemu_mipsel hello<br>这里的hello是使用动态链接的。<br>报错说 找不到 qemu_mipsel 这个 文件。 在stackoverflow上看到一个解决方案，<br>apt-get install qemu-user-static<br>然后将对应平台的static 文件放到hello所在目录就好， 同时还需要把lib目录放在一起<br>然后就可以执行了。</p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    <a class="pull-left" href="/2020/02/12/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/" style="float: left;">
+        ← 杂七杂八
+    </a>
+    
+    
+    <a class="pull-right" href="/2020/02/12/Linux%E7%BA%BF%E7%A8%8B%E4%BC%A0%E5%8F%82%E6%95%B0/">
+        Linux线程传参数 →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

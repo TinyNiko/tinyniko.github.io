@@ -75,16 +75,18 @@
             <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
             <!-- Dropdown Menu -->
 			 
-            <li>
-                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
-                <ul class="sb-submenu">
-                    
-                        <li><a href="/" target="_BLANK" class="animsition-link">alibaba</a></li>
-                    
-                </ul>
-            </li>
             
-            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(3)</small></a></li>
+				    
+				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
             
             <li>
                 <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
@@ -129,7 +131,7 @@
                             <li><a href="/" class="animsition-link">Niko's BLOG</a></li>
                             <li class="nolink"><span>Always </span>Creative.</li>
                             
-                            <li><a href="https://github.com/tinynio" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a></li>
                             
                             
                             <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
@@ -201,19 +203,12 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2020/02/12/old/">旧博客引导</a></h3>
+                    <h3><a href="/2020/02/13/fart脱壳机逆向/">fart脱壳机逆向</a></h3>
                     <span>
                         <span class="post-meta">
-      <time datetime="2020-02-11T17:41:47.000Z" itemprop="datePublished">
-          2020-02-12
+      <time datetime="2020-02-12T16:19:22.000Z" itemprop="datePublished">
+          2020-02-13
       </time>
-    
-    
-    | 
-    <a href='/tags/逆向/'>逆向</a>,
-    
-    <a href='/tags/源码分析/'>源码分析</a>
-    
     
 </span>
                     </span>
@@ -221,12 +216,15 @@
                 <div class="col-md-8">
                     <p>
                       
-                        <h1 id="旧博客引导"><a href="#旧博客引导" class="headerlink" title="旧博客引导"></a>旧博客引导</h1><p>博客又搞了点花样出来，以前写的文章，有些是pdf，就不再重复提交了，直接搞成下载链接</p>
+                        0x01 前言看雪上看到有人发了一个art脱壳机,看懂了大概，但对于细节还是有一些不理解。找了一下github发发现作者提供了rom包，还有qq群，but qq群竟然要钱，所以qq群了，还是自己动手逆向吧，已知代码都在libart.so 里，把里面不太明白的地方分析一下就好了。
+0x01 获取目标文件首先拿到rom包，file system.img ,发现输出是不认识的格式，就上网搜了一下资料，这篇文章 主要讲了
+
+system2_0.
                       
                     </p>
                     
                     <p class="pull-right readMore">
-                        <a href="/2020/02/12/old/">Read More...</a>
+                        <a href="/2020/02/13/fart脱壳机逆向/">Read More...</a>
                     </p>
                     
                 </div>
@@ -238,16 +236,174 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2020/02/12/fart-md/">fart.md</a></h3>
+                    <h3><a href="/2020/02/13/nativejava虚拟机/">nativejava虚拟机</a></h3>
                     <span>
                         <span class="post-meta">
-      <time datetime="2020-02-11T17:41:12.000Z" itemprop="datePublished">
+      <time datetime="2020-02-12T16:18:53.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        起因前段时间看到看雪有篇文章讲百度壳的分析，讲的是native创建虚拟机来自主加载so，代码是基于dvm的。但是我直接改成art，在8.0上并没有成功，当时想着写art的脱壳机的时候再去研究一下原因，结果一拖再拖就没有下文了。最近又看到一个创建虚拟机来加载so的，看了一下代码，是基于art的，并且可以跑成功。于是就打算看看为啥之前的不行。
+分析代码相比于dvm的，art的那个代码多了如下部分:
+1234567    &#x2F;&#x2
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/13/nativejava虚拟机/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/13/MultiDex分析/">MultiDex分析</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T16:18:18.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        DexClassLoader 分析尝试了一下oneNote的导出功能，貌似并不是很好，所以只能改用markdown了。muLtidex 的加载，实在attachBaseContext的时候调用Multidex.install(this) 就可以了Install 实现比较简单
+12345678910111213141516158                File dexDir = new File(applicationInfo.d
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/13/MultiDex分析/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/13/Mono安全相关/">Mono安全相关</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T16:17:59.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        unity mono android 安全相关0x0 编译首先从网上了解到，github上mono源码有两种，一种是mono自己的，一种是unity3d的，我们需要的就是u3d.因此，需要直接去u3d的git那下载。 下载完后，看网上的指南，有出现了两种，一种是按unity版本来的， 比如unity-5.6，unity-5.0这种，另外一个是unity-mono-4.x这种，鉴于自己没什么经验，就试了两种方法，结果第二种不行。第一种也需
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/13/Mono安全相关/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/13/Docker/">Docker</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T16:16:48.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        0x00 前言（建议略过）第一次接触docker大概是2016年吧，记不大清了，反正那一年docker很火。当年学了一些docker 的命令，就算是对docker有些了解了吧，但其实懂的很少。最近又开始搞docker了，因为前段时间打ctf的时候发现用dockerfile搭镜像的题还是挺多的，而且非常方便，小巧。我一向是使用虚拟机的，但是不得不说，虚拟机太大了，电脑+硬盘塞了6，7个虚拟机，占了很大的 空间。我的mac上不知是不是xco
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/13/Docker/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/13/ClassLoader分析/">ClassLoader分析</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T16:15:48.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        0x00前端时间看看dexclassloader 和pathclassloader  ，发现网上大面积的这种结论
+
+DexClassLoader：能够加载未安装的jar/apk/dexPathClassLoader：只能加载系统中已经安装过的apk
+
+真的不知道他们是看的4.x的代码还是什么，感觉就是文章抄来抄去。。。看网上的文章会发现大部分 到下面的代码就没有了
+123456789101112131415161718192021222
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/13/ClassLoader分析/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/12/qdbi/">qdbi</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T15:45:03.000Z" itemprop="datePublished">
           2020-02-12
       </time>
     
     
     | 
-    <a href='/tags/逆向-脱壳/'>逆向,脱壳</a>
+    <a href='/tags/dbi/'>dbi</a>
     
     
 </span>
@@ -256,12 +412,144 @@
                 <div class="col-md-8">
                     <p>
                       
-                        
+                        简介安装
+github 上提供了安装包https://github.com/QBDI/QBDI/releases share目录下不同种类的demo可以参考
+
+官方有python接口，但是他们推荐是用另外的方式
+
+
+preload模式LD_PRELOAD=./libqbdi_tracer.so /bin/lsDYLD_INSERT_LIBRARIES=./libqbdi_tracer.dylib ./ls
+frida 相关
                       
                     </p>
                     
                     <p class="pull-right readMore">
-                        <a href="/2020/02/12/fart-md/">Read More...</a>
+                        <a href="/2020/02/12/qdbi/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/12/DeviceIdCheck/">DeviceIdCheck</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T15:44:26.000Z" itemprop="datePublished">
+          2020-02-12
+      </time>
+    
+    
+    | 
+    <a href='/tags/Android/'>Android</a>,
+    
+    <a href='/tags/开发/'>开发</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        Android/IOS 设备指纹
+内容非原创，只是引用和总结了一下
+
+Android 设备指纹常见的就5种方式
+
+网卡mac地址
+IMEI
+AndroidID
+序列号
+蓝牙mac地址
+
+检测代码如下
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/12/DeviceIdCheck/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/12/AndroidASAN/">AndroidASAN</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T15:43:12.000Z" itemprop="datePublished">
+          2020-02-12
+      </time>
+    
+    
+    | 
+    <a href='/tags/Android/'>Android</a>,
+    
+    <a href='/tags/ASAN/'>ASAN</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        起因写android so 的时候会使用堆，但是处理不好有可能导致崩溃，address sanitizer  正好可以解决这个问题 
+第一次尝试第一次找了官方文档，看了一下，按照他的方式确实可以集成asan，但是这个只能是可执行文件 。尝试一番无果，就没有再继续研究了。
+第二次尝试第二次看到同事集成成功了，直接把asan的so放到libs，然后新的so依赖于这个so。于是我网上又找了找资料，发现ndk很早就自带了一个配置asan环境的脚
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/12/AndroidASAN/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/12/杂七杂八/">杂七杂八</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T15:41:45.000Z" itemprop="datePublished">
+          2020-02-12
+      </time>
+    
+    
+    | 
+    <a href='/tags/random/'>random</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        staticc 语言中 static 关键字 代表只能在模块中访问，比如静态函数，静态变量名。在android中，static声明的函数是直接变成内联函数。static 变量，如果初始化了，会放在.data段，如果没有初始化，会放在.bss段 
+关于hook常见的是got hook ，inline hook ，还有java的method hook . 
+got hook 只能针对 导入函数，这个其实也是一个got 相关的问题，什么函数会
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/12/杂七杂八/">Read More...</a>
                     </p>
                     
                 </div>
@@ -272,7 +560,7 @@
         
         <nav class="pagination" role="pagination">
           
-          
+          <a class="pull-right" href="/page/2/">Older Posts →</a>
         </nav>
     </div>
 </section>
@@ -299,7 +587,7 @@
             <div class="social">
                 <ul>
                     
-                    <li><a href="https://github.com/tinynio" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
                     
                     
                     <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>

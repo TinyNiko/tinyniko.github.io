@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: 源码分析 | Niko&#39;s BLOG</title>
+  <title>ClassLoader分析 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -165,69 +165,100 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2020/02/12/旧博客引导/">旧博客引导</a></h4>
-                            
-                            <p><time datetime="2020-02-11T17:41:47.000Z"><a href="/2020/02/12/旧博客引导/">2020-02-12</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2020-02-12T16:15:48.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+</span>
+                <h1>ClassLoader分析</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><p>前端时间看看dexclassloader 和pathclassloader  ，发现网上大面积的这种结论</p>
+<blockquote>
+<p>DexClassLoader：能够加载未安装的jar/apk/dex<br>PathClassLoader：只能加载系统中已经安装过的apk</p>
+</blockquote>
+<p>真的不知道他们是看的4.x的代码还是什么，感觉就是文章抄来抄去。。。<br>看网上的文章会发现大部分 到下面的代码就没有了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">807</span><span class="comment">// Multidex files make it possible that some, but not all, dex files can be broken/outdated. This</span></span><br><span class="line"><span class="number">808</span><span class="comment">// complicates the loading process, as we should not use an iterative loading process, because that</span></span><br><span class="line"><span class="number">809</span><span class="comment">// would register the oat file and dex files that come before the broken one. Instead, check all</span></span><br><span class="line"><span class="number">810</span><span class="comment">// multidex ahead of time.</span></span><br><span class="line"><span class="number">811</span>bool ClassLinker::OpenDexFilesFromOat(<span class="keyword">const</span> <span class="keyword">char</span>* dex_location, <span class="keyword">const</span> <span class="keyword">char</span>* oat_location,</span><br><span class="line"><span class="number">812</span>                                      std::vector&lt;std::string&gt;* error_msgs,</span><br><span class="line"><span class="number">813</span>                                      std::vector&lt;<span class="keyword">const</span> DexFile*&gt;* dex_files) &#123;</span><br><span class="line"><span class="number">814</span>  <span class="comment">// 1) Check whether we have an open oat file.</span></span><br><span class="line"><span class="number">815</span>  <span class="comment">// This requires a dex checksum, use the "primary" one.</span></span><br><span class="line"><span class="number">816</span>  uint32_t dex_location_checksum;</span><br><span class="line"><span class="number">817</span>  uint32_t* dex_location_checksum_pointer = &amp;dex_location_checksum;</span><br><span class="line"><span class="number">818</span>  bool have_checksum = <span class="keyword">true</span>;</span><br><span class="line"><span class="number">819</span>  std::string checksum_error_msg;</span><br><span class="line"><span class="number">820</span>  <span class="keyword">if</span> (!DexFile::GetChecksum(dex_location, dex_location_checksum_pointer, &amp;checksum_error_msg)) &#123;</span><br><span class="line"><span class="number">821</span>    <span class="comment">// This happens for pre-opted files since the corresponding dex files are no longer on disk.</span></span><br><span class="line"><span class="number">822</span>    dex_location_checksum_pointer = nullptr;</span><br><span class="line"><span class="number">823</span>    have_checksum = <span class="keyword">false</span>;</span><br><span class="line"><span class="number">824</span>  &#125;</span><br><span class="line"><span class="number">825</span></span><br><span class="line"><span class="number">826</span>  bool needs_registering = <span class="keyword">false</span>;</span><br><span class="line"><span class="number">827</span></span><br><span class="line"><span class="number">828</span>  <span class="keyword">const</span> OatFile::OatDexFile* oat_dex_file = FindOpenedOatDexFile(oat_location, dex_location,</span><br><span class="line"><span class="number">829</span>                                                                 dex_location_checksum_pointer);</span><br></pre></td></tr></table></figure>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+<p>从这边看 ，确实是，如果要加载的dex不在某个列表里 就返回空 ，但是这并不能说PathClassLoader 只能加载系统中安装过的apk，因为上面的代码下面还有很多代码，<br>所以说其实在art下PathClassLoader是可以加载dex的，当然对于apk 我并没有测试</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    <a class="pull-left" href="/2020/02/13/Docker/" style="float: left;">
+        ← Docker
+    </a>
+    
+    
+    <a class="pull-right" href="/2020/02/12/qdbi/">
+        qdbi →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

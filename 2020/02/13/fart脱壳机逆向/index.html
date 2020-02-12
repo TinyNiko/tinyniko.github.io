@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: 源码分析 | Niko&#39;s BLOG</title>
+  <title>fart脱壳机逆向 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -165,69 +165,101 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2020/02/12/旧博客引导/">旧博客引导</a></h4>
-                            
-                            <p><time datetime="2020-02-11T17:41:47.000Z"><a href="/2020/02/12/旧博客引导/">2020-02-12</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2020-02-12T16:19:22.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+</span>
+                <h1>fart脱壳机逆向</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h1 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h1><p>看雪上看到有人发了一个art脱壳机,看懂了大概，但对于细节还是有一些不理解。找了一下github发发现作者提供了rom包，还有qq群，but qq群竟然要钱，所以qq群了，还是自己动手逆向吧，已知代码都在libart.so 里，把里面不太明白的地方分析一下就好了。</p>
+<h1 id="0x01-获取目标文件"><a href="#0x01-获取目标文件" class="headerlink" title="0x01 获取目标文件"></a>0x01 获取目标文件</h1><p>首先拿到rom包，file system.img ,发现输出是不认识的格式，就上网搜了一下资料，<br><a href="https://segmentfault.com/a/1190000004363645" target="_blank" rel="noopener">这篇文章</a> 主要讲了</p>
+<blockquote>
+<p>system2_0.img: Linux rev 1.0 ext4 filesystem data, UUID=57f8f4bc-abf4-655f-bf67-946fc0f9f25b (extents) (large files)</p>
+</blockquote>
+<blockquote>
+<p>system1_0.img: Android sparse image, version: 1.0, Total of 393216 4096-byte output blocks in 1765 input chunks.</p>
+</blockquote>
+<p>以上两种格式分别为：</p>
+<pre><code>1. ext4 filesystem data
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+2. Android sparse image</code></pre><p>我手里的是2，所以用simg2img 将raw 转换成ext4 ,然后mount 一下就行，但是我的mac上执行mount 会报找不到文件的错误(可能是mac系统的问题，root权限也不行)，于是就去linux 试了一下，就可以了. 然后在lib下顺利拿 <code>libart.so</code></p>
+<h1 id="0x02-分析"><a href="#0x02-分析" class="headerlink" title="0x02 分析"></a>0x02 分析</h1><p>我们的目标是分析脱壳机的具体实现，由于作者在写文章的时候，留下了一些函数名，所以直接找这些符号就可以了。打开ida 进行搜索，发现函数确实存在。找了这几个函数，忽然发现他们都是jni函数，需要去分析framework的代码。没办法，继续找:(。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    
+    <a class="pull-right" href="/2020/02/13/nativejava%E8%99%9A%E6%8B%9F%E6%9C%BA/">
+        nativejava虚拟机 →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

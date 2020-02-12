@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<!--<![endif]-->
+
+<head>
+  <title>DeviceIdCheck | Niko&#39;s BLOG</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Niko's BLOG">
+    <meta name="author" content="N1ko">
+    <meta name="description" content="" />
+    <meta name="keywords" content="逆向,程序分析,漏洞挖掘" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Niko&#39;s BLOG" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(3)</small></a></li>
+				    
+				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" target="_blank" rel="noopener" class="animsition-link">Kieran</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Niko's BLOG</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2020-02-12T15:44:26.000Z" itemprop="datePublished">
+          2020-02-12
+      </time>
+    
+    
+    | 
+    <a href='/tags/Android/'>Android</a>,
+    
+    <a href='/tags/开发/'>开发</a>
+    
+    
+</span>
+                <h1>DeviceIdCheck</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h1 id="Android-IOS-设备指纹"><a href="#Android-IOS-设备指纹" class="headerlink" title="Android/IOS 设备指纹"></a>Android/IOS 设备指纹</h1><blockquote>
+<p>内容非原创，只是引用和总结了一下</p>
+</blockquote>
+<h2 id="Android-设备指纹"><a href="#Android-设备指纹" class="headerlink" title="Android 设备指纹"></a>Android 设备指纹</h2><p>常见的就5种方式</p>
+<ul>
+<li>网卡mac地址</li>
+<li>IMEI</li>
+<li>AndroidID</li>
+<li>序列号</li>
+<li>蓝牙mac地址</li>
+</ul>
+<p>检测代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//来自简书上的一篇文章</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        Log.i(<span class="string">"ProjectN"</span>, <span class="string">"IMEI："</span>+ getLocalIMEI(<span class="keyword">this</span>));</span><br><span class="line">        Log.i(<span class="string">"ProjectN"</span>, <span class="string">"Serial："</span>+getSerial());</span><br><span class="line">        Log.i(<span class="string">"ProjectN"</span>, <span class="string">"Mac："</span>+getMac(<span class="keyword">this</span>));</span><br><span class="line">        Log.i(<span class="string">"ProjectN"</span>, <span class="string">"AndroidId："</span>+getAndroidId(<span class="keyword">this</span>));</span><br><span class="line">        Log.i(<span class="string">"ProjectN"</span>, <span class="string">"bluetooth："</span>+getBluetooth());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *序列号</span></span><br><span class="line"><span class="comment">     *从Android 2.3 (“Gingerbread”)开始可用，可以通过android.os.Build.SERIAL获取，对于没有通话功能的设备，它会</span></span><br><span class="line"><span class="comment">     *返回一个唯一的device ID</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getSerial</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            String str = android.os.Build.class.getField("SERIAL").get(null).toString();</span><br><span class="line">            <span class="keyword">return</span> str;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException | IllegalArgumentException</span><br><span class="line">                | NoSuchFieldException e)</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 获取设备的IMEI</span></span><br><span class="line"><span class="comment">     * IMEI</span></span><br><span class="line"><span class="comment">     *方式：TelephonyManager.getDeviceId():</span></span><br><span class="line"><span class="comment">     *问题</span></span><br><span class="line"><span class="comment">     *范围：网上说“只能支持拥有通话功能的设备，对于平板不可以”，但是我测试了型号FDR-A01w平板确实拿到的是null,</span></span><br><span class="line"><span class="comment">     *而 型号S7-601的平板却能拿到。</span></span><br><span class="line"><span class="comment">     *持久性：返厂，数据擦除的时候不彻底，保留了原来的标识。</span></span><br><span class="line"><span class="comment">     *权限：需要权限：android.permission.READ_PHONE_STATE</span></span><br><span class="line"><span class="comment">     *bug: 有些厂家的实现有bug，返回一些不可用的数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getLocalIMEI</span><span class="params">(Context context)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        TelephonyManager tm = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">null</span> != tm)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> tm.getDeviceId();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception ex)</span><br><span class="line">        &#123;</span><br><span class="line">        &#125; <span class="keyword">finally</span></span><br><span class="line">        &#123;</span><br><span class="line">            tm = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Mac地址</span></span><br><span class="line"><span class="comment">     *ACCESS_WIFI_STATE权限</span></span><br><span class="line"><span class="comment">     *有些设备没有WiFi，或者蓝牙，就不可以，如果WiFi没有打开，硬件也不会返回Mac地址</span></span><br><span class="line"><span class="comment">     *6.0以前可用</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMac</span><span class="params">(Context context)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);</span><br><span class="line">        WifiInfo info = wifi.getConnectionInfo();</span><br><span class="line">        <span class="keyword">return</span> info.getMacAddress();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//兼容性强</span></span><br><span class="line">    <span class="comment">//需要权限</span></span><br><span class="line">    <span class="comment">//&lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /&gt;  </span></span><br><span class="line">    <span class="comment">//&lt;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /&gt; </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getMac</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String str = <span class="string">""</span>;</span><br><span class="line">        String macSerial = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Process pp = Runtime.getRuntime().exec(</span><br><span class="line">                    <span class="string">"cat /sys/class/net/wlan0/address "</span>);</span><br><span class="line">            InputStreamReader ir = <span class="keyword">new</span> InputStreamReader(pp.getInputStream());</span><br><span class="line">            LineNumberReader input = <span class="keyword">new</span> LineNumberReader(ir);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (; <span class="keyword">null</span> != str;) &#123;</span><br><span class="line">                str = input.readLine();</span><br><span class="line">                <span class="keyword">if</span> (str != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    macSerial = str.trim();<span class="comment">// 去空格</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (macSerial == <span class="keyword">null</span> || <span class="string">""</span>.equals(macSerial)) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> loadFileAsString(<span class="string">"/sys/class/net/eth0/address"</span>)</span><br><span class="line">                        .toUpperCase().substring(<span class="number">0</span>, <span class="number">17</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> macSerial;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">loadFileAsString</span><span class="params">(String fileName)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        FileReader reader = <span class="keyword">new</span> FileReader(fileName);</span><br><span class="line">        String text = loadReaderAsString(reader);</span><br><span class="line">        reader.close();</span><br><span class="line">        <span class="keyword">return</span> text;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">loadReaderAsString</span><span class="params">(Reader reader)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        StringBuilder builder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">char</span>[] buffer = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">4096</span>];</span><br><span class="line">        <span class="keyword">int</span> readLength = reader.read(buffer);</span><br><span class="line">        <span class="keyword">while</span> (readLength &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            builder.append(buffer, <span class="number">0</span>, readLength);</span><br><span class="line">            readLength = reader.read(buffer);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> builder.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Android Id</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *    ANDROID_ID</span></span><br><span class="line"><span class="comment">     *2.2（Froyo，8）版本系统会不可信，来自主要生产厂商的主流手机，至少有一个普遍发现的bug，这些有问题的手机相同的ANDROID_ID: 9774d56d682e549c</span></span><br><span class="line"><span class="comment">     *但是如果返厂的手机，或者被root的手机，可能会变</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> context</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getAndroidId</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        String androidId = Settings.Secure.getString(</span><br><span class="line">                context.getContentResolver(), Settings.Secure.ANDROID_ID);</span><br><span class="line">        <span class="keyword">return</span> androidId;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// bluetooth mac id </span></span><br><span class="line">    <span class="comment">// 需要Bluetooth 的权限</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span>  <span class="keyword">static</span> String <span class="title">getBluetooth</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//BluetoothAdapter m = null ;</span></span><br><span class="line">        <span class="comment">//m = BluetoothAdapter.getDefaultAdapter() ;</span></span><br><span class="line">        <span class="comment">//return m.getAddress() ;</span></span><br><span class="line">         <span class="keyword">return</span> Settings.Secure.getString(context.getContentResolver(), <span class="string">"bluetooth_address"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我自己测试的时候发现bluetooth和网卡mac地址是一样的。本着研究的心态，我去看了源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /frameworks/base/services/core/java/com/android/server/BluetoothManagerService.java</span></span><br><span class="line"><span class="comment">//  要自己看的话最好了解一下binder.</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getAddress</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="number">1043</span>        mContext.enforceCallingOrSelfPermission(BLUETOOTH_PERM,</span><br><span class="line"><span class="number">1044</span>                <span class="string">"Need BLUETOOTH permission"</span>);</span><br><span class="line"><span class="number">1045</span></span><br><span class="line"><span class="number">1046</span>        <span class="keyword">if</span> ((Binder.getCallingUid() != Process.SYSTEM_UID) &amp;&amp;</span><br><span class="line"><span class="number">1047</span>                (!checkIfCallerIsForegroundUser())) &#123;</span><br><span class="line"><span class="number">1048</span>            Slog.w(TAG,<span class="string">"getAddress(): not allowed for non-active and non system user"</span>);</span><br><span class="line"><span class="number">1049</span>            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"><span class="number">1050</span>        &#125;</span><br><span class="line"><span class="number">1051</span></span><br><span class="line"><span class="number">1052</span>        <span class="keyword">if</span> (mContext.checkCallingOrSelfPermission(Manifest.permission.LOCAL_MAC_ADDRESS)</span><br><span class="line"><span class="number">1053</span>                != PackageManager.PERMISSION_GRANTED) &#123;</span><br><span class="line"><span class="number">1054</span>            <span class="keyword">return</span> BluetoothAdapter.DEFAULT_MAC_ADDRESS;</span><br><span class="line"><span class="number">1055</span>        &#125;</span><br><span class="line"><span class="number">1056</span></span><br><span class="line"><span class="number">1057</span>        <span class="keyword">try</span> &#123;</span><br><span class="line"><span class="number">1058</span>            mBluetoothLock.readLock().lock();</span><br><span class="line"><span class="number">1059</span>            <span class="keyword">if</span> (mBluetooth != <span class="keyword">null</span>) <span class="keyword">return</span> mBluetooth.getAddress();</span><br><span class="line"><span class="number">1060</span>        &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line"><span class="number">1061</span>            Slog.e(TAG, <span class="string">"getAddress(): Unable to retrieve address remotely. Returning cached address"</span>, e);</span><br><span class="line"><span class="number">1062</span>        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"><span class="number">1063</span>            mBluetoothLock.readLock().unlock();</span><br><span class="line"><span class="number">1064</span>        &#125;</span><br><span class="line"><span class="number">1065</span></span><br><span class="line"><span class="number">1066</span>        <span class="comment">// mAddress is accessed from outside.</span></span><br><span class="line"><span class="number">1067</span>        <span class="comment">// It is alright without a lock. Here, bluetooth is off, no other thread is</span></span><br><span class="line"><span class="number">1068</span>        <span class="comment">// changing mAddress</span></span><br><span class="line"><span class="number">1069</span>        <span class="keyword">return</span> mAddress;</span><br><span class="line"><span class="number">1070</span>    &#125;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_MAC_ADDRESS = <span class="string">"02:00:00:00:00:00"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到前一个if检查是不是system用户，或者是不是在前台，然后检查权限LOCAL_MAC_ADDRESS,这个权限貌似app申请不到，所以返回了默认地址。<br>从stackoverflow上找到一个回答<br>Access to the mac address has been deliberately removed:<br>To provide users with greater data protection, starting in this release, Android removes programmatic access to the device’s local hardware identifier for apps using the Wi-Fi and Bluetooth APIs.<br>也就是Android6.0以后不能直接访问mac地址了。但是可以通过别的方式访问.<br>另外，在手机root的情况下，这些数据就可能很不可靠了，比如常见的一些hook框架就可以对关键的api进行hook，返回错误结果。</p>
+<h2 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h2><h2 id="如果有新的姿势会继续更新"><a href="#如果有新的姿势会继续更新" class="headerlink" title="如果有新的姿势会继续更新"></a>如果有新的姿势会继续更新</h2>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    <a class="pull-left" href="/2020/02/12/qdbi/" style="float: left;">
+        ← qdbi
+    </a>
+    
+    
+    <a class="pull-right" href="/2020/02/12/AndroidASAN/">
+        AndroidASAN →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By N1ko. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" target="_blank" rel="noopener" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+      
+</body>
+</html>

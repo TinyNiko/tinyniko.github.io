@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: 源码分析 | Niko&#39;s BLOG</title>
+  <title>杂七杂八 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -165,69 +165,110 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2020/02/12/旧博客引导/">旧博客引导</a></h4>
-                            
-                            <p><time datetime="2020-02-11T17:41:47.000Z"><a href="/2020/02/12/旧博客引导/">2020-02-12</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2020-02-12T15:41:45.000Z" itemprop="datePublished">
+          2020-02-12
+      </time>
+    
+    
+    | 
+    <a href='/tags/random/'>random</a>
+    
+    
+</span>
+                <h1>杂七杂八</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><p>c 语言中 static 关键字 代表只能在模块中访问，比如静态函数，静态变量名。在android中，static声明的函数是直接变成内联函数。<br>static 变量，如果初始化了，会放在.data段，如果没有初始化，会放在.bss段 </p>
+<h1 id="关于hook"><a href="#关于hook" class="headerlink" title="关于hook"></a>关于hook</h1><p>常见的是got hook ，inline hook ，还有java的method hook . </p>
+<p>got hook 只能针对 导入函数，这个其实也是一个got 相关的问题，什么函数会进入到got 表。 这个是他的局限<br>调用导入函数的时候先进plt，plt 里执行一个jmp 操作 ，第一次跳转到got.plt ，但是got.plt 存的是plt的下一条指令，然后把重定位的offset push 到栈，然后调用_dl_runtime_resolve 解析函数的名字，然后搜索符号地址，最后给got.plt 赋新的地址，下一次就直接进去</p>
+<p>inline hook 修改函数头几个字节，然后跳转到hook函数，但是对字节数偏少的函数处理比较麻烦</p>
+<p>java hook ,常见的框架是去修改method artmethod 的函数指针达到效果的</p>
+<h1 id="关于反ollvm"><a href="#关于反ollvm" class="headerlink" title="关于反ollvm"></a>关于反ollvm</h1><p>通过阅读源码 以及 quarkslab 的文章，可以发现通过匹配可以直接去掉ollvm ，但是这里有个问题是对应字修改过的ollvm ，如何找一个通用的方法去对抗sub fla bcf </p>
+<h1 id="调用约定"><a href="#调用约定" class="headerlink" title="调用约定"></a>调用约定</h1><p>ATPCS 函数调用约定</p>
+<h1 id="a-b"><a href="#a-b" class="headerlink" title="a+b"></a>a+b</h1><p>clang<br>mov    -0x4(%rbp),%edx<br>add    -0x8(%rbp),%edx</p>
+<p>gcc </p>
+<p>mov    -0x1c(%rbp),%edx<br>mov    -0x18(%rbp),%eax<br>add    %edx,%ea</p>
+<h1 id="调用已移除api"><a href="#调用已移除api" class="headerlink" title="调用已移除api"></a>调用已移除api</h1><p>Android sdk 29 的时候移除了一个api 的调用，如果compilesdk 设置为29 就会报错找不多符号，但是28不会报错。既然29中没有了，那么直接在项目里移除是最方便的，但是为了兼容，查了官方的一些邮件，说这个api 有bug所以才移除的，如果还是想用的话，就只能通过反射去调用。</p>
+<h1 id="binary-data-16"><a href="#binary-data-16" class="headerlink" title="binary data 16"></a>binary data 16</h1><p>Binary data 16 is incorrect, maximum possible value is 0. Do you want to continue with the new value?</p>
+<p>ida 分析android so的时候 会出现上面的弹窗，主要是文件格式上出了问题，他会优先读取section的信。解法很简单，直接把sh_off 置位0就行。</p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    <a class="pull-left" href="/2020/02/12/AndroidASAN/" style="float: left;">
+        ← AndroidASAN
+    </a>
+    
+    
+    <a class="pull-right" href="/2020/02/12/qemu%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+        qemu问题解决 →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

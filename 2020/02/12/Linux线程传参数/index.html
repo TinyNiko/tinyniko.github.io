@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: 源码分析 | Niko&#39;s BLOG</title>
+  <title>Linux线程传参数 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -165,69 +165,111 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2020/02/12/旧博客引导/">旧博客引导</a></h4>
-                            
-                            <p><time datetime="2020-02-11T17:41:47.000Z"><a href="/2020/02/12/旧博客引导/">2020-02-12</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2020-02-12T15:37:44.000Z" itemprop="datePublished">
+          2020-02-12
+      </time>
+    
+    
+    | 
+    <a href='/tags/开发/'>开发</a>,
+    
+    <a href='/tags/Linux/'>Linux</a>
+    
+    
+</span>
+                <h1>Linux线程传参数</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>某东的课要求我们实现一个用socket通信的程序, 用C/C++写,虽然用<br>很多语言写过这个了,但是这次想在linux平台上试一下。于是就写了个代码测试一下,然而在使用pthread的时候,程序报了一个貌似函数类型错误的的错误,然后就大致的了解了一下。</p>
+<h2 id="0x1-解析"><a href="#0x1-解析" class="headerlink" title="0x1 解析"></a>0x1 解析</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt; </span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">pthread_create</span><span class="params">((<span class="keyword">pthread_t</span>  *thread,  <span class="keyword">pthread_attr_t</span>  *attr,  <span class="keyword">void</span>  *(*start_routine)(<span class="keyword">void</span>  *),  <span class="keyword">void</span>  *arg)</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="comment">//另外gcc 编译的时候加上 -pthread 选项</span></span></span></span><br></pre></td></tr></table></figure>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+<p>这里要注意的是 线程函数的类型 必须是void (func)(void ) , 然后第四个参数是传递给func的参数,这里可以看到,只能传一个void *类型的<br>指针给线程函数,当然,不传就是NULL.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//顺手写一个小demo</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">func</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> da=*(<span class="keyword">int</span> *)arg ;</span><br><span class="line">	dosth() ; </span><br><span class="line">	<span class="keyword">return</span> <span class="literal">NULL</span> ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">int</span> a1 ;</span><br><span class="line"><span class="keyword">int</span> b2 ; </span><br><span class="line">&#125;hehe,*heheptr;</span><br><span class="line"><span class="keyword">int</span> arg ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">pthread_t</span> threadid ; </span><br><span class="line"><span class="keyword">if</span>(pthread_create(&amp;threadid ,<span class="literal">NULL</span>, func ,(<span class="keyword">void</span> *)&amp;arg)==<span class="number">-1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"error %s(%d)"</span> ,strerror(errno) ,errno) ; </span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>) ; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>上面这个展示了如何传单个参数,如果想传递多个参数的话就需要用到结构体了,<br>有了上面的demo后,传结构体其实也比较简单了, 就用结构体指针指一下就OK了。以上是关于create的问题 。下面讲一下如何判断线程是否还活着。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pthread_kill(<span class="keyword">pthread_t</span> id , <span class="keyword">int</span> sig) ;</span><br></pre></td></tr></table></figure>
+
+<p>当sig==0 时, 用于测试线程是否还活着, 另外 当返回是0的时候线程还是活着的, 当线程返回ESRCH 表示线程不存在,EINVAL则说明sig不合法。</p>
+<p>引用<br><a href="http://stackoverflow.com/questions/11253025/pthread-create-not-working-passing-argument-3-warning" target="_blank" rel="noopener">stackoverflow</a></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    <a class="pull-left" href="/2020/02/12/qemu%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="float: left;">
+        ← qemu问题解决
+    </a>
+    
+    
+    <a class="pull-right" href="/2020/02/12/AndroidGPS%E4%BC%AA%E9%80%A0%E7%A0%94%E7%A9%B6/">
+        AndroidGPS伪造研究 →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
