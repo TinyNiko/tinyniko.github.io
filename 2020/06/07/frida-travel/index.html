@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: 逆向 | Niko&#39;s BLOG</title>
+  <title>frida travel | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -175,87 +175,116 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2020/06/07/frida-travel/">frida travel</a></h4>
-                            
-                            <p><time datetime="2020-06-07T15:12:28.000Z"><a href="/2020/06/07/frida-travel/">2020-06-07</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2020/02/13/fart脱壳机逆向/">fart脱壳机逆向</a></h4>
-                            
-                            <p><time datetime="2020-02-12T16:19:22.000Z"><a href="/2020/02/13/fart脱壳机逆向/">2020-02-13</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2020/02/12/旧博客引导/">旧博客引导</a></h4>
-                            
-                            <p><time datetime="2020-02-11T17:41:47.000Z"><a href="/2020/02/12/旧博客引导/">2020-02-12</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2020-06-07T15:12:28.000Z" itemprop="datePublished">
+          2020-06-07
+      </time>
+    
+    
+    | 
+    <a href='/tags/逆向/'>逆向</a>,
+    
+    <a href='/tags/hook/'>hook</a>
+    
+    
+</span>
+                <h1>frida travel</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h1 id="frida-java-lang-Object-构造"><a href="#frida-java-lang-Object-构造" class="headerlink" title="frida [java.lang.Object 构造"></a>frida [java.lang.Object 构造</h1><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在学习frida的过程中，遇到一个比较有趣的函数，需要对其进行hook，函数如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(Object[] data)</span></span>&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+<p>其中data 可以传多个不同类型的数据，比如true,1233,string等，我需要对其进行调用</p>
+<a id="more"></a>
+<h1 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h1><p>由于参数是一个array,使用frida的Java.array(data,class)进行调用，但是当我传递<br>var array = Java.array(‘java.lang.Object’,[aClass.$new(),true,123])的时候，frida 就报错了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Error: invalid argument value</span><br><span class="line">    at frida&#x2F;node_modules&#x2F;frida-java-bridge&#x2F;lib&#x2F;env.js:166</span><br><span class="line">    at frida&#x2F;node_modules&#x2F;frida-java-bridge&#x2F;lib&#x2F;class-factory.js:106</span><br><span class="line">    at &#x2F;test.js:36</span><br><span class="line">    at ye (frida&#x2F;node_modules&#x2F;frida-java-bridge&#x2F;lib&#x2F;class-factory.js:574)</span><br><span class="line">    at frida&#x2F;node_modules&#x2F;frida-java-bridge&#x2F;lib&#x2F;class-factory.js:557</span><br></pre></td></tr></table></figure>
+
+<p>搜了一堆资料之后，偶然发现了Integer这个类，突然想到在java中，基本类型是不继承Object类的，所以123，true<br>这些值是不能存在于数组中的。知道了问题的根源后，其实解决方案也很好做,只要使用继承自Object的类就行了<br>于是就有了如下的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var array &#x3D; Java.array(&#39;java.lang.Object&#39;,[aClass.$new(),aClass.$new()])</span><br><span class="line">array[1]&#x3D; Java.cast(Boolean.$new(true), Objectx);</span><br><span class="line">this.Check(array);</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>frida 的大部分hook代码都用js编写，除了要了解js的语法之外，frida自带的api功能也很强大，但是自己对这块用的太少了，看到大佬们的代码，发现真的好多都没看懂</p>
+<hr>
+<p>如果觉得我的文章对你有帮助，可以扫描以下微信二维码提供赞赏，您的支持是对我的认可。</p>
+<!-- ![](support.png) -->
+<img src="./support.png" width="50%" height="50%" />
+
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    <a class="pull-left" href="/2020/06/07/leetcode1/" style="float: left;">
+        ← leetcode1
+    </a>
+    
+    
+    <a class="pull-right" href="/2020/02/13/fart%E8%84%B1%E5%A3%B3%E6%9C%BA%E9%80%86%E5%90%91/">
+        fart脱壳机逆向 →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

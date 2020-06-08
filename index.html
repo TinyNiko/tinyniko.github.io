@@ -86,6 +86,10 @@
 				    
 				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
 				    
+				    <li><a href="/categories/learn/" class="animsition-link">learn<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/tools/" class="animsition-link">tools<small>(1)</small></a></li>
+				    
 				    <li><a href="/categories/游戏/" class="animsition-link">游戏<small>(1)</small></a></li>
 				    
 				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
@@ -205,6 +209,83 @@
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/06/07/leetcode1/">leetcode1</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-06-07T15:15:15.000Z" itemprop="datePublished">
+          2020-06-07
+      </time>
+    
+    
+    | 
+    <a href='/tags/编程/'>编程</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        <p>NO177. 第N高的薪水<br>题目：编写一个 SQL 查询，获取 Employee 表中第 n 高的薪水（Salary）。</p>
+<p>code：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> getNthHighestSalary(N <span class="built_in">INT</span>) <span class="keyword">RETURNS</span> <span class="built_in">INT</span></span><br><span class="line"><span class="keyword">BEGIN</span> </span><br><span class="line">    <span class="keyword">SET</span> N=N<span class="number">-1</span>;</span><br><span class="line">    RETURN (<span class="keyword">select</span> <span class="keyword">distinct</span> Salary <span class="keyword">from</span> Employee <span class="keyword">order</span> <span class="keyword">by</span> Salary <span class="keyword">desc</span> <span class="keyword">limit</span> N,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/06/07/leetcode1/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/06/07/frida-travel/">frida travel</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-06-07T15:12:28.000Z" itemprop="datePublished">
+          2020-06-07
+      </time>
+    
+    
+    | 
+    <a href='/tags/逆向/'>逆向</a>,
+    
+    <a href='/tags/hook/'>hook</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        <h1 id="frida-java-lang-Object-构造"><a href="#frida-java-lang-Object-构造" class="headerlink" title="frida [java.lang.Object 构造"></a>frida [java.lang.Object 构造</h1><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在学习frida的过程中，遇到一个比较有趣的函数，需要对其进行hook，函数如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(Object[] data)</span></span>&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中data 可以传多个不同类型的数据，比如true,1233,string等，我需要对其进行调用</p>
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/06/07/frida-travel/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
@@ -509,78 +590,6 @@ frida 相关
                     
                     <p class="pull-right readMore">
                         <a href="/2020/02/12/DeviceIdCheck/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/02/12/AndroidASAN/">AndroidASAN</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-02-12T15:43:12.000Z" itemprop="datePublished">
-          2020-02-12
-      </time>
-    
-    
-    | 
-    <a href='/tags/Android/'>Android</a>,
-    
-    <a href='/tags/ASAN/'>ASAN</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>写android so 的时候会使用堆，但是处理不好有可能导致崩溃，address sanitizer  正好可以解决这个问题 </p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/02/12/AndroidASAN/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/02/12/杂七杂八/">杂七杂八</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-02-12T15:41:45.000Z" itemprop="datePublished">
-          2020-02-12
-      </time>
-    
-    
-    | 
-    <a href='/tags/random/'>random</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><p>c 语言中 static 关键字 代表只能在模块中访问，比如静态函数，静态变量名。在android中，static声明的函数是直接变成内联函数。<br>static 变量，如果初始化了，会放在.data段，如果没有初始化，会放在.bss段 </p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/02/12/杂七杂八/">Read More...</a>
                     </p>
                     
                 </div>

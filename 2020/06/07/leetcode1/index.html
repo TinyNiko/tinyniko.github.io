@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<!--<![endif]-->
+
+<head>
+  <title>leetcode1 | Niko&#39;s BLOG</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Niko's BLOG">
+    <meta name="author" content="N1ko">
+    <meta name="description" content="" />
+    <meta name="keywords" content="逆向,程序分析,漏洞挖掘" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Niko&#39;s BLOG" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/DBI/" class="animsition-link">DBI<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/learn/" class="animsition-link">learn<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/tools/" class="animsition-link">tools<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/游戏/" class="animsition-link">游戏<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" target="_blank" rel="noopener" class="animsition-link">Kieran</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Niko's BLOG</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2020-06-07T15:15:15.000Z" itemprop="datePublished">
+          2020-06-07
+      </time>
+    
+    
+    | 
+    <a href='/tags/编程/'>编程</a>
+    
+    
+</span>
+                <h1>leetcode1</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>NO177. 第N高的薪水<br>题目：编写一个 SQL 查询，获取 Employee 表中第 n 高的薪水（Salary）。</p>
+<p>code：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> getNthHighestSalary(N <span class="built_in">INT</span>) <span class="keyword">RETURNS</span> <span class="built_in">INT</span></span><br><span class="line"><span class="keyword">BEGIN</span> </span><br><span class="line">    <span class="keyword">SET</span> N=N<span class="number">-1</span>;</span><br><span class="line">    RETURN (<span class="keyword">select</span> <span class="keyword">distinct</span> Salary <span class="keyword">from</span> Employee <span class="keyword">order</span> <span class="keyword">by</span> Salary <span class="keyword">desc</span> <span class="keyword">limit</span> N,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+<p>题解：limit的操作。 目前对于截取第几个的操作有limit 2,1和limit 2 offset 1这两种。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t <span class="keyword">limit</span> <span class="number">2</span> <span class="keyword">offset</span> <span class="number">1</span>；代表是从第<span class="number">1</span>条后面数据开始取出<span class="number">2</span>条数据，即读取第<span class="number">2</span>,<span class="number">3</span>条</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t <span class="keyword">limit</span> <span class="number">2</span>,<span class="number">1</span>；代表跳过前两条数据取出<span class="number">1</span>条数据，即读取第<span class="number">3</span>条数据</span><br></pre></td></tr></table></figure>
+
+<p>NO178.分数排名<br>题目：编写一个 SQL 查询来实现分数排名。</p>
+<p>code:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.Score,</span><br><span class="line">    (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">distinct</span> Score) <span class="keyword">from</span> Scores b <span class="keyword">where</span> a.Score&lt;=b.Score) <span class="keyword">as</span> <span class="keyword">rank</span></span><br><span class="line"><span class="keyword">from</span> Scores a </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.Score <span class="keyword">desc</span></span><br></pre></td></tr></table></figure>
+
+<p>题解：相当于统计b表中有多少个大于a表的元素。</p>
+<p>NO180.连续出现的数字<br>题目：编写一个 SQL 查询，查找所有至少连续出现三次的数字。</p>
+<p>code:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> a.Num <span class="keyword">as</span> ConsecutiveNums <span class="keyword">from</span> </span><br><span class="line"><span class="keyword">Logs</span> a </span><br><span class="line"><span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> <span class="keyword">Logs</span> b <span class="keyword">on</span> a.Id=b.Id<span class="number">-1</span></span><br><span class="line"><span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> <span class="keyword">Logs</span> c <span class="keyword">on</span> b.Id=c.Id<span class="number">-1</span></span><br><span class="line"><span class="keyword">where</span> a.Num=b.Num <span class="keyword">and</span> a.Num=c.Num</span><br></pre></td></tr></table></figure>
+
+<p>题解：三表join，Id差值为1，Num值相等。</p>
+<p>NO184.部门工资最高的员工<br>题目：编写一个 SQL 查询，找出每个部门工资最高的员工。例如，根据上述给定的表格，Max 在 IT 部门有最高工资，Henry 在 Sales 部门有最高工资。</p>
+<p>code</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> d.Name <span class="keyword">as</span> Department,b.Name <span class="keyword">as</span> Employee,c.max_salary <span class="keyword">as</span> Salary <span class="keyword">from</span> </span><br><span class="line">Employee b </span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> (<span class="keyword">select</span> DepartmentId,<span class="keyword">max</span>(Salary) <span class="keyword">as</span> max_salary <span class="keyword">from</span> Employee a <span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span> ) c <span class="keyword">on</span> b.DepartmentId=c.DepartmentId <span class="keyword">and</span> b.Salary=c.max_salary</span><br><span class="line"><span class="keyword">inner</span>  <span class="keyword">join</span> Department d <span class="keyword">on</span> b.DepartmentId = d.Id</span><br></pre></td></tr></table></figure>
+
+<p>题解：inner join 操作</p>
+<p>NO185.部门工资前三高的所有员工<br>题目：</p>
+<p>code:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> e.Name <span class="keyword">as</span> Department,d.Name <span class="keyword">as</span> Employee,c.Salary <span class="keyword">from</span> </span><br><span class="line">(<span class="keyword">select</span> a.DepartmentId,a.Salary,</span><br><span class="line">    (<span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">distinct</span> b.Salary) <span class="keyword">from</span> Employee b </span><br><span class="line">    <span class="keyword">where</span> b.Salary&gt;=a.Salary <span class="keyword">and</span> a.DepartmentId=b.DepartmentId) <span class="keyword">as</span> <span class="keyword">rank</span></span><br><span class="line"><span class="keyword">from</span> Employee a </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.DepartmentId,a.Salary <span class="keyword">desc</span>) c</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> Employee d <span class="keyword">on</span> c.DepartmentId = d.DepartmentId <span class="keyword">and</span> c.Salary=d.Salary</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> Department e <span class="keyword">on</span> c.DepartmentId = e.Id </span><br><span class="line"><span class="keyword">where</span> c.rank&lt;=<span class="number">3</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> e.Name <span class="keyword">asc</span>,c.Salary <span class="keyword">desc</span></span><br></pre></td></tr></table></figure>
+
+<p>上面这个方法有点复杂了，比较耗时。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    d.Name <span class="keyword">AS</span> <span class="string">'Department'</span>, e1.Name <span class="keyword">AS</span> <span class="string">'Employee'</span>, e1.Salary</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    Employee e1</span><br><span class="line">        <span class="keyword">JOIN</span></span><br><span class="line">    Department d <span class="keyword">ON</span> e1.DepartmentId = d.Id</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    <span class="number">3</span> &gt; (<span class="keyword">SELECT</span></span><br><span class="line">            <span class="keyword">COUNT</span>(<span class="keyword">DISTINCT</span> e2.Salary)</span><br><span class="line">        <span class="keyword">FROM</span></span><br><span class="line">            Employee e2</span><br><span class="line">        <span class="keyword">WHERE</span></span><br><span class="line">            e2.Salary &gt; e1.Salary</span><br><span class="line">                <span class="keyword">AND</span> e1.DepartmentId = e2.DepartmentId</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+
+<p>面试题03.数组中重复的数字<br>题目：在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+<p>code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#字典</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findRepeatNumber</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        d = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> nums:</span><br><span class="line">            d[key] = d.get(key,<span class="number">0</span>)+<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> d:</span><br><span class="line">            <span class="keyword">if</span> d[key]&gt;=<span class="number">2</span>:</span><br><span class="line">                <span class="keyword">return</span> key</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#遍历用set</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findRepeatNumber</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        s = set()</span><br><span class="line">        <span class="keyword">for</span> items <span class="keyword">in</span> nums:</span><br><span class="line">            ll = len(s)</span><br><span class="line">            s.add(items)</span><br><span class="line">            <span class="keyword">if</span> ll == len(s):</span><br><span class="line">                <span class="keyword">return</span> items</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br></pre></td></tr></table></figure>
+
+<p>面试题04.二维数组中的查找<br>题目： 在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
+<p>code:</p>
+<p>选对方向。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findNumberIn2DArray</span><span class="params">(self, matrix: List[List[int]], target: int)</span> -&gt; bool:</span></span><br><span class="line">        <span class="keyword">if</span> len(matrix) == <span class="number">0</span> <span class="keyword">or</span> len(matrix[<span class="number">0</span>]) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        left = len(matrix)</span><br><span class="line">        right = len(matrix[<span class="number">0</span>])</span><br><span class="line">        i, j = left - <span class="number">1</span>, <span class="number">0</span> </span><br><span class="line">        <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">and</span> j &lt; right :</span><br><span class="line">            <span class="keyword">if</span> matrix[i][j] &gt; target:</span><br><span class="line">                i = i - <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> matrix[i][j] &lt; target:</span><br><span class="line">                j = j + <span class="number">1</span> </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>面试题05.替换空格<br>题目： 请实现一个函数，把字符串 s 中的每个空格替换成”%20”。</p>
+<p>code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">replaceSpace</span><span class="params">(self, s: str)</span> -&gt; str:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'%20'</span>.join(s.split(<span class="string">' '</span>))</span><br></pre></td></tr></table></figure>
+
+<p>面试题6.从头到位打印链表<br>题目： 输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。</p>
+<p>code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reversePrint</span><span class="params">(self, head: ListNode)</span> -&gt; List[int]:</span></span><br><span class="line">        <span class="keyword">return</span> self.reversePrint(head.next) + [head.val] <span class="keyword">if</span> head <span class="keyword">else</span> []</span><br></pre></td></tr></table></figure>
+
+<p>面试题11.旋转数组的最小数字<br>题目： 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如，数组 [3,4,5,1,2] 为 [1,2,3,4,5] 的一个旋转，该数组的最小值为1。</p>
+<p>code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minArray</span><span class="params">(self, numbers: List[int])</span> -&gt; int:</span></span><br><span class="line">        i, j = <span class="number">0</span>, len(numbers) - <span class="number">1</span> </span><br><span class="line">        <span class="keyword">while</span> i &lt; j:</span><br><span class="line">            m = (i + j) // <span class="number">2</span> </span><br><span class="line">            <span class="keyword">if</span> numbers[m] &gt; numbers[j]:</span><br><span class="line">                i = m + <span class="number">1</span> </span><br><span class="line">            <span class="keyword">elif</span> numbers[m] &lt; numbers[j]:</span><br><span class="line">                j = m</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                j = j - <span class="number">1</span> </span><br><span class="line">        <span class="keyword">return</span> numbers[i]</span><br></pre></td></tr></table></figure>
+<p>面试题48. 最长不含重复字符的子字符串<br>请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。</p>
+<p>输入: “abcabcbb” 输出: 3 解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。</p>
+<p>核心思想： 从左往右移动，如果最右边那个已经在字典中，则左侧开始+1.</p>
+<p>code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(self, s: str)</span> -&gt; int:</span></span><br><span class="line">        left, right, res = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        length = len(s)</span><br><span class="line">        windows = &#123;&#125;</span><br><span class="line">        <span class="keyword">while</span> right &lt; length:</span><br><span class="line">            c = s[right]</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> windows:</span><br><span class="line">                windows[c] = <span class="number">1</span> </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                windows[c] += <span class="number">1</span></span><br><span class="line">            right += <span class="number">1</span> </span><br><span class="line">            <span class="keyword">while</span> c <span class="keyword">in</span> windows <span class="keyword">and</span> windows[c]&gt;<span class="number">1</span>:</span><br><span class="line">                c2 = s[left]</span><br><span class="line">                windows[c2] = windows[c2] - <span class="number">1</span></span><br><span class="line">                left += <span class="number">1</span>  </span><br><span class="line">            res = max(res,right-left)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    
+    <a class="pull-right" href="/2020/06/07/frida-travel/">
+        frida travel →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By N1ko. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" target="_blank" rel="noopener" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+      
+</body>
+</html>
