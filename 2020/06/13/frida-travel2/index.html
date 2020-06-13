@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>frida travel | Niko&#39;s BLOG</title>
+  <title>frida travel2 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -181,8 +181,8 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2020-06-07T15:12:28.000Z" itemprop="datePublished">
-          2020-06-07
+      <time datetime="2020-06-13T10:13:34.000Z" itemprop="datePublished">
+          2020-06-13
       </time>
     
     
@@ -193,40 +193,54 @@
     
     
 </span>
-                <h1>frida travel</h1>
+                <h1>frida travel2</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h1 id="frida-java-lang-Object-构造"><a href="#frida-java-lang-Object-构造" class="headerlink" title="frida [java.lang.Object 构造"></a>frida [java.lang.Object 构造</h1><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在学习frida的过程中，遇到一个比较有趣的函数，需要对其进行hook，函数如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(Object[] data)</span></span>&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中data 可以传多个不同类型的数据，比如true,1233,string等，我需要对其进行调用</p>
+      		<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当我刚开始写frida脚本时, 会用python binding的方式去写，比如以下代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">device = frida.get_usb_device()</span><br><span class="line">session = device.attach(<span class="string">"package_name"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_message</span><span class="params">(message ,data)</span>:</span></span><br><span class="line">    print(message)</span><br><span class="line">    <span class="comment">#print(message['payload'])</span></span><br><span class="line"></span><br><span class="line">src = <span class="string">"""</span></span><br><span class="line"><span class="string">js code here</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line">script = session.create_script(src)</span><br><span class="line">script.on(<span class="string">"message"</span> , on_message)</span><br><span class="line">script.load()</span><br><span class="line">sys.stdin.read()</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h1 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h1><p>由于参数是一个array,使用frida的Java.array(data,class)进行调用，但是当我传递<br>var array = Java.array(‘java.lang.Object’,[aClass.$new(),true,123])的时候，frida 就报错了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Error: invalid argument value</span><br><span class="line">    at frida&#x2F;node_modules&#x2F;frida-java-bridge&#x2F;lib&#x2F;env.js:166</span><br><span class="line">    at frida&#x2F;node_modules&#x2F;frida-java-bridge&#x2F;lib&#x2F;class-factory.js:106</span><br><span class="line">    at &#x2F;test.js:36</span><br><span class="line">    at ye (frida&#x2F;node_modules&#x2F;frida-java-bridge&#x2F;lib&#x2F;class-factory.js:574)</span><br><span class="line">    at frida&#x2F;node_modules&#x2F;frida-java-bridge&#x2F;lib&#x2F;class-factory.js:557</span><br></pre></td></tr></table></figure>
 
-<p>搜了一堆资料之后，偶然发现了Integer这个类，突然想到在java中，基本类型是不继承Object类的，所以123，true<br>这些值是不能存在于数组中的。知道了问题的根源后，其实解决方案也很好做,只要使用继承自Object的类就行了<br>于是就有了如下的代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var array &#x3D; Java.array(&#39;java.lang.Object&#39;,[aClass.$new(),aClass.$new()])</span><br><span class="line">array[1]&#x3D; Java.cast(Boolean.$new(true), Objectx);</span><br><span class="line">this.Check(array);</span><br></pre></td></tr></table></figure>
+<p>这种写法是官方文档提供的，代码的核心在于 js code 部分，显然，在py里写js的代码相对来说不够友好。后来我就想了一个办法，把js代码单独放到js文件编写，python代码每次读入<br>js文件，这样我就可以按需执行不同的js即可。</p>
+<p>后来，当我重新看frida官方文档的时候，又发现了frida这个命令，它可以代替掉python桩程序，直接运行js文件。直到现在我一直使用着这种方式。<br><img src="./kk.png" width="50%" height="50%" /></p>
+<h1 id="冲突"><a href="#冲突" class="headerlink" title="冲突"></a>冲突</h1><p>当我frida用久了之后，我发现了很多重复的代码，整个js文件又长又难看，就想着把这个重复的代码单独拿出来，放到一个utils文件中，这样我每次要用到一些公共函数的时候，直接调用utils中的方法<br>就可以了。但我并没有找到比较优雅的方式去解决这个问题。</p>
+<h1 id="希望"><a href="#希望" class="headerlink" title="希望"></a>希望</h1><p>当我再次查看官方文档的时候，我发现 frida 提供了一个TypeScript的接口，它正好提供了一个模块化开发的思路，同时还带来了很多惊喜，参考<a href="https://github.com/oleavr/frida-agent-example" target="_blank" rel="noopener">链接</a>。<br>在使用TypeScript开发的过程中，我感觉和原生的 js 并没有太大的区别，不过，使用vscode，多了很多代码补全，省去了一部分查文档的时间。</p>
+<h1 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h1><p>使用上非常的简单，基本就是按照文档走一遍流程</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> git://github.com/oleavr/frida-agent-example.git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> frida-agent-example/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> frida -U -f com.example.android --no-pause -l _agent.js</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>frida 的大部分hook代码都用js编写，除了要了解js的语法之外，frida自带的api功能也很强大，但是自己对这块用的太少了，看到大佬们的代码，发现真的好多都没看懂</p>
+<p>然后就可以愉快的玩耍了。当然首先你需要有个npm。<br><img src="./bb.png" width="50%" height="50%" /></p>
+<h1 id="优劣对比"><a href="#优劣对比" class="headerlink" title="优劣对比"></a>优劣对比</h1><p>新的方式优点很多，比如自动不全，语法检查，模块化开发，缺点也有一些，比如编译时间会稍微长一点，我这里基本要1秒，同时编译出来的js文件也会比较大。</p>
+<p>旧的方式使用简单，写完js就可以用，方便测试，但是没有语法检查，自动补全其实也挺麻烦的</p>
+<h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><p>typescript虽然弥补了javascript的一些缺陷，但因为进入了type，也给开发带来了一定的坑，以下是我目前遇到的一些坑，希望对你有一定的帮助。</p>
+<h2 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h2><p>遇到的第一个坑是toString。 toString是内置的一个函数，但是如果我们的目标函数名也是toString的时候，那就会导致a.toString 被识别成一个string对象，显然在js里string 是没有implementation这个属性的，所以编译就会不通过。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a =Java.use(<span class="string">'xxx'</span>)</span><br><span class="line">a.toString.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br></pre></td></tr></table></figure>
+<p>咨询了一下我前端的同学，得到了2中解决方法<br>第一种，使用@ts-ignore ，表示下一行代码按原生代码解析，因为原生js是可以这么写的，编译自然也能通过</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a =Java.use(<span class="string">'xxx'</span>)</span><br><span class="line"><span class="comment">//@ts-ignore</span></span><br><span class="line">a.toString.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>第二种 使用 as any,表示转换成any 类型</p>
+<p>一种写法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> k = Java.use(<span class="string">'x'</span>) <span class="keyword">as</span> any</span><br><span class="line"> k.toString.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">this</span>.toString()</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>另一种写法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> k = Java.use(<span class="string">'x'</span>)</span><br><span class="line">(k.toString <span class="keyword">as</span> any).implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="keyword">let</span> ret = <span class="keyword">this</span>.toString()</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'you are in'</span> + ret)</span><br><span class="line">     <span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h2><p>js 中 implementation 后的function的参数可以随便写，不受约束，但是typescript 里就不一样了，因为ts本身就是为了type 而存在的，那么参数的类型就省不了，于是就可能写成一下样子。这么写的坏处就是，写的内容太多了，效率反而低了，好在这个也有解决方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> class1 = Java.use(<span class="string">'X.7C5'</span>)</span><br><span class="line">class1.method.implementation = <span class="function"><span class="keyword">function</span>(<span class="params">a: any, b: any, c: any,d: any,e: any,f: any,g: any</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.method(a,b,c,d,e,f,g)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解决方案： 使用 ..args: any[] 代替参数，然后用数组下表访问成员</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class1.method1.implementation = <span class="function"><span class="keyword">function</span>(<span class="params">...args: any[]</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.method(args[<span class="number">0</span>],args[<span class="number">1</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h2><p>想用别人写好的base64 模块，然后npm install 之后无法使用，后来发现是少导入主代码了<br>    “@types/js-base64”: “^2.3.1”,// 这个主要是定义了一些typescript 的导出定义，只有一个声明<br>    “js-base64”: “^2.5.2” // 这个是主代码，可以给node ，browser等使用</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>从工程化的角度看，typescript + frida + vscode还是很有优势的, 推荐大家尝试一下。</p>
 <hr>
-<p>如果觉得我的文章对你有帮助，可以扫描以下微信二维码提供赞赏，您的支持是对我的认可。</p>
-<!-- ![](support.png) -->
-<img src="/img/support.png" width="50%" height="50%" />
-
+<p>最后欢迎关注公众号获取最新文章<br><img src="/img/main.jpg" width="50%" height="50%" /><br><img src="/img/support.png" width="50%" height="50%" /></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
     
-    <a class="pull-left" href="/2020/06/07/leetcode1/" style="float: left;">
-        ← leetcode1
-    </a>
     
-    
-    <a class="pull-right" href="/2020/02/13/fart%E8%84%B1%E5%A3%B3%E6%9C%BA%E9%80%86%E5%90%91/">
-        fart脱壳机逆向 →
+    <a class="pull-right" href="/2020/06/07/leetcode1/">
+        leetcode1 →
     </a>
     
 </nav>
