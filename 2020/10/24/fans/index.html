@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>qemu问题解决 | Niko&#39;s BLOG</title>
+  <title>fans | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -183,44 +183,86 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2020-02-12T15:40:37.000Z" itemprop="datePublished">
-          2020-02-12
+      <time datetime="2020-10-24T06:58:13.000Z" itemprop="datePublished">
+          2020-10-24
       </time>
     
     
     | 
-    <a href='/tags/qemu/'>qemu</a>,
-    
-    <a href='/tags/mips/'>mips</a>
+    <a href='/tags/漏洞挖掘/'>漏洞挖掘</a>
     
     
 </span>
-                <h1>qemu问题解决</h1>
+                <h1>fans</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h1 id="Qemu-Mips-配置"><a href="#Qemu-Mips-配置" class="headerlink" title="Qemu+Mips 配置"></a>Qemu+Mips 配置</h1><h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>最近在搞mips相关的东西。搞的心累。。。。<br>记几个遇到的问题吧</p>
-<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><ol>
-<li><p>首先得有qemu,已经经过buildroot 编译过的mips-gcc<br>这个过程比较费时，网上有相关的说明，就不多说了。<br>下面说说我遇到的几个问题</p>
-</li>
-<li><p>交叉编译mips程序<br>在我编译完buildroot 后， 在output/xxxxx/bin 目录里会有一些mips-linux-gcc<br>,使用这些gcc编译的时候，会出现找不到xxx.bx_real的错误，这里我的解决方法是<br>改名字，然后把bin这个目录加到PATH中。</p>
-</li>
-<li><p>sudo chroot . ./qemu_mipsel hello<br>这里的hello是使用动态链接的。<br>报错说 找不到 qemu_mipsel 这个 文件。 在stackoverflow上看到一个解决方案，<br>apt-get install qemu-user-static<br>然后将对应平台的static 文件放到hello所在目录就好， 同时还需要把lib目录放在一起<br>然后就可以执行了。</p>
-</li>
+      		<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文是一篇论文阅读，大致会按照论文中的排序进行解读。作者介绍了对Android系统服务进行漏洞挖掘的一种方法，<br>在配备Android9的六款智能手机上上，发现30种独特的崩溃，其中20个已被Google确认。在fuzz中还发现了138个独特的Java异常。</p>
+<a id="more"></a>
+
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Android最基本的功能由Android系统服务提供，直到2019.10， Google已经收到了数百个跟系统服务相关的漏洞。系统服务可以由java或者C++实现，C++实现的服务通常会包含比较多的漏洞。<br>系统服务会先注册到Service Manager中，用户App通过Service Manager拿到对应服务的接口，然后通过一个叫IBinder::transact(code,data,reply,flags)的RPC接口进行访问，code决定了访问哪个函数，<br>data则是经过序列化的用户数据。因此，我们可以用这种方法测试所有的系统服务，但我们必须知道所有可用接口及其数据格式。<br>因此，就有了3个挑战：</p>
+<ol>
+<li>多层接口识别： 除了ServiceManager中注册的服务，部分接口可以通过顶层服务进行访问，另外需要将java实现的服务也考虑在内。</li>
+<li>接口模型提取：每个接口有code和input语法。我们需要找到所有接口的输入语法，并能够提取出路径约束。</li>
+<li>语义正确的输入生成：Android系统本身会对输入进行各种校验，要实现满足校验的输入会比较困难。</li>
 </ol>
+<p>针对以上几点，作者提出了FANS, 为了解决第一个问题，FANS 先通过 Service Manager获取所有的顶层接口，并利用深层次接口会调用writeStrongBinder这一事实来确认深层次接口（新姿势get）。<br>对于问题2，Android系统使用使用特定的反序列化方法（如readInt32）来解析输入数据，通过识别这些调用顺序，我们可以推断出有效输入语法。对于问题3，利用2中得到的输入顺序进行数据的构造，另外，依靠接口间的关系也可以对他们的数据进行一定推断（这一段建议看看源码，说的不太好理解）。作者将源码开源在<a href="https://github.com/iromise/fans上。" target="_blank" rel="noopener">https://github.com/iromise/fans上。</a></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>这一节主要是对Android系统服务的介绍，具体的细节大家可以google一下。作者在论文中放了一张简单的概念图。</p>
+<h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><p>首先作者先讲了如何选择fuzz方案。</p>
+<ol>
+<li>如果直接去service端进行fuzz，容易误报，因为IPC会进行数据校验，并且有些校验可能是动态变化的。所以使用RPC方式更合理一些</li>
+<li>如何变异输入，作者提到使用遗传的方式进行</li>
+<li>如何生成输入，作者提到传统的基于模版的方式需要大量人工，而有的则依赖于现有的通信数据，都不适合。而输入模型实际上是隐藏在代码中的。</li>
+</ol>
+<p>整个系统分成4个部分</p>
+<h2 id="interface-Collector"><a href="#interface-Collector" class="headerlink" title="interface Collector"></a>interface Collector</h2><p>这个阶段主要是把各个接口及其内部接口全部提取出来。作者并不是直接扫描c/c++文件，而是通过编译命令查找，把AIDL生成的部分也找齐。</p>
+<h2 id="interface-model-Extractor"><a href="#interface-model-Extractor" class="headerlink" title="interface model Extractor"></a>interface model Extractor</h2><p>这个阶段主要是把输入输出的格式及其语义全部提取出来。<br>这个是整个论文的核心。数据的提取遵循完整，精确，方便这三个原则。<br>作者提出2个方案，一个是从服务端代码进行分析，一个是从AST入手。<br>从AST入手的好处是变量名和类型保持不变，从C++文件中可以得到精确的接口，这样使得整个又比较方便。<br>code的提取也是从AST入手，code分布在swich-case结构体中，通过分析就能够拿到对应的数据。<br>输入输出变量提取中，作者讲到了3中变量，分别是顺序变量，条件变量，循环变量。另外作者还讲到了一个Return声明，<br>如果return返回了错误代码，意味着该路径少有漏洞，则需要调整输入，尽量少走此路径。<br>变量的类型同样可以通过AST获取。</p>
+<h2 id="dependency-inferer"><a href="#dependency-inferer" class="headerlink" title="dependency inferer"></a>dependency inferer</h2><p>这个阶段把调用接口的依赖关系分析出来。依赖有2中，一种是接口依赖，还有就是变量依赖。</p>
+<h3 id="接口依赖"><a href="#接口依赖" class="headerlink" title="接口依赖"></a>接口依赖</h3><p>接口依赖又可以分为生成依赖和使用依赖，如果通过一个接口可以返回另一个接口，那么这两个接口存在依赖关系<br>如果一个接口被另一个接口使用，那么这两个接口存在使用关系</p>
+<h3 id="变量依赖"><a href="#变量依赖" class="headerlink" title="变量依赖"></a>变量依赖</h3><p>依赖分为交易(transaction)内依赖和交易间依赖.在同一个交易中，如果变量依赖于另一个，那么就是交易内依赖，<br>如果是一个变量有时候依赖于另一个交易的变量，那就是交易间依赖，为了处理此类依赖，作者写了一个算法，具体见论文。</p>
+<h2 id="Fuzzer-Engine"><a href="#Fuzzer-Engine" class="headerlink" title="Fuzzer Engine"></a>Fuzzer Engine</h2><p>这个阶段主要是进行模糊测试。<br>fuzzer manager 用于同步pc和手机上的信息，fuzzer会根据id生成对应服务的参数，然后进行fuzz<br>fuzz数据遵循3个原则：</p>
+<ul>
+<li>约束第一</li>
+<li>依赖第二</li>
+<li>类型和名称第三</li>
+</ul>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>作者没有直接基于AFL进行开发，因为使用AFL会引入别的问题。</p>
+<h2 id="Interface-Collector"><a href="#Interface-Collector" class="headerlink" title="Interface Collector"></a>Interface Collector</h2><p>作者先编译AOSP代码，然后根据记录下来的编译命令扫描文件</p>
+<h2 id="Interface-Model-Extractor"><a href="#Interface-Model-Extractor" class="headerlink" title="Interface Model Extractor"></a>Interface Model Extractor</h2><p>作者将编译命令转换成cc1命令，这样就可以便利AST获取一个粗糙的接口模型，然后将输入输出部分进行保留</p>
+<h2 id="Dependency-Inferer"><a href="#Dependency-Inferer" class="headerlink" title="Dependency Inferer"></a>Dependency Inferer</h2><p>这块就是根据算法遍历</p>
+<h2 id="Fuzzer-Engine-1"><a href="#Fuzzer-Engine-1" class="headerlink" title="Fuzzer Engine"></a>Fuzzer Engine</h2><p>这块作者实现了一个简单的fuzz用于在多个手机上运行，感兴趣的可以看一下代码</p>
+<h1 id="评估"><a href="#评估" class="headerlink" title="评估"></a>评估</h1><p>作者提出了3个问题：</p>
+<ol>
+<li>找到多少个接口？ 它们之间是什么关系？</li>
+<li>提取的接口模型是什么样的？ 模型完整并且精确吗？</li>
+<li>FANS在发现漏洞方面的效率如何？</li>
+</ol>
+<p>对于第一点，数据如下图，由于AIDL也用于生成别的代码，所以无法直接比较接口数量。</p>
+<p>对于第二点，从服务接口数量上看，一共发现了811个，多级接口有281个。从变量上看，作者又分成了变量模式，类型别名和<br>接口间的变量依存关系这3块。<br>在完整和精确度上，目前没有对比的方法，作者随机检查了10个服务，发现数据基本都对，所以这块是满足需求的。</p>
+<p>对于第三点，作者用FANS跑了30天，并发现很多的崩溃。作者想对比BinderCracker的效率，但因为版本问题没有进行测试，只从漏洞数量上<br>进行了对比，个人觉得FAN还是有很多优势的。之后就是几个案例的分析，感兴趣的可以再看看。</p>
+<h1 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h1><p>Android IPC和服务安全性：</p>
+<ol>
+<li>早期的IPC研究主要集中在Intent上[2,11,16]</li>
+<li>龚[7]是第一个关注Binder IPC的人，并通过手动发现漏洞来证明它是不安全的</li>
+<li>[12]进一步提出了fuzz java 接口的解决方案，[10]主要定位供应商实现的Java服务。</li>
+<li>BinderCracker将测试扩展到本地服务，它监视IPC流量然后尝试了解输入模型并生成新的测试用例，但它取决于流量的多样性，但还是有很多问题。</li>
+</ol>
+<p>结构化输入：</p>
+<ol>
+<li>Peach[5]基于模版进行模糊测试，DomFuzz[15]利用语法生成目标程序结构</li>
+<li>VUzzer [14]运用动态污点分析（DTA）进行捕获有效输入的共同特征</li>
+<li>其他的就不一一列举了。</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>系统化的进行系统服务的挖掘，这篇论文应该是第一篇，其中的方法和思想都是值得借鉴的。</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
     
-    <a class="pull-left" href="/2020/02/12/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/" style="float: left;">
-        ← 杂七杂八
-    </a>
     
-    
-    <a class="pull-right" href="/2020/02/12/Linux%E7%BA%BF%E7%A8%8B%E4%BC%A0%E5%8F%82%E6%95%B0/">
-        Linux线程传参数 →
+    <a class="pull-right" href="/2020/06/13/frida-travel2/">
+        frida travel2 →
     </a>
     
 </nav>
