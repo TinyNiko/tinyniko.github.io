@@ -113,7 +113,7 @@
         <!-- Lists in Slidebars -->
         <ul class="sb-menu secondary">
             
-            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/about/index.html" class="animsition-link" title="about">About</a></li>
             <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
         </ul>
     </div>
@@ -146,16 +146,10 @@
                             <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a></li>
                             
                             
-                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            <li><a href="https://twitter.com/nikos233__" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
                             
                             
-                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
                             
-                            
-                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
-                            
-                            
-                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
                             
                             <li class="nolink"><span>Welcome!</span></li>
                         </ul>
@@ -197,7 +191,7 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h1 id="0x00-前言（建议略过）"><a href="#0x00-前言（建议略过）" class="headerlink" title="0x00 前言（建议略过）"></a>0x00 前言（建议略过）</h1><p>第一次接触docker大概是2016年吧，记不大清了，反正那一年docker很火。当年学了一些docker 的命令，就算是对docker有些了解了吧，但其实懂的很少。最近又开始搞docker了，因为前段时间打ctf的时候发现用dockerfile搭镜像的题还是挺多的，而且非常方便，小巧。我一向是使用虚拟机的，但是不得不说，虚拟机太大了，电脑+硬盘塞了6，7个虚拟机，占了很大的 空间。我的mac上不知是不是xcode的问题，angr一直装不上，后来直接整了一个docker镜像就ok 了，就能直接玩耍了。 今天主要是想介绍一下docker 的命令，以及一个小项目的迁移。</p>
+      		<h1 id="0x00-前言（建议略过）"><a href="#0x00-前言（建议略过）" class="headerlink" title="0x00 前言（建议略过）"></a>0x00 前言（建议略过）</h1><p>第一次接触docker大概是2016年吧，记不大清了，反正那一年docker很火。当年学了一些docker 的命令，就算是对docker有些了解了吧，但其实懂的很少。最近又开始搞docker了，因为前段时间打ctf的时候发现用dockerfile搭镜像的题还是挺多的，而且非常方便，小巧。我一向是使用虚拟机的，但是不得不说，虚拟机太大了，电脑+硬盘塞了6，7个虚拟机，占了很大的 空间。我的mac上不知是不是xcode的问题，angr一直装不上，后来直接整了一个docker镜像就ok 了，就能直接玩耍了。 今天主要是想介绍一下 docker 的命令，以及一个小项目的迁移。</p>
 <a id="more"></a>
 <h1 id="0x01-docker-命令"><a href="#0x01-docker-命令" class="headerlink" title="0x01 docker 命令"></a>0x01 docker 命令</h1><h1 id="0x02-dockerfile"><a href="#0x02-dockerfile" class="headerlink" title="0x02 dockerfile"></a>0x02 dockerfile</h1><h1 id="0x03-项目迁移"><a href="#0x03-项目迁移" class="headerlink" title="0x03 项目迁移"></a>0x03 项目迁移</h1><p>我原来有个项目，一直是在虚拟机里做的，所以只要虚拟机配好环境 我就可以直接开发了。但是由于是虚拟机的缘故，别人都无法自己生成文件，于是，我就把项目直接迁移到docker ，这样大家都可以从gitlab拉取代码进行编译。相比较复制一个虚拟机，那速度真的是非常快。<br>由于dockerfile 的命令都很友好， 移植过程很快，大概半个小时就把原来的项目迁移完成，10行代码不到。</p>
 
@@ -288,16 +282,10 @@
                     <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
                     
                     
-                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    <li><a href="https://twitter.com/nikos233__" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
                     
                     
-                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
                     
-                    
-                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
                     
                 </ul>
             </div>

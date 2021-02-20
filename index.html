@@ -113,7 +113,7 @@
         <!-- Lists in Slidebars -->
         <ul class="sb-menu secondary">
             
-            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/about/index.html" class="animsition-link" title="about">About</a></li>
             <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
         </ul>
     </div>
@@ -146,16 +146,10 @@
                             <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a></li>
                             
                             
-                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            <li><a href="https://twitter.com/nikos233__" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
                             
                             
-                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
                             
-                            
-                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
-                            
-                            
-                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
                             
                             <li class="nolink"><span>Welcome!</span></li>
                         </ul>
@@ -215,6 +209,166 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2021/02/20/aes-enhance/">aes enhance</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2021-02-20T12:45:20.000Z" itemprop="datePublished">
+          2021-02-20
+      </time>
+    
+    
+    | 
+    <a href='/tags/逆向/'>逆向</a>,
+    
+    <a href='/tags/算法/'>算法</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        TODO
+
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2021/02/20/aes-enhance/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2021/02/20/hmac-crack/">hmac crack</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2021-02-20T12:44:35.000Z" itemprop="datePublished">
+          2021-02-20
+      </time>
+    
+    
+    | 
+    <a href='/tags/逆向/'>逆向</a>,
+    
+    <a href='/tags/加密算法/'>加密算法</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        0x00 前言我在逆向的过程中发现很多公司都开始使用hmacsha1 作为签名校验的算法，并且这个算法基本都是放到 native 层做了一定的保护。而 sha1 则多见于 java 层，一般不做什么保护。 本文会先讲解一下hmac, 然后针对hmac的算法，看看算法存在的弱点。
+hmacsha1算法弱点分析
+
+
+
+算法加固针对以上几个弱点，就可以很方便的制定出加固的方案了。
+
+更换…
+魔改… 
+加固,但一定程度影响性能…
+
+总结这里只是
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2021/02/20/hmac-crack/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2021/02/20/vscode-docker/">vscode联动docker</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2021-02-20T12:03:36.000Z" itemprop="datePublished">
+          2021-02-20
+      </time>
+    
+    
+    | 
+    <a href='/tags/开发/'>开发</a>,
+    
+    <a href='/tags/Docker/'>Docker</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        最近在学习符号执行，很多符号执行框架都有自己的依赖和编译环境， 因此使用 docker 可以让我们专心于框架本身而不是各种编译错误。但是 docker 容器有了之后，随之而来的问题也来了，宿主机和 docker 如何进行数据传输?
+docker 有一个cp 命令， 可以将文件或者目录拷贝，也就是说，每次修改完文件之后，都需要执行命令来同步文件。这个对于一次性操作来说是方便的，但对于频繁改动的内容就不太适合。
+查看 docker 的文档可
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2021/02/20/vscode-docker/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2021/02/20/llvm4-on-big-sur/">llvm4 on big sur</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2021-02-20T06:40:22.000Z" itemprop="datePublished">
+          2021-02-20
+      </time>
+    
+    
+    | 
+    <a href='/tags/源码分析/'>源码分析</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        0x00 前言  在移动端风控对抗中，端安全变得越来越重要，很多设备指纹厂商都纷纷将 java 层的设备信息采集代码移到 native 层。这么做的好处很明显，java 层的攻击相对native 来说简单不少，防御这块研究的人也不多，处于攻防不平衡的状态。native层的保护多种多样，除了常规的运行时保护，比如反调试，反注入等等，还有很多静态的保护技术，比如插花，混淆，这些保护让原来简单易懂的代码变得难以理解，让攻击者花费更多的时间去理
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2021/02/20/llvm4-on-big-sur/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2020/10/24/fans/">fans</a></h3>
                     <span>
                         <span class="post-meta">
@@ -259,9 +413,9 @@
     
     
     | 
-    <a href='/tags/逆向/'>逆向</a>,
+    <a href='/tags/hook/'>hook</a>,
     
-    <a href='/tags/hook/'>hook</a>
+    <a href='/tags/逆向/'>逆向</a>
     
     
 </span>
@@ -334,9 +488,9 @@
     
     
     | 
-    <a href='/tags/逆向/'>逆向</a>,
+    <a href='/tags/hook/'>hook</a>,
     
-    <a href='/tags/hook/'>hook</a>
+    <a href='/tags/逆向/'>逆向</a>
     
     
 </span>
@@ -374,9 +528,9 @@
     
     
     | 
-    <a href='/tags/逆向/'>逆向</a>,
-    
     <a href='/tags/开发/'>开发</a>,
+    
+    <a href='/tags/逆向/'>逆向</a>,
     
     <a href='/tags/脱壳/'>脱壳</a>
     
@@ -413,11 +567,11 @@
     
     
     | 
-    <a href='/tags/源码分析/'>源码分析</a>,
-    
     <a href='/tags/Android/'>Android</a>,
     
-    <a href='/tags/开发/'>开发</a>
+    <a href='/tags/开发/'>开发</a>,
+    
+    <a href='/tags/源码分析/'>源码分析</a>
     
     
 </span>
@@ -432,158 +586,6 @@
                     
                     <p class="pull-right readMore">
                         <a href="/2020/02/13/nativejava虚拟机/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/02/13/MultiDex分析/">MultiDex分析</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-02-12T16:18:18.000Z" itemprop="datePublished">
-          2020-02-13
-      </time>
-    
-    
-    | 
-    <a href='/tags/源码分析/'>源码分析</a>,
-    
-    <a href='/tags/Android/'>Android</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <p>尝试了一下oneNote的导出功能，貌似并不是很好，所以只能改用markdown了。<br>muLtidex 的加载，实在attachBaseContext的时候调用Multidex.install(this) 就可以了Install 实现比较简单</p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/02/13/MultiDex分析/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/02/13/Mono安全相关/">Mono安全相关</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-02-12T16:17:59.000Z" itemprop="datePublished">
-          2020-02-13
-      </time>
-    
-    
-    | 
-    <a href='/tags/Android/'>Android</a>,
-    
-    <a href='/tags/游戏/'>游戏</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <h2 id="0x0-编译"><a href="#0x0-编译" class="headerlink" title="0x0 编译"></a>0x0 编译</h2><p>首先从网上了解到，github上mono源码有两种，一种是mono自己的，一种是unity3d的，我们需要的就是u3d.因此，需要直接去u3d的git那下载。 下载完后，看网上的指南，有出现了两种，一种是按unity版本来的， 比如unity-5.6，unity-5.0这种，另外一个是unity-mono-4.x这种，鉴于自己没什么经验，就试了两种方法，结果第二种不行。第一种也需要做一定的改动，在根目录下，执行external/buildscript/build_runtime_android.sh 的时候，会下载ndk_r10e,但是这个r10e提供的clang版本是3.5的，所以需要改动krait中的Applcation.mk中的clang版本，然后再次运行runtime脚本就可以编译除mono.so了。</p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/02/13/Mono安全相关/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/02/13/Docker/">Docker</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-02-12T16:16:48.000Z" itemprop="datePublished">
-          2020-02-13
-      </time>
-    
-    
-    | 
-    <a href='/tags/Docker/'>Docker</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <h1 id="0x00-前言（建议略过）"><a href="#0x00-前言（建议略过）" class="headerlink" title="0x00 前言（建议略过）"></a>0x00 前言（建议略过）</h1><p>第一次接触docker大概是2016年吧，记不大清了，反正那一年docker很火。当年学了一些docker 的命令，就算是对docker有些了解了吧，但其实懂的很少。最近又开始搞docker了，因为前段时间打ctf的时候发现用dockerfile搭镜像的题还是挺多的，而且非常方便，小巧。我一向是使用虚拟机的，但是不得不说，虚拟机太大了，电脑+硬盘塞了6，7个虚拟机，占了很大的 空间。我的mac上不知是不是xcode的问题，angr一直装不上，后来直接整了一个docker镜像就ok 了，就能直接玩耍了。 今天主要是想介绍一下docker 的命令，以及一个小项目的迁移。</p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/02/13/Docker/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/02/13/ClassLoader分析/">ClassLoader分析</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-02-12T16:15:48.000Z" itemprop="datePublished">
-          2020-02-13
-      </time>
-    
-    
-    | 
-    <a href='/tags/源码分析/'>源码分析</a>,
-    
-    <a href='/tags/Android/'>Android</a>,
-    
-    <a href='/tags/java/'>java</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><p>前段时间看看dexclassloader 和pathclassloader  ，发现网上大面积的这种结论</p>
-<blockquote>
-<p>DexClassLoader：能够加载未安装的jar/apk/dex<br>PathClassLoader：只能加载系统中已经安装过的apk</p>
-</blockquote>
-<p>真的不知道他们是看的4.x的代码还是什么，感觉就是文章抄来抄去。。。</p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/02/13/ClassLoader分析/">Read More...</a>
                     </p>
                     
                 </div>
@@ -624,16 +626,10 @@
                     <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
                     
                     
-                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    <li><a href="https://twitter.com/nikos233__" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
                     
                     
-                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
                     
-                    
-                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
                     
                 </ul>
             </div>

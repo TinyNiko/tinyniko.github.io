@@ -113,7 +113,7 @@
         <!-- Lists in Slidebars -->
         <ul class="sb-menu secondary">
             
-            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/about/index.html" class="animsition-link" title="about">About</a></li>
             <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
         </ul>
     </div>
@@ -146,16 +146,10 @@
                             <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a></li>
                             
                             
-                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            <li><a href="https://twitter.com/nikos233__" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
                             
                             
-                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
                             
-                            
-                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
-                            
-                            
-                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
                             
                             <li class="nolink"><span>Welcome!</span></li>
                         </ul>
@@ -211,6 +205,158 @@
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/13/MultiDex分析/">MultiDex分析</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T16:18:18.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+    
+    | 
+    <a href='/tags/Android/'>Android</a>,
+    
+    <a href='/tags/源码分析/'>源码分析</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        <p>尝试了一下oneNote的导出功能，貌似并不是很好，所以只能改用markdown了。<br>muLtidex 的加载，实在attachBaseContext的时候调用Multidex.install(this) 就可以了Install 实现比较简单</p>
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/13/MultiDex分析/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/13/Mono安全相关/">Mono安全相关</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T16:17:59.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+    
+    | 
+    <a href='/tags/Android/'>Android</a>,
+    
+    <a href='/tags/游戏/'>游戏</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        <h2 id="0x0-编译"><a href="#0x0-编译" class="headerlink" title="0x0 编译"></a>0x0 编译</h2><p>首先从网上了解到，github上mono源码有两种，一种是mono自己的，一种是unity3d的，我们需要的就是u3d.因此，需要直接去u3d的git那下载。 下载完后，看网上的指南，有出现了两种，一种是按unity版本来的， 比如unity-5.6，unity-5.0这种，另外一个是unity-mono-4.x这种，鉴于自己没什么经验，就试了两种方法，结果第二种不行。第一种也需要做一定的改动，在根目录下，执行external/buildscript/build_runtime_android.sh 的时候，会下载ndk_r10e,但是这个r10e提供的clang版本是3.5的，所以需要改动krait中的Applcation.mk中的clang版本，然后再次运行runtime脚本就可以编译除mono.so了。</p>
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/13/Mono安全相关/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/13/Docker/">Docker</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T16:16:48.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+    
+    | 
+    <a href='/tags/Docker/'>Docker</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        <h1 id="0x00-前言（建议略过）"><a href="#0x00-前言（建议略过）" class="headerlink" title="0x00 前言（建议略过）"></a>0x00 前言（建议略过）</h1><p>第一次接触docker大概是2016年吧，记不大清了，反正那一年docker很火。当年学了一些docker 的命令，就算是对docker有些了解了吧，但其实懂的很少。最近又开始搞docker了，因为前段时间打ctf的时候发现用dockerfile搭镜像的题还是挺多的，而且非常方便，小巧。我一向是使用虚拟机的，但是不得不说，虚拟机太大了，电脑+硬盘塞了6，7个虚拟机，占了很大的 空间。我的mac上不知是不是xcode的问题，angr一直装不上，后来直接整了一个docker镜像就ok 了，就能直接玩耍了。 今天主要是想介绍一下 docker 的命令，以及一个小项目的迁移。</p>
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/13/Docker/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/13/ClassLoader分析/">ClassLoader分析</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T16:15:48.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+    
+    | 
+    <a href='/tags/Android/'>Android</a>,
+    
+    <a href='/tags/java/'>java</a>,
+    
+    <a href='/tags/源码分析/'>源码分析</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        <h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><p>前段时间看看dexclassloader 和pathclassloader  ，发现网上大面积的这种结论</p>
+<blockquote>
+<p>DexClassLoader：能够加载未安装的jar/apk/dex<br>PathClassLoader：只能加载系统中已经安装过的apk</p>
+</blockquote>
+<p>真的不知道他们是看的4.x的代码还是什么，感觉就是文章抄来抄去。。。</p>
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/13/ClassLoader分析/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
@@ -443,120 +589,9 @@ frida 相关
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/02/12/AndroidGPS伪造研究/">AndroidGPS伪造研究</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-02-12T12:43:37.000Z" itemprop="datePublished">
-          2020-02-12
-      </time>
-    
-    
-    | 
-    <a href='/tags/Android/'>Android</a>,
-    
-    <a href='/tags/开发/'>开发</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <h1 id="虚拟定位"><a href="#虚拟定位" class="headerlink" title="虚拟定位"></a>虚拟定位</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>近年来，越来越多的手机应用通过定位系统来实现强大功能，比如钉钉的打卡，微信的实时位置共享，咕咚的路径记录。这些应用给大众带来了便利，但也让一部分人看到了商机，通过虚拟定位技术，使用者可以出现在世界的任何一个角落，并且不会被应用检查出问题。这样，使用者就可以进行远程打卡，秀定位了。</p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/02/12/AndroidGPS伪造研究/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/02/12/Android埋点研究/">Android埋点研究</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-02-12T12:42:49.000Z" itemprop="datePublished">
-          2020-02-12
-      </time>
-    
-    
-    | 
-    <a href='/tags/Android/'>Android</a>,
-    
-    <a href='/tags/开发/'>开发</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <p>埋点这个没什么特别的兴趣，了解了一下就不在继续了</p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/02/12/Android埋点研究/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/02/12/旧博客引导/">旧博客引导</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-02-11T17:41:47.000Z" itemprop="datePublished">
-          2020-02-12
-      </time>
-    
-    
-    | 
-    <a href='/tags/逆向/'>逆向</a>,
-    
-    <a href='/tags/源码分析/'>源码分析</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <p>博客又搞了点花样出来，以前写的文章，有些是pdf，就不再重复提交了，直接搞成下载链接</p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/02/12/旧博客引导/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
         <nav class="pagination" role="pagination">
           <a class="pull-left" href="/">← Newer Posts</a>
-          
+          <a class="pull-right" href="/page/3/">Older Posts →</a>
         </nav>
     </div>
 </section>
@@ -586,16 +621,10 @@ frida 相关
                     <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
                     
                     
-                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    <li><a href="https://twitter.com/nikos233__" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
                     
                     
-                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
                     
-                    
-                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
                     
                 </ul>
             </div>
