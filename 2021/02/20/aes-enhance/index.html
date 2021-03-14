@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>aes enhance | Niko&#39;s BLOG</title>
+  <title>aes 算法识别与对抗 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -189,16 +189,63 @@
     
     
 </span>
-                <h1>aes enhance</h1>
+                <h1>aes 算法识别与对抗</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<p>TODO</p>
+      		<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h1><p>在对称加密中，遇到最多的就是DES，AES，其次国内也经常能够看到SM4算法。今天主要对AES进行一个简单分析， 以及一种称之为白盒AES的算法。本文部分内容是从别的博客摘抄。</p>
+<h1 id="0x01-AES算法介绍"><a href="#0x01-AES算法介绍" class="headerlink" title="0x01 AES算法介绍"></a>0x01 AES算法介绍</h1><h2 id="识别"><a href="#识别" class="headerlink" title="识别"></a>识别</h2><p>以<code>AES128</code>为例，算法如下图:</p>
+<img src="./aes.jpeg" width="50%" height="50%" />
+
+<p>整个流程分为以下几部分：</p>
+<ol>
+<li>密钥初始化(key init)</li>
+<li>10轮加密：<ol>
+<li>字节替换(SubBytes)</li>
+<li>行位移(Shift Rows)</li>
+<li>列混合(Mix Column)</li>
+<li>轮密钥加密(Add Round Key)</li>
+</ol>
+</li>
+</ol>
+<p>其中最后一轮的加密是不需要经过列混合的。 在我们逆向分析中，只要能够想办法识别出这几个过程的特征，基本就能够知道这个算法是不是aes了。</p>
+<p>在 <code>Key Init</code> 过程中，根据算法可以知道这个扩展后的密钥是一个 16 * 11 的大小，根据这个特征基本可以判定这个算法是AES算法， 另外扩展后的密钥，第一个16个字节其实是包含了原始密钥的，只不过这个时候，密钥是每4个字节翻转的。 比如<code>ABCDABCDABCDABCD</code> 是密钥， 那么扩展之后的密钥，前16个字节就是 <code>DCBADCBADCBADCBA</code>。</p>
+<p><code>SubBytes</code> 过程中，需要注意的是， 这个时候会有一个Sbox 参与进来， 在二进制中，通常这就是一个全局变量，可以查看Sbox中的内容来确定是不是AES。 比如，正常 AES 的 Sbox 为</p>
+<img src="./aessbox.jpeg" width="50%" height="50%" />
+
+
+<p><code>ShiftRows</code>中，需要知道这个位移的关系</p>
+<img src="./shiftrows.png" width="50%" height="50%" />
+
+<p><code>MixColumn</code> 中，会存在一个 4 * 4 的数组, 你可以当作是第一行的4个字节，每次都右移一个字节得到下一行。通过这个特征就能够发现是AES.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0x02, 0x03, 0x01, 0x01,</span><br><span class="line">0x01, 0x02, 0x03, 0x01,</span><br><span class="line">0x01, 0x01, 0x02, 0x03,</span><br><span class="line">0x03, 0x01, 0x01, 0x02</span><br></pre></td></tr></table></figure>
+
+<p>最后是<code>AddRoundkey</code>, 这个就是输入和最开始的扩展密钥进行抑或的过程，比较简单。</p>
+<p>另外在AES中还又一个称之为<code>GaloisMultiplication</code>的乘法运算， 这个也是一个特征。</p>
+<p>上面主要讲到了如何识别 AES 算法，你可以发现，其实 AES 的特征非常多，只要识别出一个点，基本上剩下的工作就是去找key，或者是加密模式（ecb, cbc），从我的经验看，业内基本都是清一色的使用cbc模式，所以需要额外在找一个 iv,不过这个基本就是小菜一碟。 那么如何对AES进行防御呢？</p>
+<h2 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h2><p>对于一个比较有经验的逆向工程师来说， 混淆已经不能够对识别算法造成太大的影响了，比如可以通过模拟执行，直接不管内部算法，或者通过hook，观察输入输出，大致确定算法属于哪一类。本文不讨论如何对抗模拟执行，只要是一个纯算法，基本都没办法对抗。</p>
+<p>对于一个攻击者来说，最重要的是识别出一个算法的类型，一个算法的 key，iv，其他完全不需要 care。 </p>
+<p>那么如何把一个AES算法改成不是AES算法呢？ 这就需要魔改 AES 了，比如密钥扩展阶段，你可以再增加一点别的操作，让前16个字节变异，或者故意更改密钥扩展的长度来迷惑攻击者。再比如，把 Sbox 里的内容随机改动一下，确保生成的结果和标准结果不一致。这种魔改的方式，有一定的效果，但是配套起来就比较麻烦，比如需要给SDK写一套，给后台写一套。</p>
+<p>另外对于 key 的保护， 通常就是把 key 用另一个算法保护起来， 需要用到的时候再解密。 见过很多把 key 藏在图片里的，然后不断用key 解密key， 虽然一顿操作猛如虎，但是关键点<code>hook</code>一下， 关键数据全部出来了。</p>
+<p>接下里谈谈 一种AES的变种，白盒AES。</p>
+<h1 id="0x02-白盒AES算法"><a href="#0x02-白盒AES算法" class="headerlink" title="0x02 白盒AES算法"></a>0x02 白盒AES算法</h1><p>这个算法其实接触过好几次，但是以前一直不知道还能这么玩。</p>
+<p>白盒AES的核心是直接把 key 融入到一个表中，这样，AES 算法就变成了一个查表的过程， 攻击者很难拿到原始的key，自然也就无法攻破AES。</p>
+<p>在白盒算法中 <code>AddRoundKey</code> 和 <code>SubBytes</code> 可以 和原始的 <code>Sbox</code> 进行合并，构成一个新的Tbox， 每一轮16个表，10轮就会生成<code>160</code>个表。</p>
+<p>最终算法就变成了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">state &lt;- plaintext</span><br><span class="line">for r &#x3D; 1 to 9:</span><br><span class="line">	ShiftRows</span><br><span class="line">	TBoxesTyiTables</span><br><span class="line">	XORTables</span><br><span class="line">ShiftRows</span><br><span class="line">Tboxes</span><br><span class="line">ciphertext &lt;- state</span><br></pre></td></tr></table></figure>
+
+<p>从安全性上考虑， 这个算法是优于AES的，因为某种程度上，他都可以不算是一个AES了，只不过他的结果刚好和 AES 一致。 攻击者能够想办法拿到160个表，但是无法拿到原始的密钥（实际有办法拿到：）），这就是一种保护。</p>
+<p>从性能上来说，白盒AES将运算转变成了查表，性能上确比原来的 AES要 慢不少了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>从我目前的观察来看，目前大部分应用都是在用普通的 AES 算法，基本上密钥都会使用固定字符串或者是通过 RSA + 随机密钥的方式。 白盒 AES 变种可以很多，但需要对算法本身比较了解，能做白盒的人比较少，所以整体上，更加安全些。 </p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    <a class="pull-left" href="/2021/03/14/%E7%99%BD%E7%9B%92AES%E7%A0%B4%E8%A7%A3/" style="float: left;">
+        ← 白盒AES破解
+    </a>
     
     
     <a class="pull-right" href="/2021/02/20/hmac-crack/">

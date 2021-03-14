@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>hmac crack | Niko&#39;s BLOG</title>
+  <title>白盒AES破解 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -177,50 +177,52 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2021-02-20T12:44:35.000Z" itemprop="datePublished">
-          2021-02-20
+      <time datetime="2021-03-14T05:34:44.000Z" itemprop="datePublished">
+          2021-03-14
       </time>
     
     
     | 
     <a href='/tags/逆向/'>逆向</a>,
     
-    <a href='/tags/加密算法/'>加密算法</a>
+    <a href='/tags/算法/'>算法</a>
     
     
 </span>
-                <h1>hmac crack</h1>
+                <h1>白盒AES破解</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h1><p>我在逆向的过程中发现很多公司都开始使用<code>hmacsha1</code> 作为签名校验的算法，并且这个算法基本都是放到 native 层做了一定的保护。而 sha1 则多见于 java 层，一般不做什么保护。 本文会先讲解一下hmac, 然后针对hmac的算法，看看算法存在的弱点。</p>
-<h1 id="hmacsha1算法"><a href="#hmacsha1算法" class="headerlink" title="hmacsha1算法"></a>hmacsha1算法</h1><p>算法如图：</p>
-<img src="./hmac.png" width="50%" height="50%" />
-
-<p>hmac 需要用户提供一个key， 这个key 会进行扩展到hash 函数的分组长度，然后这个密钥会跟ipad, opad 进行异或运算，作为新的key和消息进行组合，然后通过hash 计算最终得出一个结果。</p>
-<h1 id="弱点分析"><a href="#弱点分析" class="headerlink" title="弱点分析"></a>弱点分析</h1><ol>
-<li>hmac 首要保护的是key，所以能够拿到 key 的方法就是他的弱点。 从上图中，可以发现 opad, ipad 其实是一个突破口，如果我们能够识别出这两个值，我们就可以直接拿到 key.</li>
-<li>sha1 本身也很容易被定位，比如初始化中的魔数，别人可以搜索字节来定位。</li>
-</ol>
-<h1 id="算法加固"><a href="#算法加固" class="headerlink" title="算法加固"></a>算法加固</h1><p>针对以上几个弱点，就可以很方便的制定出加固的方案了。</p>
+      		<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h1><p>前面已经提到过白盒AES算法了，由于白盒AES性能比原来的算法慢，所以想着有没有办法在有源码的情况下把 key 还原出来。google之后发现看雪上有一篇讲破解白盒AES算法的，于是尝试了一下，并且成功获取到了原始的key，所以这里分享一下我的过程，原理 还是得参考 <a href="https://bbs.pediy.com/thread-254042.htm" target="_blank" rel="noopener">https://bbs.pediy.com/thread-254042.htm</a> </p>
+<h1 id="0x01-破解"><a href="#0x01-破解" class="headerlink" title="0x01 破解"></a>0x01 破解</h1><p>以前的文章已经讲过白盒AES 的原理了，这里直接讲如何破解。正如看雪文章里所言，可以使用DFA 对白盒AES进行破解。<br>这个攻击分为两步：</p>
 <ol>
-<li>魔改 sha1 或者 hmac 本身，防止通过内存搜索来快速定位。</li>
-<li>加固,但一定程度影响性能</li>
+<li>生成fault 数据</li>
+<li>利用fault 数据还原始roundkey</li>
 </ol>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这里只是简单介绍了一下hmac上的攻防，希望能对读者有一定的启发。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>提前准备了一个 aes 算法工程， 我这里直接使用原始AES,  毕竟核心是如何构造出fault 数据。</p>
+<p><a href="https://github.com/TinyNiko/white_aes" target="_blank" rel="noopener">https://github.com/TinyNiko/white_aes</a></p>
+<h2 id="还原RoundKey"><a href="#还原RoundKey" class="headerlink" title="还原RoundKey"></a>还原RoundKey</h2><p>首先我们需要固定住输入。我的demo代码中是直接做了一个aes 加密， 那么我们是可以知道原始 aeskey 的，后续只要验证，DFA攻击是否能还原出 key 就行。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">uint8_t</span> *key = <span class="string">"\x6C\x28\x93\xF2\x1B\x61\x85\xE8\x56\x72\x38\xCB\x78\x18\x49\x45"</span>;</span><br><span class="line"><span class="keyword">uint8_t</span> plain[<span class="number">33</span>] = <span class="string">"\x19\xec\x35\x72\xac\xca\xa7\x92\xbc\xb1\xe8\xe1\xdc\x59\x53\x66\x54\xbf\x08\x84 \x82\xa4\xef\x35\x5a\x66\x7f\xa1\x4e\x12\x24\xe9\x00"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>记录第一次正确的aes 加密结果，记为 <code>golden_ref</code>。</p>
+<p>然后最关键的一步， 在第<code>9</code>轮 <code>列混合(Mix Column)</code> 之前，更改状态矩阵的一个字节数据，比如</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">uint8_t</span> *pp = (<span class="keyword">uint8_t</span> *)state;</span><br><span class="line">  <span class="keyword">for</span> (round = <span class="number">1</span>; ; ++round)</span><br><span class="line">  &#123;</span><br><span class="line"></span><br><span class="line">    SubBytes(state);</span><br><span class="line">    ShiftRows(state);</span><br><span class="line">    <span class="keyword">if</span> (round == Nr) &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(round == Nr - <span class="number">1</span>)&#123;</span><br><span class="line">      <span class="comment">// Modify index here</span></span><br><span class="line">      pp[<span class="number">15</span>] = <span class="number">0x33</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    MixColumns(state);</span><br><span class="line"></span><br><span class="line">    AddRoundKey(round, state, RoundKey);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// Add round key to last round</span></span><br><span class="line">  AddRoundKey(Nr, state, RoundKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我在第九轮的列混合前， 加了一个判断，如果当前是第9轮，那么状态矩阵的最后一个字节变为 0x33（这个值随便填）。<br>然后记录这个时候的加密结果， 看看和 <code>golden_ref</code> 是不是只有4个字节不一样， 如果刚好四个字节不一样， 那么这个关键点就找到了， 如果只有1字节改变，<br>说明点找得太晚，如果有16字节不同说明点找得太早。</p>
+<p>之后就是一个重复的过程，把状态矩阵里的每一个位置都改一遍， 就可以得到 16 组 不同的加密结果， 也就是fault 数据。</p>
+<p>然后利用phonenixAES， 把 <code>golden_ref</code> 和<code>fault 数据</code> 一起丢进去， 最后可以得到一个<code>Roundkey 10</code>。 至此，最关键的一步就完成了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">import</span> phoenixAES</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'tracefile'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> t:</span><br><span class="line">    t.write(<span class="string">"""</span></span><br><span class="line"><span class="string">868fc14bccc36e3c657b73271a32dcd7</span></span><br><span class="line"><span class="string">ab8fc14bccc36e0f657b7e271a9edcd7</span></span><br><span class="line"><span class="string">e98fc14bccc36ed9657b80271adcdcd7</span></span><br><span class="line"><span class="string">d58fc14bccc36e5d657b6a271a38dcd7</span></span><br><span class="line"><span class="string">da8fc14bccc36e0a657b62271a6fdcd7</span></span><br><span class="line"><span class="string">865ac14b08c36e3c657b73201a3239d7</span></span><br><span class="line"><span class="string">8613c14b86c36e3c657b73401a325cd7</span></span><br><span class="line"><span class="string">86ecc14b82c36e3c657b73701a32afd7</span></span><br><span class="line"><span class="string">86bdc14be4c36e3c657b73851a3257d7</span></span><br><span class="line"><span class="string">868f004bcc0b6e3c617b73271a32dc7a</span></span><br><span class="line"><span class="string">868f544bcc2c6e3c527b73271a32dc61</span></span><br><span class="line"><span class="string">868f6f4bcccc6e3ce17b73271a32dc4a</span></span><br><span class="line"><span class="string">868f394bcccc6e3c0e7b73271a32dc80</span></span><br><span class="line"><span class="string">868fc1ecccc3993c657d73273c32dcd7</span></span><br><span class="line"><span class="string">868fc1bfccc3a83c650f73274032dcd7</span></span><br><span class="line"><span class="string">868fc1c7ccc38f3c651c7327da32dcd7</span></span><br><span class="line"><span class="string">868fc1b1ccc33d3c658f73278632dcd7</span></span><br><span class="line"><span class="string">"""</span>.encode(<span class="string">'utf8'</span>))</span><br><span class="line"></span><br><span class="line">phoenixAES.crack_file(<span class="string">'tracefile'</span>)</span><br><span class="line"><span class="comment"># Last round key #N found:</span></span><br><span class="line"><span class="comment"># 040D08DA68001026F3DC0D68897148B4</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="还原AES-KEY"><a href="#还原AES-KEY" class="headerlink" title="还原AES KEY"></a>还原AES KEY</h2><p>在拿到RoundKey 之后，我们可以使用 <a href="https://github.com/SideChannelMarvels/Stark" target="_blank" rel="noopener">https://github.com/SideChannelMarvels/Stark</a> 中的 aes_keyschedule 反推出aeskey，然后对这个<br>aeskey 进行验证即可。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文讲了一种破解白盒AES的方法。 文章我很早的时候就看过了，但是我一直担心内容会不会过于复杂，导致投入和产出不成比例， 最终我自己花了一个小时不到就搞定了，所以大家有好的想法还是花点时间早点去验证。</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
     
-    <a class="pull-left" href="/2021/02/20/aes-enhance/" style="float: left;">
-        ← aes 算法识别与对抗
-    </a>
     
-    
-    <a class="pull-right" href="/2021/02/20/vscode-docker/">
-        vscode联动docker →
+    <a class="pull-right" href="/2021/02/20/aes-enhance/">
+        aes 算法识别与对抗 →
     </a>
     
 </nav>
