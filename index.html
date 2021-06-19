@@ -211,6 +211,86 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2021/06/19/Plaid-CTF-2018-roll-a-d8/">Plaid CTF 2018 roll a d8</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2021-06-19T11:22:02.000Z" itemprop="datePublished">
+          2021-06-19
+      </time>
+    
+    
+    | 
+    <a href='/tags/exploit/'>exploit</a>,
+    
+    <a href='/tags/ctf/'>ctf</a>,
+    
+    <a href='/tags/Browser/'>Browser</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        前言这题是PCTF 2018 中的一道浏览器利用题。
+漏洞分析存在漏洞的代码如下：
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051  void GenerateSetLength(TNode&lt;Context&gt; context, TNode&lt;Object&gt; array,    
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2021/06/19/Plaid-CTF-2018-roll-a-d8/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2021/06/19/browser-pwn-cve-2020-6418漏洞分析/">browser-pwn cve-2020-6418漏洞分析</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2021-06-19T11:01:54.000Z" itemprop="datePublished">
+          2021-06-19
+      </time>
+    
+    
+    | 
+    <a href='/tags/exploit/'>exploit</a>,
+    
+    <a href='/tags/Browser/'>Browser</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        前言本文是学习笔记，参考[博客](https://ray-cp.github.io/archivers/browser-pwn-cve-2020-6418%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90_
+指针压缩 Pointer compression在7.5 版本中 a = [1, 2] 在内存中的表示为
+123456789pwndbg&gt; telescope 0x31c7b978dee800:0000│
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2021/06/19/browser-pwn-cve-2020-6418漏洞分析/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2021/06/19/starctf-oob/">starctf oob</a></h3>
                     <span>
                         <span class="post-meta">
@@ -517,81 +597,6 @@ docker 有一个cp 命令， 可以将文件或者目录拷贝，也就是说，
                     
                     <p class="pull-right readMore">
                         <a href="/2020/10/24/fans/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/06/13/frida-travel2/">frida travel2</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-06-13T10:13:34.000Z" itemprop="datePublished">
-          2020-06-13
-      </time>
-    
-    
-    | 
-    <a href='/tags/hook/'>hook</a>,
-    
-    <a href='/tags/逆向/'>逆向</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当我刚开始写frida脚本时, 会用python binding的方式去写，比如以下代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">device = frida.get_usb_device()</span><br><span class="line">session = device.attach(<span class="string">"package_name"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_message</span><span class="params">(message ,data)</span>:</span></span><br><span class="line">    print(message)</span><br><span class="line">    <span class="comment">#print(message['payload'])</span></span><br><span class="line"></span><br><span class="line">src = <span class="string">"""</span></span><br><span class="line"><span class="string">js code here</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line">script = session.create_script(src)</span><br><span class="line">script.on(<span class="string">"message"</span> , on_message)</span><br><span class="line">script.load()</span><br><span class="line">sys.stdin.read()</span><br></pre></td></tr></table></figure>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/06/13/frida-travel2/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/06/07/leetcode1/">leetcode1</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-06-07T15:15:15.000Z" itemprop="datePublished">
-          2020-06-07
-      </time>
-    
-    
-    | 
-    <a href='/tags/编程/'>编程</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <p>NO177. 第N高的薪水<br>题目：编写一个 SQL 查询，获取 Employee 表中第 n 高的薪水（Salary）。</p>
-<p>code：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> getNthHighestSalary(N <span class="built_in">INT</span>) <span class="keyword">RETURNS</span> <span class="built_in">INT</span></span><br><span class="line"><span class="keyword">BEGIN</span> </span><br><span class="line">    <span class="keyword">SET</span> N=N<span class="number">-1</span>;</span><br><span class="line">    RETURN (<span class="keyword">select</span> <span class="keyword">distinct</span> Salary <span class="keyword">from</span> Employee <span class="keyword">order</span> <span class="keyword">by</span> Salary <span class="keyword">desc</span> <span class="keyword">limit</span> N,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/06/07/leetcode1/">Read More...</a>
                     </p>
                     
                 </div>

