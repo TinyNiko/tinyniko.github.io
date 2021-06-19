@@ -211,6 +211,47 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2021/06/19/starctf-oob/">starctf oob</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2021-06-19T03:04:03.000Z" itemprop="datePublished">
+          2021-06-19
+      </time>
+    
+    
+    | 
+    <a href='/tags/exploit/'>exploit</a>,
+    
+    <a href='/tags/ctf/'>ctf</a>,
+    
+    <a href='/tags/Browser/'>Browser</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        前言这题是starctf2019 oob 的v8漏洞利用题。
+题目介绍从网上的博客里拿到了v8 的diff 文件，按照对应的命令进行patch 和 编译，编译的命令和diff 代码如下：
+12345678git reset --hard 6dc88c191f5ecc5389dc26efa3ca0907faef3598git apply &lt; oob.diff# 同步模块gclient sync# 编译debug版本tools&#x2
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2021/06/19/starctf-oob/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2021/05/18/35C3-krautflare-exploit/">35C3 krautflare exploit</a></h3>
                     <span>
                         <span class="post-meta">
@@ -551,46 +592,6 @@ docker 有一个cp 命令， 可以将文件或者目录拷贝，也就是说，
                     
                     <p class="pull-right readMore">
                         <a href="/2020/06/07/leetcode1/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/06/07/frida-travel/">frida travel</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-06-07T15:12:28.000Z" itemprop="datePublished">
-          2020-06-07
-      </time>
-    
-    
-    | 
-    <a href='/tags/hook/'>hook</a>,
-    
-    <a href='/tags/逆向/'>逆向</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <h1 id="frida-java-lang-Object-构造"><a href="#frida-java-lang-Object-构造" class="headerlink" title="frida [java.lang.Object 构造"></a>frida [java.lang.Object 构造</h1><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在学习frida的过程中，遇到一个比较有趣的函数，需要对其进行hook，函数如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(Object[] data)</span></span>&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中data 可以传多个不同类型的数据，比如true,1233,string等，我需要对其进行调用</p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/06/07/frida-travel/">Read More...</a>
                     </p>
                     
                 </div>
