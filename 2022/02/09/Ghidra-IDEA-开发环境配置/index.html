@@ -200,6 +200,7 @@
 <p>先新建一个空白的 java 项目。之后打开IDEA 的设置界面, 在Plugins选项中选择从本地安装插件， 安装完之后，插件列表中会出现Ghidra 的插件。 </p>
 <p><img src="./a.jpeg" alt="a"></p>
 <p>接着打开Project Structure, 在 Facets中，加入Ghidra选项并配置好Ghidra 的安装路径。</p>
+<p><img src="./e.jpeg" alt="e"></p>
 <p>最后再配置一下项目的Configurations,  增加Ghidra Launcher， 选择JRE 为 11。 这个插件也提供了headless 的选项， 如果有需要可以勾选。</p>
 <p><img src="./c.jpeg" alt="c"></p>
 <p>配置完之后，就可以正常启动Ghidra 了。 启动之后， 还需要把脚本的路径添加到Ghidra 的script manager中，如果是在eclipse 中进行开发，则不需要这一步，因为 Eclipse 会自动配置好。 具体的操作如下：</p>
@@ -210,7 +211,7 @@
 <p><img src="./b.jpeg" alt="b"></p>
 <p>接着就是按照开发脚本的操作， 将整个项目配置好，然后就可以正常调试了， 如果项目中有用到ghidra_scripts ，仍然需要将scripts 所在的目录添加到script manager中。</p>
 <p>当我们把extention 开发完毕之后，就需要打包了。由于整个项目是一个gradle 项目，只要运行 <code>./gradlew buildExtension</code> 就可以打包了。</p>
-<p><img src="./e.jpeg" alt="e"></p>
+<p><img src="./f.jpeg" alt="f"></p>
 <h1 id="使用-IDEA-开发-Ghidra"><a href="#使用-IDEA-开发-Ghidra" class="headerlink" title="使用 IDEA 开发 Ghidra"></a>使用 IDEA 开发 Ghidra</h1><p>这一步也比较麻烦</p>
 <p>首先需要编译ghidra源码并配置好eclipse 的开发环境，然后用IDEA 打开，这个时候，java代码是可以被识别的，但是由于没有配置Configuration, 所以项目还不能跑。而这个配置则比较麻烦， 需要参照着ghidra 的运行脚本进行配置， 需要配置的有-cp, classloader, 命令行参数。<br>配置好这些之后，最终就可以运行和调试了。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>目前Ghidra 的开发环境还不算特别友好， 希望 Ghidra 官方后续能出个适配IDEA 的开发插件， 另外python3 也能够支持上。如果大家有更好的方法，也可以告诉我:)​</p>
