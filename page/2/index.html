@@ -211,6 +211,45 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2021/02/20/vscode-docker/">vscode联动docker</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2021-02-20T12:03:36.000Z" itemprop="datePublished">
+          2021-02-20
+      </time>
+    
+    
+    | 
+    <a href='/tags/开发/'>开发</a>,
+    
+    <a href='/tags/Docker/'>Docker</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        最近在学习符号执行，很多符号执行框架都有自己的依赖和编译环境， 因此使用 docker 可以让我们专心于框架本身而不是各种编译错误。但是 docker 容器有了之后，随之而来的问题也来了，宿主机和 docker 如何进行数据传输?
+docker 有一个cp 命令， 可以将文件或者目录拷贝，也就是说，每次修改完文件之后，都需要执行命令来同步文件。这个对于一次性操作来说是方便的，但对于频繁改动的内容就不太适合。
+查看 docker 的文档可
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2021/02/20/vscode-docker/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2021/02/20/llvm4-on-big-sur/">llvm4 on big sur</a></h3>
                     <span>
                         <span class="post-meta">
@@ -537,41 +576,6 @@
                     
                     <p class="pull-right readMore">
                         <a href="/2020/02/13/Mono安全相关/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/02/13/Docker/">Docker</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-02-12T16:16:48.000Z" itemprop="datePublished">
-          2020-02-13
-      </time>
-    
-    
-    | 
-    <a href='/tags/Docker/'>Docker</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <h1 id="0x00-前言（建议略过）"><a href="#0x00-前言（建议略过）" class="headerlink" title="0x00 前言（建议略过）"></a>0x00 前言（建议略过）</h1><p>第一次接触docker大概是2016年吧，记不大清了，反正那一年docker很火。当年学了一些docker 的命令，就算是对docker有些了解了吧，但其实懂的很少。最近又开始搞docker了，因为前段时间打ctf的时候发现用dockerfile搭镜像的题还是挺多的，而且非常方便，小巧。我一向是使用虚拟机的，但是不得不说，虚拟机太大了，电脑+硬盘塞了6，7个虚拟机，占了很大的 空间。我的mac上不知是不是xcode的问题，angr一直装不上，后来直接整了一个docker镜像就ok 了，就能直接玩耍了。 今天主要是想介绍一下 docker 的命令，以及一个小项目的迁移。</p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/02/13/Docker/">Read More...</a>
                     </p>
                     
                 </div>

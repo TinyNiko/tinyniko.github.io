@@ -211,6 +211,42 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2022/02/13/CVE-2021-4034-pkexec本地提权漏洞复现与原理分析/">CVE-2021-4034 pkexec本地提权漏洞复现与原理分析</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2022-02-13T06:19:19.000Z" itemprop="datePublished">
+          2022-02-13
+      </time>
+    
+    
+    | 
+    <a href='/tags/exploit/'>exploit</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        这篇文章主要是看看雪上的一篇分析文章之后写的，部分内容从文章中拷贝， 文章链接在这里
+漏洞原理 漏洞的原理很简单， 对于命令行程序，通常会有参数， 体现在代码中就是argc 和 argv, argc 代表参数个数，argv 是参数，默认情况下，argv[0]是当前程序的路径。当我们访问argv的偏移大于argc的时候，就会出现越界访问。所以，通常情况下都是先检查下argc个数，然后再去访问的，但是linux中挺多程序写法上有一定问题。这
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2022/02/13/CVE-2021-4034-pkexec本地提权漏洞复现与原理分析/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2022/02/09/Ghidra-IDEA-开发环境配置/">Ghidra IDEA 开发环境配置 </a></h3>
                     <span>
                         <span class="post-meta">
@@ -563,45 +599,6 @@ hmac 需要用户提供一个key， 这个key 会进行扩展到hash 函数的�
                     
                     <p class="pull-right readMore">
                         <a href="/2021/02/20/hmac-crack/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2021/02/20/vscode-docker/">vscode联动docker</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2021-02-20T12:03:36.000Z" itemprop="datePublished">
-          2021-02-20
-      </time>
-    
-    
-    | 
-    <a href='/tags/开发/'>开发</a>,
-    
-    <a href='/tags/Docker/'>Docker</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        最近在学习符号执行，很多符号执行框架都有自己的依赖和编译环境， 因此使用 docker 可以让我们专心于框架本身而不是各种编译错误。但是 docker 容器有了之后，随之而来的问题也来了，宿主机和 docker 如何进行数据传输?
-docker 有一个cp 命令， 可以将文件或者目录拷贝，也就是说，每次修改完文件之后，都需要执行命令来同步文件。这个对于一次性操作来说是方便的，但对于频繁改动的内容就不太适合。
-查看 docker 的文档可
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2021/02/20/vscode-docker/">Read More...</a>
                     </p>
                     
                 </div>
