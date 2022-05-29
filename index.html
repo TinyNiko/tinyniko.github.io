@@ -96,7 +96,7 @@
 				    
 				    <li><a href="/categories/论文/" class="animsition-link">论文<small>(1)</small></a></li>
 				    
-				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
+				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(2)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -207,6 +207,44 @@
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2022/05/29/mac-微信小程序解密/">mac 微信小程序解密</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2022-05-29T06:25:04.000Z" itemprop="datePublished">
+          2022-05-29
+      </time>
+    
+    
+    | 
+    <a href='/tags/开发/'>开发</a>,
+    
+    <a href='/tags/逆向/'>逆向</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        0x01 前言以前分析微信小程序，都是通过移动端获取wxapkg之后，使用解包工具解包的， 现在pc/mac都已经支持小程序了，所以移动端的操作就多少有些麻烦了。网上找了一圈，我发现pc的包跟移动端的包不太一样，根据pc_wxapkg_decrypt 可以知道，在pc端，文件是被加密了，并且现在新版本可能就不支持了。而我使用的mac端，目前并没有解密工具，所以我只能自己想办法解密了。
+逆向过程打开微信的包， 可以发现微信有两个程序，一个
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2022/05/29/mac-微信小程序解密/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
@@ -558,47 +596,6 @@
                     
                     <p class="pull-right readMore">
                         <a href="/2021/02/20/aes-enhance/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2021/02/20/hmac-crack/">hmac crack</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2021-02-20T12:44:35.000Z" itemprop="datePublished">
-          2021-02-20
-      </time>
-    
-    
-    | 
-    <a href='/tags/逆向/'>逆向</a>,
-    
-    <a href='/tags/加密算法/'>加密算法</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        0x00 前言我在逆向的过程中发现很多公司都开始使用hmacsha1 作为签名校验的算法，并且这个算法基本都是放到 native 层做了一定的保护。而 sha1 则多见于 java 层，一般不做什么保护。 本文会先讲解一下hmac, 然后针对hmac的算法，看看算法存在的弱点。
-hmacsha1算法算法如图：
-
-
-hmac 需要用户提供一个key， 这个key 会进行扩展到hash 函数的分组长度，然后这个密钥会跟ipad, opad 
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2021/02/20/hmac-crack/">Read More...</a>
                     </p>
                     
                 </div>

@@ -96,7 +96,7 @@
 				    
 				    <li><a href="/categories/论文/" class="animsition-link">论文<small>(1)</small></a></li>
 				    
-				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(1)</small></a></li>
+				    <li><a href="/categories/逆向/" class="animsition-link">逆向<small>(2)</small></a></li>
 				    
 				</ul>
         	</li>
@@ -207,6 +207,43 @@
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/02/13/Mono安全相关/">Mono安全相关</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-02-12T16:17:59.000Z" itemprop="datePublished">
+          2020-02-13
+      </time>
+    
+    
+    | 
+    <a href='/tags/Android/'>Android</a>,
+    
+    <a href='/tags/游戏/'>游戏</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        <h2 id="0x0-编译"><a href="#0x0-编译" class="headerlink" title="0x0 编译"></a>0x0 编译</h2><p>首先从网上了解到，github上mono源码有两种，一种是mono自己的，一种是unity3d的，我们需要的就是u3d.因此，需要直接去u3d的git那下载。 下载完后，看网上的指南，有出现了两种，一种是按unity版本来的， 比如unity-5.6，unity-5.0这种，另外一个是unity-mono-4.x这种，鉴于自己没什么经验，就试了两种方法，结果第二种不行。第一种也需要做一定的改动，在根目录下，执行external/buildscript/build_runtime_android.sh 的时候，会下载ndk_r10e,但是这个r10e提供的clang版本是3.5的，所以需要改动krait中的Applcation.mk中的clang版本，然后再次运行runtime脚本就可以编译除mono.so了。</p>
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/02/13/Mono安全相关/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
@@ -546,43 +583,6 @@ frida 相关
                     
                     <p class="pull-right readMore">
                         <a href="/2020/02/12/AndroidGPS伪造研究/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/02/12/Android埋点研究/">Android埋点研究</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-02-12T12:42:49.000Z" itemprop="datePublished">
-          2020-02-12
-      </time>
-    
-    
-    | 
-    <a href='/tags/Android/'>Android</a>,
-    
-    <a href='/tags/开发/'>开发</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <p>埋点这个没什么特别的兴趣，了解了一下就不在继续了</p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/02/12/Android埋点研究/">Read More...</a>
                     </p>
                     
                 </div>

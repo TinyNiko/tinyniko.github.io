@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>llvm4 on big sur | Niko&#39;s BLOG</title>
+  <title>Archives: 2022/5 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="post-template">
+<body class="home-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -173,110 +173,69 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2021-02-20T06:40:22.000Z" itemprop="datePublished">
-          2021-02-20
-      </time>
-    
-    
-    | 
-    <a href='/tags/源码分析/'>源码分析</a>
-    
-    
-</span>
-                <h1>llvm4 on big sur</h1>
+      <!-- ============================ Hero Image =========================== -->
+
+<section id="hero" class="scrollme">
+    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                    <div>
+                        
+                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
+                        <p></p>
+                        
+                        <h2></h2>
+                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
+                        
+
+                    </div>
+                </div>
             </div>
+            <!-- // .col-md-12 -->
         </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>  在移动端风控对抗中，端安全变得越来越重要，很多设备指纹厂商都纷纷将 java 层的设备信息采集代码移到 native 层。这么做的好处很明显，java 层的攻击相对native 来说简单不少，防御这块研究的人也不多，处于攻防不平衡的状态。native层的保护多种多样，除了常规的运行时保护，比如反调试，反注入等等，还有很多静态的保护技术，比如插花，混淆，这些保护让原来简单易懂的代码变得难以理解，让攻击者花费更多的时间去理解原来的意思。随着基于编译器的保护技术越来越成熟，越来越多的混淆方案出现在大厂的 so 中，这些 so 虽然也使用了 fla, sub ，bcf，但他们的实现跟开源的 ollvm 都有一定的区别。针对这些混淆，目前都只能通过case by case 的方式解决，没有一套通用的反混淆方案。当然，之前开源的<a href="https://eshard.com/posts/d810_blog_post_1/" target="_blank" rel="noopener">d810</a> 已经有了一定的探索。</p>
-<p>  本文仅讨论在 <code>mac big sur</code> 上编译 <code>ollvm-4.0</code> 时遇到的问题，以及解决方法。等后续在反混淆上有一定的积累再来讲讲如何进行反混淆</p>
-<h2 id="0x01-编译过程"><a href="#0x01-编译过程" class="headerlink" title="0x01 编译过程"></a>0x01 编译过程</h2><p>  整个编译过程遇到如下问题：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tools&#x2F;clang&#x2F;lib&#x2F;CodeGen&#x2F;CGOpenMPRuntime.cpp:6275:24: error: a lambda parameter cannot shadow an explicitly captured entity</span><br><span class="line">      CodeGenFunction &amp;CGF, PrePostActionTy &amp;) &#123;</span><br><span class="line">                       ^</span><br><span class="line">tools&#x2F;clang&#x2F;lib&#x2F;CodeGen&#x2F;CGOpenMPRuntime.cpp:6321:62: error: a lambda parameter cannot shadow an explicitly captured entity</span><br><span class="line">  auto &amp;&amp;EndThenGen &#x3D; [&amp;CGF, Device, &amp;Info](CodeGenFunction &amp;CGF,</span><br><span class="line">                                                             ^</span><br><span class="line">tools&#x2F;clang&#x2F;lib&#x2F;CodeGen&#x2F;CGOpenMPRuntime.cpp:6400:56: error: a lambda parameter cannot shadow an explicitly captured entity</span><br><span class="line">  auto &amp;&amp;ThenGen &#x3D; [&amp;D, &amp;CGF, Device](CodeGenFunction &amp;CGF, PrePostActionTy &amp;) &#123;</span><br></pre></td></tr></table></figure>
-
-<p>  根据提示<code>a lambda parameter cannot shadow an explicitly captured entity</code> google之后，找到了链接<code>https://reviews.llvm.org/rGc6e4583dbbdc3112c9a04d35a161dc9b4657f607</code>,  这个patch中，我们主要关注三个部分，分别是 <code>ThenGen</code> ,<code>EndThenGen</code>, <code>BeginThenGen</code>, 将代码按 patch 修改好之后， 重新编译，发现就可以编译过去了。</p>
-<p>  这个修改，实际上是将lambda中 未使用的捕捉变量移除了，并没有其他的作用….</p>
-<h2 id="0x02-测试"><a href="#0x02-测试" class="headerlink" title="0x02 测试"></a>0x02 测试</h2><p>  简单用<code>clang</code> 编译一下代码，发现报错了, 说是这不到 <code>-lSystem</code><br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ld: library not found for -lSystem</span><br><span class="line">clang-4.0: error: linker command failed with exit code 1 (use -v to see invocation)</span><br></pre></td></tr></table></figure></p>
-<p>  找了一圈， 最后发现在<code>Big Sur</code> 上加上<code>-L/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib</code> 就好了, 另外如果要加入头文件的话，还需要添加<code>-I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include</code>, 但这么一搞，倒是引入了不少 warning 和 note。</p>
-<p>  至此就可以正常使用ollvm了，下图是一个 fla 的 demo。</p>
-  <img src="/img/fla.jpg" width="50%" height="50%" />
-
-<p>  不过现在只能编译64位的，32位貌似要修改sdk.</p>
-
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
-    
-    <a class="pull-left" href="/2021/02/20/vscode-docker/" style="float: left;">
-        ← vscode联动docker
-    </a>
-    
-    
-    <a class="pull-right" href="/2020/10/24/fans/">
-        fans →
-    </a>
-    
-</nav>
-
-        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
-  /**
-   * 搜狐畅言
-   */
-
-  /*
-  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
-
-  window.onload = function () {
-    (function () {
-      var appid = 'cytXXXX';
-      var conf = 'prod_xxxxxxxxxxxxxxxxx';
-      var width = window.innerWidth || document.documentElement.clientWidth;
-      var loadJs = function (d, a, id) {
-        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
-        var b = document.createElement("script");
-        b.setAttribute("type", "text/javascript");
-        b.setAttribute("charset", "UTF-8");
-        b.setAttribute("src", d);
-        if (id) {
-          b.setAttribute("id", id);
-        }
-        if (typeof a === "function") {
-          if (window.attachEvent) {
-            b.onreadystatechange = function () {
-              var e = b.readyState;
-              if (e === "loaded" || e === "complete") {
-                b.onreadystatechange = null;
-                a()
-              }
-            }
-          } else {
-            b.onload = a
-          }
-        }
-        c.appendChild(b)
-      };
-
-      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
-        window.changyan.api.config({
-          appid: appid,
-          conf: conf
-        })
-      });
-    })();
-  }
-  */
-
-</script>
-</div>
+        <div class="herofade beige-dk"></div>
     </div>
 </section>
 
+<!-- Height spacing helper -->
+<div class="heightblock"></div>
+<!-- // End height spacing helper -->
 
+<!-- ============================ END Hero Image =========================== -->
+
+
+
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
+                    
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2022/05/29/mac-微信小程序解密/">mac 微信小程序解密</a></h4>
+                            
+                            <p><time datetime="2022-05-29T06:25:04.000Z"><a href="/2022/05/29/mac-微信小程序解密/">2022-05-29</a></time></p>
+                        </div>
+                    
+                </div>
+            </div>    
+        </div>
+    </div>
+</section> 
+
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+        </div>
+    </div>
+</section>
       
 <!-- ============================ Footer =========================== -->
 
