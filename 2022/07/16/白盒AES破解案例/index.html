@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives | Niko&#39;s BLOG</title>
+  <title>白盒AES破解案例 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -173,87 +173,112 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2020/02/12/AndroidGPS伪造研究/">AndroidGPS伪造研究</a></h4>
-                            
-                            <p><time datetime="2020-02-12T12:43:37.000Z"><a href="/2020/02/12/AndroidGPS伪造研究/">2020-02-12</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2020/02/12/Android埋点研究/">Android埋点研究</a></h4>
-                            
-                            <p><time datetime="2020-02-12T12:42:49.000Z"><a href="/2020/02/12/Android埋点研究/">2020-02-12</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2020/02/12/旧博客引导/">旧博客引导</a></h4>
-                            
-                            <p><time datetime="2020-02-11T17:41:47.000Z"><a href="/2020/02/12/旧博客引导/">2020-02-12</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2022-07-16T13:57:11.000Z" itemprop="datePublished">
+          2022-07-16
+      </time>
+    
+    
+    | 
+    <a href='/tags/逆向/'>逆向</a>,
+    
+    <a href='/tags/算法/'>算法</a>
+    
+    
+</span>
+                <h1>白盒AES破解案例</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>去年遇到一个 js 版本的 aes加密算法，这个算法有一个巨大的表(4* 256), 基本可以断定是一个白盒aes 算法了， 然后我手工使用 DFA，发现并不能将白盒 aes 的密钥还原，由于当时还原 key 并不是一个强需求，所以在尝试了两次之后我就放弃了。 今年机缘巧合，为了排查线上的问题数据，需要对数据解密，还原key就变成了强需求。我本身是不太想搞的，感觉会投入很多时间并且最终还没有分析出来，但本着事不过三的原则，我还是决定试一下。本文主要是分享一下我的分析过程  </p>
+<h1 id="已知信息"><a href="#已知信息" class="headerlink" title="已知信息"></a>已知信息</h1><p>js经过了强混淆和一定的优化， 原始逻辑无法看清。 知道了一些关键的数据，比如有一个256字节的表，和4个256*4字节的表，另外， 加密的中间过程也能够观察到。  </p>
+<h1 id="js转c"><a href="#js转c" class="headerlink" title="js转c"></a>js转c</h1><p>由于我想使用<a href="https://github.com/SideChannelMarvels/Deadpool" target="_blank" rel="noopener">Deadpool</a>尝试自动化攻击，所以将 js 转换成 c 是一个必经之路。 这块没有技巧，就是直接翻译。翻译的过程中，发现代码也是有规律的，特别是Tboxlookup 和addRoundKey 这块能够很明显的感觉到是一个 for 循环，只是之前的混淆把for 循环展开了。 确认循环之后，代码中每个循环都会用到4 个 int 值， 这些数据刚好组成了roundkey， 另外，之前提到的256个字节的表实际上sbox。 明确<code>roundkey</code> 和<code>sbox</code> 对于后续排查问题很重要。  </p>
+<p>编写完c代码之后，我使用<code>DFA</code>进行攻击，但是跑了多次始终没有出结果。 另外，我也尝试了使用<code>DCA</code>进行攻击，这个攻击方式也没有能够得到key。  </p>
+<h1 id="标准VS非标准"><a href="#标准VS非标准" class="headerlink" title="标准VS非标准"></a>标准VS非标准</h1><p>鉴于 Deadpool 无法获取key， 我开始怀疑是不是我做的不对或者 Deadpool 代码有坑，然后我做了几个测试：<br>    1. 我们知道<code>roundkey</code> 是通过 <code>key</code> 变化而来的，那么我们可以使用 aes_key_schedule 进行还原，还原后发现发现密钥不对。<br>    2. 对标准白盒AES 使用 Deadpool 的DFA 攻击，发现可以获取到原始的 key， 但是如果是替换了sbox，则无法获取到key。 这个时候，我开始意识到问题可能在于 sbox 上。分析代码，发现 sbox 涉及到 roundkey 生成和加解密。<br>    3. 替换aes_key_schedule中的sbox, 替换标准AES中的sbox, 生成的roundkey 可以解密， 但是js里的 roundkey 仍然对不上，开始怀疑是不是 key expand 算法被修改了，如果被修改了的话，那就无法拿到key，也就无法解密了！！！<br>    4. 已知算法被修改了过了，我需要确认那些点还被修改过，于是我使用标准的白盒AES代码，逐步转换成js里的AES， 最终确认加密函数中也有小幅的修改（替换字节顺序）  </p>
+<h1 id="确认改动点"><a href="#确认改动点" class="headerlink" title="确认改动点"></a>确认改动点</h1><ul>
+<li>sbox经过了改动，我们可以通过sbox 计算出invSbox。  </li>
+<li>roundkey 的生成跟只和 sbox 有关，修改sbox 仍然无法通过aes_keyschedule 获取正确的key， 说明keyExpand 算法被更改过。  </li>
+<li>roundkey 由key 衍生，即使没有key，使用roundkey也能进行加解密。  </li>
+<li>TeBox 和TdBox 的生成纸盒Sbox，invSbox 有关，我们也可以计算出。  </li>
+<li>结合手头已知的东西（roundkey, sbox, 加密算法）， 可以知道，我们已经具备了生成解密算法的原料。那么还差一个完整的白盒demo  </li>
+</ul>
+<h1 id="白盒破解"><a href="#白盒破解" class="headerlink" title="白盒破解"></a>白盒破解</h1><p>找一个 白盒AES demo 花了不少时间， github 上要么只有加密算法， 要么就是看不懂的算法，能够使用的代码很少。  </p>
+<p>开始我找了<a href="https://github.com/secana/AES-TBOX" target="_blank" rel="noopener">link</a>， 只有加密算法，但代码质量不错（我看得懂且跟非标准的aes 相近）。我的想法就是补齐解密算法，这里有个风险点，我并不知道我能否完成解密算法，所以我又找了好些个白盒解密算法（go ，c，java），经过一番尝试，我发现这个 Tboxlookup 大家写的都不一样，我没有办法一下子解决问题。 到这个时候，有点小慌，如果解决不了，可能前面的工作就白费了，要么就直接放弃，要么再找找别的代码看看能不能解密。  </p>
+<p>最后我找了<a href="https://github.com/pjok1122/AES-Optimization/blob/master/aes.c" target="_blank" rel="noopener">link</a>，首先确认了加密结果没问题，是一个标准aes。 然后开始改tbox, 这个时候发现代码里的生成方式有bug， 修了bug之后终于把结果跑通了。  </p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>针对非标准的AES或白盒AES加密，首先要确认的是算法是否标准。目前只能通过人工对比的方式，将变动的部分找出，然后实现出对应的解密算法。由于改算法的人一般不会把整体框架改掉，所以我们对算法也只要有一定了解就行了。  </p>
+<p>想要自己尝试一些破解的可以找我要一份demo。</p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    
+    <a class="pull-right" href="/2022/05/29/mac-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E5%AF%86/">
+        mac 微信小程序解密 →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

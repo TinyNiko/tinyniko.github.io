@@ -211,6 +211,43 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2022/07/16/白盒AES破解案例/">白盒AES破解案例</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2022-07-16T13:57:11.000Z" itemprop="datePublished">
+          2022-07-16
+      </time>
+    
+    
+    | 
+    <a href='/tags/逆向/'>逆向</a>,
+    
+    <a href='/tags/算法/'>算法</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        背景去年遇到一个 js 版本的 aes加密算法，这个算法有一个巨大的表(4* 256), 基本可以断定是一个白盒aes 算法了， 然后我手工使用 DFA，发现并不能将白盒 aes 的密钥还原，由于当时还原 key 并不是一个强需求，所以在尝试了两次之后我就放弃了。 今年机缘巧合，为了排查线上的问题数据，需要对数据解密，还原key就变成了强需求。我本身是不太想搞的，感觉会投入很多时间并且最终还没有分析出来，但本着事不过三的原则，我还是决定
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2022/07/16/白盒AES破解案例/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2022/05/29/mac-微信小程序解密/">mac 微信小程序解密</a></h3>
                     <span>
                         <span class="post-meta">
@@ -548,54 +585,6 @@
                     
                     <p class="pull-right readMore">
                         <a href="/2021/03/14/白盒AES破解/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2021/02/20/aes-enhance/">aes 算法识别与对抗</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2021-02-20T12:45:20.000Z" itemprop="datePublished">
-          2021-02-20
-      </time>
-    
-    
-    | 
-    <a href='/tags/逆向/'>逆向</a>,
-    
-    <a href='/tags/算法/'>算法</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        0x00 前言在对称加密中，遇到最多的就是DES，AES，其次国内也经常能够看到SM4算法。今天主要对AES进行一个简单分析， 以及一种称之为白盒AES的算法。本文部分内容是从别的博客摘抄。
-0x01 AES算法介绍识别以AES128为例，算法如下图:
-
-
-整个流程分为以下几部分：
-
-密钥初始化(key init)
-10轮加密：
-字节替换(SubBytes)
-行位移(Shift Rows)
-列混合(Mix Column)
-轮密钥加密(A
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2021/02/20/aes-enhance/">Read More...</a>
                     </p>
                     
                 </div>
