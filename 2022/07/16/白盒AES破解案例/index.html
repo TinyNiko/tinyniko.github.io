@@ -202,9 +202,9 @@
 <h1 id="标准VS非标准"><a href="#标准VS非标准" class="headerlink" title="标准VS非标准"></a>标准VS非标准</h1><p>鉴于 Deadpool 无法获取key， 我开始怀疑是不是我做的不对或者 Deadpool 代码有坑，然后我做了几个测试：<br>    1. 我们知道<code>roundkey</code> 是通过 <code>key</code> 变化而来的，那么我们可以使用 aes_key_schedule 进行还原，还原后发现发现密钥不对。<br>    2. 对标准白盒AES 使用 Deadpool 的DFA 攻击，发现可以获取到原始的 key， 但是如果是替换了sbox，则无法获取到key。 这个时候，我开始意识到问题可能在于 sbox 上。分析代码，发现 sbox 涉及到 roundkey 生成和加解密。<br>    3. 替换aes_key_schedule中的sbox, 替换标准AES中的sbox, 生成的roundkey 可以解密， 但是js里的 roundkey 仍然对不上，开始怀疑是不是 key expand 算法被修改了，如果被修改了的话，那就无法拿到key，也就无法解密了！！！<br>    4. 已知算法被修改了过了，我需要确认那些点还被修改过，于是我使用标准的白盒AES代码，逐步转换成js里的AES， 最终确认加密函数中也有小幅的修改（替换字节顺序）  </p>
 <h1 id="确认改动点"><a href="#确认改动点" class="headerlink" title="确认改动点"></a>确认改动点</h1><ul>
 <li>sbox经过了改动，我们可以通过sbox 计算出invSbox。  </li>
-<li>roundkey 的生成跟只和 sbox 有关，修改sbox 仍然无法通过aes_keyschedule 获取正确的key， 说明keyExpand 算法被更改过。  </li>
+<li>roundkey 的生成只和 sbox 有关，修改sbox 仍然无法通过aes_keyschedule 获取正确的key， 说明 keyExpand 算法被更改过。  </li>
 <li>roundkey 由key 衍生，即使没有key，使用roundkey也能进行加解密。  </li>
-<li>TeBox 和TdBox 的生成纸盒Sbox，invSbox 有关，我们也可以计算出。  </li>
+<li>TeBox 和TdBox 的生成只和Sbox，invSbox 有关，我们也可以计算出。  </li>
 <li>结合手头已知的东西（roundkey, sbox, 加密算法）， 可以知道，我们已经具备了生成解密算法的原料。那么还差一个完整的白盒demo  </li>
 </ul>
 <h1 id="白盒破解"><a href="#白盒破解" class="headerlink" title="白盒破解"></a>白盒破解</h1><p>找一个 白盒AES demo 花了不少时间， github 上要么只有加密算法， 要么就是看不懂的算法，能够使用的代码很少。  </p>
@@ -217,6 +217,10 @@
             <hr class="nogutter">
         </div>
         <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    <a class="pull-left" href="/2022/07/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1ios-vmp-%E5%88%86%E6%9E%90/" style="float: left;">
+        ← 记录一次ios vmp 分析
+    </a>
     
     
     <a class="pull-right" href="/2022/05/29/mac-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E5%AF%86/">

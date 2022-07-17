@@ -211,6 +211,45 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2022/07/17/记录一次ios-vmp-分析/">记录一次ios vmp 分析</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2022-07-17T06:55:35.000Z" itemprop="datePublished">
+          2022-07-17
+      </time>
+    
+    
+    | 
+    <a href='/tags/逆向/'>逆向</a>,
+    
+    <a href='/tags/算法/'>算法</a>,
+    
+    <a href='/tags/VMP/'>VMP</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        背景之前研究过某个 android app 的 vmp，通过模拟执行成功把里面的算法破解了。 ios 版本的 vmp 一直没有破解，原因在于 vmp init 阶段符号找不到，我想排查问题，但海量的日志让我难以分析，所以就放弃模拟执行这条路了。app 本身有反调试，当时也没仔细去研究，所以就无法调试。 由于不知道 vmp 解释器在哪， 我采用 ghidra 指令匹配收集了一堆可能是 instruction handler的点， 但fri
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2022/07/17/记录一次ios-vmp-分析/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2022/07/16/白盒AES破解案例/">白盒AES破解案例</a></h3>
                     <span>
                         <span class="post-meta">
@@ -547,44 +586,6 @@
                     
                     <p class="pull-right readMore">
                         <a href="/2021/05/18/35C3-krautflare-exploit/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2021/03/14/白盒AES破解/">白盒AES破解</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2021-03-14T05:34:44.000Z" itemprop="datePublished">
-          2021-03-14
-      </time>
-    
-    
-    | 
-    <a href='/tags/逆向/'>逆向</a>,
-    
-    <a href='/tags/算法/'>算法</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        0x00 前言前面已经提到过白盒AES算法了，由于白盒AES性能比原来的算法慢，所以想着有没有办法在有源码的情况下把 key 还原出来。google之后发现看雪上有一篇讲破解白盒AES算法的，于是尝试了一下，并且成功获取到了原始的key，所以这里分享一下我的过程，原理 还是得参考 https://bbs.pediy.com/thread-254042.htm 
-0x01 破解以前的文章已经讲过白盒AES 的原理了，这里直接讲如何破解。正
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2021/03/14/白盒AES破解/">Read More...</a>
                     </p>
                     
                 </div>
