@@ -90,7 +90,7 @@
 				    
 				    <li><a href="/categories/learn/" class="animsition-link">learn<small>(1)</small></a></li>
 				    
-				    <li><a href="/categories/tools/" class="animsition-link">tools<small>(3)</small></a></li>
+				    <li><a href="/categories/tools/" class="animsition-link">tools<small>(4)</small></a></li>
 				    
 				    <li><a href="/categories/游戏/" class="animsition-link">游戏<small>(1)</small></a></li>
 				    
@@ -207,6 +207,45 @@
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2023/06/14/frida-hook-检测简介/">frida hook 检测简介</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2023-06-14T12:35:01.000Z" itemprop="datePublished">
+          2023-06-14
+      </time>
+    
+    
+    | 
+    <a href='/tags/逆向/'>逆向</a>,
+    
+    <a href='/tags/hook/'>hook</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        背景最近分析了一个 app，有 frida 检测，一旦 attach 之后，app 就退出了。过去分析的一些 app，通常都有 frida 的检测，但不会这么暴力的退出。 于是我就分析了一下这个 app 的检测逻辑。基于此，我把市面上常见的一些 frida 检测逻辑都整理了一下。
+检测方法frida 的检测可以分为两种， 一种检测frida-server 是否运行， 一种检测frida 是否已经注入到程序中。
+检测frida-serve
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2023/06/14/frida-hook-检测简介/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
@@ -546,46 +585,6 @@
                     
                     <p class="pull-right readMore">
                         <a href="/2021/06/19/starctf-oob/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2021/05/18/35C3-krautflare-exploit/">35C3 krautflare exploit</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2021-05-18T15:25:25.000Z" itemprop="datePublished">
-          2021-05-18
-      </time>
-    
-    
-    | 
-    <a href='/tags/exploit/'>exploit</a>,
-    
-    <a href='/tags/ctf/'>ctf</a>,
-    
-    <a href='/tags/Browser/'>Browser</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        0x00 前言最近我在学习浏览器利用，就找了 35C3 的题目练习了一下。在看别人的 writeup 的时候，我发现很多文章的思维跨度都好大，作为小白就得花很长时间去理解为什么这么做。此文记录了一些我做这道题学到的东西。
-0x01 漏洞分析这题是根据 https://bugs.chromium.org/p/project-zero/issues/detail?id=1710 这个 bug 改编的， 官方对这个bug 的patch 有两处
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2021/05/18/35C3-krautflare-exploit/">Read More...</a>
                     </p>
                     
                 </div>
