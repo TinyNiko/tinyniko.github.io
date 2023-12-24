@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Mono安全相关 | Niko&#39;s BLOG</title>
+  <title>Tag: 生活 | Niko&#39;s BLOG</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="post-template">
+<body class="home-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -173,105 +173,69 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2020-02-12T16:17:59.000Z" itemprop="datePublished">
-          2020-02-13
-      </time>
-    
-    
-    | 
-    <a href='/tags/Android/'>Android</a>,
-    
-    <a href='/tags/游戏/'>游戏</a>
-    
-    
-</span>
-                <h1>Mono安全相关</h1>
+      <!-- ============================ Hero Image =========================== -->
+
+<section id="hero" class="scrollme">
+    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
+                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
+                    <div>
+                        
+                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
+                        <p></p>
+                        
+                        <h2></h2>
+                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
+                        
+
+                    </div>
+                </div>
             </div>
+            <!-- // .col-md-12 -->
         </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<h2 id="0x0-编译"><a href="#0x0-编译" class="headerlink" title="0x0 编译"></a>0x0 编译</h2><p>首先从网上了解到，github上mono源码有两种，一种是mono自己的，一种是unity3d的，我们需要的就是u3d.因此，需要直接去u3d的git那下载。 下载完后，看网上的指南，有出现了两种，一种是按unity版本来的， 比如unity-5.6，unity-5.0这种，另外一个是unity-mono-4.x这种，鉴于自己没什么经验，就试了两种方法，结果第二种不行。第一种也需要做一定的改动，在根目录下，执行external/buildscript/build_runtime_android.sh 的时候，会下载ndk_r10e,但是这个r10e提供的clang版本是3.5的，所以需要改动krait中的Applcation.mk中的clang版本，然后再次运行runtime脚本就可以编译除mono.so了。</p>
-<a id="more"></a>
-<h2 id="0x01-修改"><a href="#0x01-修改" class="headerlink" title="0x01 修改"></a>0x01 修改</h2><p>我们知道在mono_image_open_from_data_with_name 中可以dump出dll的源码，鉴于mono是开源的，所以大家可以修改mono的源码，在这个函数里面可以自己加一些解密的代码。可以想到，其实我们可以在这个函数的上层做一些解密的操作，因为常规的，大家都知道这个函数里有解密函数了。当然，解密放到上层其实也没有太大的意义，下层也是一样，交叉引用看一下很快就可以对比出异样来了，所以，在有源码的情况下，对攻击者还是很有利的。但是这种方式防不住hook,只要hook住了这个函数，就可以很轻松的dump出dll。那么有没有其他什么办法呢。</p>
-<h2 id="0x02-进阶"><a href="#0x02-进阶" class="headerlink" title="0x02 进阶"></a>0x02 进阶</h2><p>前面提到了一个现象，攻击者可以根据比对源码来分析那里做了修改，从而确定解密的方法，那么，如果我使用ollvm来混淆我的代码，就可以一定程度上增加比对的难度，但是这个还是防不住hook。我想过给源码加个函数名混淆，但是这个还是可以通过定位字符串等方法来判断出一个函数，从而慢慢还原，不管是攻击还是防御，都有一定的工作量。所以现在的一个想法就是自己hook自己,从源码中可以看到image 这个变量其实还是保存了我们的地址和长度的，所以后续一系列的函数都是可以被hook，然后可以自己进行解析，拿到data和len,所以，这个思路就和dex文件加载差不多了,后续的函数都可以自己实现，不要用到源码中提供的这些函数，然后，对于我们自己的函数，可以通过so相关技术保护起来，也就是说，如果想要知道解密算法，就必须现对so脱壳。那么，如果直接去找dll呢，我们知道，dll最终肯定会在内存里的，那么是不是可以直接dump整个内存，然后自己去匹配头呢？ 我觉得这个方法是可行的。所以防御方就要想办法不让你找到匹配的内容，或者干脆对于检测到dump的直接推出游戏等等。这也是我目前的一些想法。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">datac = data;</span><br><span class="line"><span class="keyword">if</span> (need_copy) &#123;</span><br><span class="line">	datac = g_try_malloc (data_len);</span><br><span class="line">	<span class="keyword">if</span> (!datac) &#123;</span><br><span class="line">		<span class="keyword">if</span> (status)</span><br><span class="line">			*status = MONO_IMAGE_ERROR_ERRNO;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memcpy</span> (datac, data, data_len);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">image</span> = g_new0 (MonoImage, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">image</span>-&gt;raw_data = datac;</span><br><span class="line"><span class="built_in">image</span>-&gt;raw_data_len = data_len;</span><br><span class="line"><span class="built_in">image</span>-&gt;raw_data_allocated = need_copy;</span><br><span class="line"><span class="built_in">image</span>-&gt;name = (name == <span class="literal">NULL</span>) ? g_strdup_printf (<span class="string">"data-%p"</span>, datac) : g_strdup(name);</span><br><span class="line">iinfo = g_new0 (MonoCLIImageInfo, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">image</span>-&gt;image_info = iinfo;</span><br><span class="line"><span class="built_in">image</span>-&gt;ref_only = refonly;</span><br><span class="line"><span class="built_in">image</span>-&gt;ref_count = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">image</span> = do_mono_image_load (<span class="built_in">image</span>, status, TRUE, TRUE);</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">image</span> == <span class="literal">NULL</span>)</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> register_image (<span class="built_in">image</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="0x03-后续"><a href="#0x03-后续" class="headerlink" title="0x03 后续"></a>0x03 后续</h2><p>等逆向分析了更多的游戏再来看看这块更好的方案</p>
-
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
-    
-    <a class="pull-left" href="/2020/02/13/MultiDex%E5%88%86%E6%9E%90/" style="float: left;">
-        ← MultiDex分析
-    </a>
-    
-    
-    <a class="pull-right" href="/2020/02/13/Docker/">
-        Docker →
-    </a>
-    
-</nav>
-
-        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
-  /**
-   * 搜狐畅言
-   */
-
-  /*
-  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
-
-  window.onload = function () {
-    (function () {
-      var appid = 'cytXXXX';
-      var conf = 'prod_xxxxxxxxxxxxxxxxx';
-      var width = window.innerWidth || document.documentElement.clientWidth;
-      var loadJs = function (d, a, id) {
-        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
-        var b = document.createElement("script");
-        b.setAttribute("type", "text/javascript");
-        b.setAttribute("charset", "UTF-8");
-        b.setAttribute("src", d);
-        if (id) {
-          b.setAttribute("id", id);
-        }
-        if (typeof a === "function") {
-          if (window.attachEvent) {
-            b.onreadystatechange = function () {
-              var e = b.readyState;
-              if (e === "loaded" || e === "complete") {
-                b.onreadystatechange = null;
-                a()
-              }
-            }
-          } else {
-            b.onload = a
-          }
-        }
-        c.appendChild(b)
-      };
-
-      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
-        window.changyan.api.config({
-          appid: appid,
-          conf: conf
-        })
-      });
-    })();
-  }
-  */
-
-</script>
-</div>
+        <div class="herofade beige-dk"></div>
     </div>
 </section>
 
+<!-- Height spacing helper -->
+<div class="heightblock"></div>
+<!-- // End height spacing helper -->
 
+<!-- ============================ END Hero Image =========================== -->
+
+
+
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row boxes">
+                    
+                    
+                        
+                        
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
+                            
+                              <h4 class="title"><a href="/2023/12/24/聊一聊我大学时期做过的兼职/">聊一聊我大学时期做过的兼职</a></h4>
+                            
+                            <p><time datetime="2023-12-24T07:49:04.000Z"><a href="/2023/12/24/聊一聊我大学时期做过的兼职/">2023-12-24</a></time></p>
+                        </div>
+                    
+                </div>
+            </div>    
+        </div>
+    </div>
+</section> 
+
+<section id="statement">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
+        <div class="row">
+            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+        </div>
+    </div>
+</section>
       
 <!-- ============================ Footer =========================== -->
 

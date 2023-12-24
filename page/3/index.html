@@ -106,7 +106,7 @@
                 <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
                 <ul class="sb-submenu">
                     
-                    <li><a href="http://go.kieran.top/" target="_blank" rel="noopener" class="animsition-link">Kieran</a></li>
+                    <li><a target="_blank" rel="noopener" href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
                     
                 </ul>
             </li>
@@ -207,6 +207,46 @@
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/06/07/frida-travel/">frida travel</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-06-07T15:12:28.000Z" itemprop="datePublished">
+          2020-06-07
+      </time>
+    
+    
+    | 
+    <a href='/tags/逆向/'>逆向</a>,
+    
+    <a href='/tags/hook/'>hook</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        <h1 id="frida-java-lang-Object-构造"><a href="#frida-java-lang-Object-构造" class="headerlink" title="frida [java.lang.Object 构造"></a>frida [java.lang.Object 构造</h1><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在学习frida的过程中，遇到一个比较有趣的函数，需要对其进行hook，函数如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(Object[] data)</span></span>&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中data 可以传多个不同类型的数据，比如true,1233,string等，我需要对其进行调用</p>
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/06/07/frida-travel/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
@@ -556,41 +596,6 @@ frida 相关
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/02/12/杂七杂八/">杂七杂八</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-02-12T15:41:45.000Z" itemprop="datePublished">
-          2020-02-12
-      </time>
-    
-    
-    | 
-    <a href='/tags/random/'>random</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><p>c 语言中 static 关键字 代表只能在模块中访问，比如静态函数，静态变量名。在android中，static声明的函数是直接变成内联函数。<br>static 变量，如果初始化了，会放在.data段，如果没有初始化，会放在.bss段 </p>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/02/12/杂七杂八/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
         <nav class="pagination" role="pagination">
           <a class="pull-left" href="/page/2/">← Newer Posts</a>
           <a class="pull-right" href="/page/4/">Older Posts →</a>
@@ -615,7 +620,7 @@ frida 相关
                 <p>
                     &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By N1ko. All Rights Reserved.
                 </p>
-                <p>Theme By <a href="//go.kieran.top" target="_blank" rel="noopener" style="color: #767D84">Kieran</a></p>
+                <p>Theme By <a target="_blank" rel="noopener" href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
             </div>
             <div class="social">
                 <ul>
