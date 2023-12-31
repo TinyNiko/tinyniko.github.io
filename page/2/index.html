@@ -211,6 +211,45 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2021/06/19/browser-pwn-cve-2020-6418漏洞分析/">browser-pwn cve-2020-6418漏洞分析</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2021-06-19T11:01:54.000Z" itemprop="datePublished">
+          2021-06-19
+      </time>
+    
+    
+    | 
+    <a href='/tags/exploit/'>exploit</a>,
+    
+    <a href='/tags/Browser/'>Browser</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        前言本文是学习笔记，参考[博客](https://ray-cp.github.io/archivers/browser-pwn-cve-2020-6418%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90_
+指针压缩 Pointer compressionv8 8.0之前，tagged pointer 有三种表示方法：
+123Smi:                   [32 bits] [31 bits (un
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2021/06/19/browser-pwn-cve-2020-6418漏洞分析/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2021/06/19/starctf-oob/">starctf oob</a></h3>
                     <span>
                         <span class="post-meta">
@@ -555,43 +594,6 @@ docker 有一个cp 命令， 可以将文件或者目录拷贝，也就是说，
                     
                     <p class="pull-right readMore">
                         <a href="/2020/06/13/frida-travel2/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/06/07/leetcode1/">leetcode1</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-06-07T15:15:15.000Z" itemprop="datePublished">
-          2020-06-07
-      </time>
-    
-    
-    | 
-    <a href='/tags/编程/'>编程</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        <p>NO177. 第N高的薪水<br>题目：编写一个 SQL 查询，获取 Employee 表中第 n 高的薪水（Salary）。</p>
-<p>code：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> getNthHighestSalary(N <span class="built_in">INT</span>) <span class="keyword">RETURNS</span> <span class="built_in">INT</span></span><br><span class="line"><span class="keyword">BEGIN</span> </span><br><span class="line">    <span class="keyword">SET</span> N=N<span class="number">-1</span>;</span><br><span class="line">    RETURN (<span class="keyword">select</span> <span class="keyword">distinct</span> Salary <span class="keyword">from</span> Employee <span class="keyword">order</span> <span class="keyword">by</span> Salary <span class="keyword">desc</span> <span class="keyword">limit</span> N,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/06/07/leetcode1/">Read More...</a>
                     </p>
                     
                 </div>
